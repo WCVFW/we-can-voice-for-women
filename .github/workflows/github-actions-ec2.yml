@@ -1,6 +1,5 @@
 name: Push-to-EC2
 
-# Trigger deployment only on push to main branch
 on:
   push:
     branches:
@@ -8,31 +7,36 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2 on main push
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the files
+      - name: 📦 Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+      - name: 🚀 Deploy via rsync
         uses: easingthemes/ssh-deploy@v4.1.10
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+          TARGET: ${{ secrets.TARGET_DIR }} # e.g. /home/ubuntu/my-app
 
-      - name: Executing remote ssh commands using ssh key
+      - name: 🛠 Run commands on EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo apt-get -y update
+            # Ensure Apache is installed and running
+            sudo apt-get update -y
             sudo apt-get install -y apache2
-            sudo systemctl start apache2
             sudo systemctl enable apache2
-            cd home
-            sudo mv * /var/www/html
+            sudo systemctl start apache2
+
+            # Copy deployed files to web root (update paths)
+            sudo cp -r ${{ secrets.TARGET_DIR }}/* /var/www/html/
+
+            # Optional: restart apache2 if needed
+            sudo systemctl restart apache2
