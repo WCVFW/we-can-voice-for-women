@@ -16,7 +16,7 @@ const Header = () => {
             />
 
             <span className="text-2xl font-bold bg-gradient-to-r from-rose-500 to-pink-300 bg-clip-text text-transparent">
-              We Can Voice For Women
+              We Can Voice For Wome
             </span>
           </Link>
         </div>
