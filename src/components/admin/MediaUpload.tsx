@@ -39,7 +39,7 @@ const MediaUpload: React.FC<MediaUploadProps> = ({
       // Check file size
       const oversizedFiles = newFiles.filter(file => file.size > maxFileSize * 1024 * 1024);
       if (oversizedFiles.length > 0) {
-        toast.error(`Some files exceed the maximum size of ${maxFileSize}MB`);
+        toast.error(`Some files exceed the maximum size of ₹{maxFileSize}MB`);
         return;
       }
       
@@ -89,7 +89,7 @@ const MediaUpload: React.FC<MediaUploadProps> = ({
       }));
       
       onUploadComplete?.(uploadedMedia);
-      toast.success(`${files.length} file(s) uploaded successfully!`);
+      toast.success(`₹{files.length} file(s) uploaded successfully!`);
       
       // Reset form
       setFiles([]);
@@ -214,7 +214,7 @@ const MediaUpload: React.FC<MediaUploadProps> = ({
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
                   className="bg-primary h-2 rounded-full"
-                  style={{ width: `${progress}%` }}
+                  style={{ width: `₹{progress}%` }}
                 ></div>
               </div>
             </div>

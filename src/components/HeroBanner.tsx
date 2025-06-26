@@ -5,37 +5,41 @@ import DonateButton from "./DonateButton";
 
 const HeroBanner = () => {
   return (
-    <div className="relative">
-      {/* Pink Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-pink-600/30 to-rose-400/30 mix-blend-multiply z-0" />
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-rose-500/50 via-pink-600/40 to-transparent z-10 mix-blend-multiply pointer-events-none" />
 
-      {/* Background Image and Content */}
+      {/* Bottom fade overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background/90 to-transparent z-20 pointer-events-none" />
+
+      {/* Background Image & Bottom Content */}
       <div
-        className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-32 md:py-48 bg-cover bg-center"
+        className="relative z-30 flex flex-col justify-end items-center text-center px-6 pb-20 h-full bg-cover bg-center"
         style={{
-          backgroundImage: "url('/assets/images/hero-background.jpg')",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
+          backgroundImage: "url('./assets/images/Hero_Banner.png')",
         }}
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl leading-tight drop-shadow-lg">
-          Empowering Women Through Action
-        </h1>
-        <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl drop-shadow">
-          Join our mission to uplift women through education, health
-          initiatives, and economic empowerment programs.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <DonateButton size="lg" className="text-lg px-8" />
-          <Button
-            variant="outline"
-            size="lg"
-            className="text-lg px-8 bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20"
-            asChild
-          >
-            <Link to="/about">Learn More</Link>
-          </Button>
+        <div className="max-w-4xl">
+          <div className="w-full flex justify-center px-4">
+            <h1
+              className="text-white font-semibold tracking-wider text-center mb-6"
+              style={{
+                fontFamily: '"Bebas Neue", sans-serif',
+                fontSize: 'clamp(28px, 5vw, 52px)',
+                lineHeight: '1.2',
+                letterSpacing: '1.2px',
+                textShadow: '6px 0 8px rgba(0, 0, 0, 0.8)',
+              }}
+            >
+              Progress of Women is Essential <br />for Progress of the Country
+            </h1>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <DonateButton
+              size="lg"
+              className="px-10 py-4 text-lg shadow-lg shadow-pink-500/30"
+            />
+          </div>
         </div>
       </div>
     </div>

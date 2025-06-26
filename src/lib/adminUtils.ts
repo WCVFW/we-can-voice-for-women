@@ -35,7 +35,7 @@ export const formatCurrency = (amount: number): string => {
  */
 export const truncateText = (text: string, length: number = 50): string => {
   if (!text) return '';
-  return text.length > length ? `${text.substring(0, length)}...` : text;
+  return text.length > length ? `₹{text.substring(0, length)}...` : text;
 };
 
 /**
@@ -57,7 +57,7 @@ export const validateFileType = (file: File, allowedTypes: string[]): boolean =>
     // Handle wildcard types like 'image/*'
     if (type.endsWith('/*')) {
       const mainType = type.split('/')[0];
-      return file.type.startsWith(`${mainType}/`);
+      return file.type.startsWith(`₹{mainType}/`);
     }
     return file.type === type;
   });
@@ -109,6 +109,6 @@ export const getYoutubeId = (url: string): string | null => {
  * @returns Boolean indicating if email format is valid
  */
 export const validateEmail = (email: string): boolean => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+₹/;
   return re.test(email);
 };

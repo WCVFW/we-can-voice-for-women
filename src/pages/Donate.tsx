@@ -30,7 +30,7 @@ export default function Donate() {
       isMonthly
     });
     
-    toast.success(`Thank you for your ${isMonthly ? 'monthly' : 'one-time'} donation of $${amount}!`, {
+    toast.success(`Thank you for your ₹{isMonthly ? 'monthly' : 'one-time'} donation of ₹₹{amount}!`, {
       description: 'Your generosity helps us empower more women.'
     });
   };
@@ -85,17 +85,17 @@ export default function Donate() {
                       <div key={amount} className="flex items-center">
                         <RadioGroupItem 
                           value={amount} 
-                          id={`amount-${amount}`} 
+                          id={`amount-₹{amount}`} 
                           className="peer sr-only"
                         />
                         <Label
-                          htmlFor={`amount-${amount}`}
+                          htmlFor={`amount-₹{amount}`}
                           className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-white p-4 hover:bg-gray-50 hover:border-primary peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                         >
                           {amount === 'custom' ? (
                             'Custom'
                           ) : (
-                            <span>${amount}</span>
+                            <span>₹{amount}</span>
                           )}
                         </Label>
                       </div>
@@ -104,7 +104,7 @@ export default function Donate() {
 
                   {donationAmount === 'custom' && (
                     <div className="mt-2">
-                      <Label htmlFor="custom-amount">Custom Amount ($)</Label>
+                      <Label htmlFor="custom-amount">Custom Amount (₹)</Label>
                       <Input
                         id="custom-amount"
                         placeholder="Enter amount"
@@ -165,23 +165,23 @@ export default function Donate() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">$25 can provide</h3>
+                <h3 className="font-semibold mb-2">₹25 can provide</h3>
                 <p>Educational materials for 5 women in our literacy programs</p>
               </div>
               <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">$50 can provide</h3>
+                <h3 className="font-semibold mb-2">₹50 can provide</h3>
                 <p>Health screening services for 10 women in underserved communities</p>
               </div>
               <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">$100 can provide</h3>
+                <h3 className="font-semibold mb-2">₹100 can provide</h3>
                 <p>Business skills training for a woman entrepreneur</p>
               </div>
               <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">$250 can provide</h3>
+                <h3 className="font-semibold mb-2">₹250 can provide</h3>
                 <p>A microloan to help a woman start her own business</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">$500 can provide</h3>
+                <h3 className="font-semibold mb-2">₹500 can provide</h3>
                 <p>A full scholarship for a woman to complete job skills training</p>
               </div>
             </CardContent>

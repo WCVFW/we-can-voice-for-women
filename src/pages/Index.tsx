@@ -8,17 +8,17 @@ export default function Home() {
   const foundationData = [
     {
       title: 'Vision',
-      text: `A society where every woman is educated, healthy, and empowered — free to make informed choices, live with dignity, and shape a future of equality and justice.`,
+      text: `A society where every woman is educated, healthy, and empowered to make choices and shape a future of equality and justice.`,
       colorClass: 'text-pink-600',
     },
     {
       title: 'Mission',
-      text: `To empower women and girls from marginalised communities by creating safe, inclusive, and opportunity-rich environments. Through education, healthcare, economic independence, and advocacy, we strive to dismantle systemic barriers and nurture leaders who uplift families, communities, and the nation.`,
+      text: `Empower marginalized women and girls by fostering safe, inclusive environments and promoting education, healthcare, and advocacy to uplift families and communities.`,
       colorClass: 'text-pink-600',
     },
     {
       title: 'Values',
-      text: `Our core values demand fairness and equal access for all women. We empower them with the skills and confidence to make their own choices. We create inclusive spaces that embrace every voice and celebrate diversity. We act with integrity by being honest and responsible in our community efforts. With compassion, we support women empathetically and assertively drive collaboration for lasting change. We cultivate resilience to build strong and determined women.`,
+      text: `We promote fairness and empowerment for women, celebrate diversity, and foster collaboration to build resilience.`,
       colorClass: 'text-pink-600',
     },
   ];
@@ -26,18 +26,18 @@ export default function Home() {
   const whatWeDoData = [
     {
       title: 'Enlightenment',
-      text: 'Advancing equal access to quality education and literacy for girls and women.',
-      colorClass: 'text-purple-700',
+      text: 'When women achieve independence through education, they unlock their full potential and flourish in every aspect of life.',
+      colorClass: 'text-pink-600',
     },
     {
       title: 'Enhealthment',
-      text: 'Promoting physical and mental health through awareness, accessibility, and preventive care.',
-      colorClass: 'text-green-700',
+      text: 'A healthy woman embodies vitality. We provide essential medical support to underserved women, ensuring they thrive.',
+      colorClass: 'text-pink-600',
     },
     {
       title: 'Empowerment',
-      text: 'Enabling economic independence through skills development, employment support, and entrepreneurship.',
-      colorClass: 'text-blue-700',
+      text: 'Grassroots women can improve their economic status through self-employment, and we are here to empower their journey to success.',
+      colorClass: 'text-pink-600',
     },
   ];
 
@@ -48,7 +48,7 @@ export default function Home() {
       {/* Our Foundation Section */}
       <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-6 lg:px-8">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold mb-6">Our Foundation</h2>
+          <h2 className="text-3xl font-bold mb-6 text-pink-600">Our Foundation</h2>
           <p className="text-lg text-gray-700 max-w-4xl mx-auto">
             ‘We Can Voice for Women’ is a grassroots movement dedicated to empowering women.
           </p>
@@ -63,7 +63,7 @@ export default function Home() {
       {/* What We Do Section */}
       <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-6 lg:px-8">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold mb-6">What We Do</h2>
+          <h2 className="text-3xl font-bold text-pink-600 mb-6">What We Do</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeDoData.map((item, index) => (
@@ -71,8 +71,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      <MediaSection />
+      {/* <MediaSection /> */}
     </div>
   );
 }

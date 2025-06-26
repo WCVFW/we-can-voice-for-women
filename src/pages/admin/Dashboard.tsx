@@ -258,7 +258,7 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div className="bg-primary/10 p-4 rounded-lg">
                   <h3 className="text-sm font-medium text-gray-500">Total Donations</h3>
-                  <p className="text-3xl font-bold">$24,500</p>
+                  <p className="text-3xl font-bold">₹24,500</p>
                   <p className="text-sm text-green-600">+12% from last month</p>
                 </div>
                 <div className="bg-primary/10 p-4 rounded-lg">
@@ -268,7 +268,7 @@ export default function Dashboard() {
                 </div>
                 <div className="bg-primary/10 p-4 rounded-lg">
                   <h3 className="text-sm font-medium text-gray-500">Average Donation</h3>
-                  <p className="text-3xl font-bold">$134</p>
+                  <p className="text-3xl font-bold">₹134</p>
                   <p className="text-sm text-green-600">+4% from last month</p>
                 </div>
               </div>
@@ -291,7 +291,7 @@ export default function Dashboard() {
                         <div className="text-sm text-gray-500">sarah@example.com</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">$250.00</div>
+                        <div className="text-sm text-gray-900">₹250.00</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -308,7 +308,7 @@ export default function Dashboard() {
                         <div className="text-sm text-gray-500">michael@example.com</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">$100.00</div>
+                        <div className="text-sm text-gray-900">₹100.00</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
@@ -325,7 +325,7 @@ export default function Dashboard() {
                         <div className="text-sm text-gray-500">jessica@example.com</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">$500.00</div>
+                        <div className="text-sm text-gray-900">₹500.00</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">

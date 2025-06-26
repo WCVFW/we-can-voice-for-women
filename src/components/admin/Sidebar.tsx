@@ -74,7 +74,7 @@ const Sidebar = () => {
             <li key={item.name}>
               <Link
                 to={item.href}
-                className={`flex items-center gap-3 px-4 py-3 text-sm rounded-md transition-colors ${
+                className={`flex items-center gap-3 px-4 py-3 text-sm rounded-md transition-colors ₹{
                   isActive(item.href)
                     ? 'bg-primary/10 text-primary font-medium'
                     : 'text-gray-600 hover:bg-gray-100'

@@ -98,7 +98,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ title, initialData = {}, onSa
               {currentImage && (
                 <div className="border rounded-md p-2 w-32 h-24 flex items-center justify-center bg-gray-50 overflow-hidden">
                   <img 
-                    src={currentImage.startsWith('http') ? currentImage : `/assets/images/${currentImage}`} 
+                    src={currentImage.startsWith('http') ? currentImage : `/assets/images/₹{currentImage}`} 
                     alt="Current" 
                     className="max-h-full object-cover" 
                   />
