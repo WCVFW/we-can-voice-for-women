@@ -10,7 +10,7 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/public/assets/images/Logo.png"  // ✅ No "/public" needed
+              src="/assets/images/Logo.png"  // ✅ No "/public" needed
               alt="Logo"
               className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain"
             />
