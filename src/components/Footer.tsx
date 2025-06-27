@@ -60,8 +60,7 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5" />
                 <span>
-                  42/57, 3rd Street, Jothiammal Nagar,<br />
-                  Saidapet, Chennai, Tamil Nadu 600015
+                  32, 1st St, Sri Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Kumaran Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
                 </span>
               </li>
               <li className="flex items-center">

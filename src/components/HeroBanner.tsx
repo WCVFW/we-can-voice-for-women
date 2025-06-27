@@ -16,25 +16,35 @@ const HeroBanner = () => {
       <div
         className="relative z-30 flex flex-col justify-end items-center text-center px-6 pb-20 h-full bg-cover bg-center"
         style={{
-          backgroundImage: "url('./assets/images/Hero_Banner.png')",
+          backgroundImage: "url('./assets/images/untitled-529.jpeg')",
         }}
       >
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Centered Heading */}
           <div className="w-full flex justify-center">
             <h1
-              className="text-white text-[20px] sm:text-[32px] md:text-[40px] lg:text-[40px] font-semibold uppercase text-center mb-6 leading-[1.2] tracking-[0.075em]"
+              className="text-white font-myriad font-bold uppercase text-center mb-6
+  text-[16px] xs:text-[18px] sm:text-[24px] md:text-[28px] lg:text-[36px] xl:text-[44px] 2xl:text-[52px]
+  leading-[1.2] tracking-[0.075em]"
               style={{
-                fontFamily: '"Bebas Neue", sans-serif',
-                textShadow: '4px 0 1px rgb(160,28,73)',
+                textShadow: '6px 0 3px rgb(238, 14, 119)',
               }}
             >
-              Progress of Women is Essential <br /> for Progress of the Country
+              Empowering Women is Vital<br />
+              For the Prosperity of Our Nation
             </h1>
+
           </div>
-          <div className="mt-8 flex justify-center">
+
+          {/* Donate Button */}
+          <div className="mt-6 sm:mt-8 flex justify-center">
             <DonateButton
               size="lg"
-              className="px-10 py-4 text-lg shadow-lg shadow-pink-500/30"
+              className="
+        w-32 sm:w-40 md:w-44
+        px-2.5 py-1.5 sm:px-4 sm:py-2 
+        text-xs sm:text-sm md:text-base 
+        shadow-md shadow-pink-400/20"
             />
           </div>
         </div>

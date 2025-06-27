@@ -10,23 +10,27 @@ interface DonateButtonProps {
   className?: string;
 }
 
-const DonateButton: React.FC<DonateButtonProps> = ({ 
-  size = 'default', 
+const DonateButton: React.FC<DonateButtonProps> = ({
+  size = 'default',
   variant = 'default',
   className
 }) => {
   return (
-    <Button
+    < Button
       size={size}
       variant={variant}
-      className={cn('gap-1', className)}
+      className={cn('gap-5 sm:gap-3', className)}
       asChild
     >
-      <Link to="/donate">
-        <Heart className="h-4 w-4" />
+      <Link
+        to="/donate"
+        className="flex items-center gap-2 text-sm sm:text-base md:text-lg lg:text-xl"
+      >
+        <Heart className="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5" />
         Donate
       </Link>
-    </Button>
+    </Button >
+
   );
 };
 
