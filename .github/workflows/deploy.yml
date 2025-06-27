@@ -19,7 +19,7 @@ jobs:
         node-version: '18'  # Adjust if needed
 
     - name: Install Dependencies
-      run: npm install
+      run: npm update
 
     - name: Build Project
       run: npm run build
