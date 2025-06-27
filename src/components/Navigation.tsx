@@ -31,11 +31,10 @@ const Navigation = () => {
           >
             <Link
               to={item.href}
-              className={`text-base font-semibold tracking-wide rounded-md px-2 py-1 transition-all duration-300 ease-in-out hover:text-primary hover:bg-accent ₹{
-                isActive(item.href)
-                  ? 'text-primary bg-accent'
+              className={`text-base font-semibold tracking-wide rounded-md px-2 py-1 transition-all duration-300 ease-in-out hover:text-white hover:bg-pink-400 ${isActive(item.href)
+                  ? 'text-white bg-pink-400'
                   : 'text-muted-foreground'
-              }`}
+                }`}
             >
               {item.name}
             </Link>
@@ -64,9 +63,9 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-lg font-bold tracking-wide transition-colors hover:text-primary ₹{
+                  className={`text-lg font-bold tracking-wide transition-colors hover:text-primary hover:text-white hover:bg-pink-400 ₹{
                     isActive(item.href)
-                      ? 'text-primary'
+                      ? 'text-primary bg-pink-400'
                       : 'text-muted-foreground'
                   }`}
                   onClick={() => setIsMenuOpen(false)}

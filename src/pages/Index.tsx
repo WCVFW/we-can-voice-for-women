@@ -46,10 +46,10 @@ export default function Home() {
       <HeroBanner />
 
       {/* Our Foundation Section */}
-      <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-6 lg:px-8 bg-pink-200">
         <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-pink-600">Our Foundation</h2>
-          <p className="text-lg text-gray-700 max-w-4xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-4xl mx-auto font-sans">
             ‘We Can Voice for Women’ is a grassroots movement dedicated to empowering women.
           </p>
         </div>

@@ -11,7 +11,7 @@ export default function Card({ title, text, colorClass, center }) {
         {title}
       </h3>
 
-      <p className="text-gray-700" style={{ overflowWrap: "break-word" }}>
+      <p className="text-gray-700 font-sans" style={{ overflowWrap: "break-word" }}>
         {text}
       </p>
     </div>

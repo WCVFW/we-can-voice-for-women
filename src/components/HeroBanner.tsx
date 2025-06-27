@@ -19,19 +19,16 @@ const HeroBanner = () => {
           backgroundImage: "url('./assets/images/Hero_Banner.png')",
         }}
       >
-        <div className="max-w-4xl">
-          <div className="w-full flex justify-center px-4">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="w-full flex justify-center">
             <h1
-              className="text-white font-semibold tracking-wider text-center mb-6"
+              className="text-white text-[20px] sm:text-[32px] md:text-[40px] lg:text-[40px] font-semibold uppercase text-center mb-6 leading-[1.2] tracking-[0.075em]"
               style={{
                 fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: 'clamp(28px, 5vw, 52px)',
-                lineHeight: '1.2',
-                letterSpacing: '1.2px',
-                textShadow: '6px 0 8px rgba(0, 0, 0, 0.8)',
+                textShadow: '4px 0 1px rgb(160,28,73)',
               }}
             >
-              Progress of Women is Essential <br />for Progress of the Country
+              Progress of Women is Essential <br /> for Progress of the Country
             </h1>
           </div>
           <div className="mt-8 flex justify-center">
