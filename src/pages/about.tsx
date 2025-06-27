@@ -47,7 +47,7 @@ const About: React.FC = () => {
             id: 1,
             name: "Mr. Gunalan Lavanyan",
             title: "Founder & Chairman",
-            image: "assets/images/Gunalan.jpg?height=300&width=300",
+            image: "assets/images/7.jpg?height=300&width=300",
             bio: "A seasoned media professional with over 2 decades of experience, Mr. Gunalan Lavanyan is a passionate advocate for social justice. Since initiating the We Can Voice for Women movement in 2016, he has worked tirelessly to reshape public perceptions and attitudes toward women. His leadership combines creative communication, grassroots mobilisation, and strategic vision.",
             social: {
                 linkedin: "https://www.linkedin.com/in/gunalancity/",
@@ -59,7 +59,7 @@ const About: React.FC = () => {
             id: 2,
             name: "Mrs. Oorvasi Gunalan",
             title: "Secretary & Treasurer",
-            image: "/assets/images/oruvasi.jpg?height=300&width=300",
+            image: "/assets/images/9.jpg?height=300&width=300",
             bio: "With a strong academic background in mathematics and an unyielding passion for community welfare, Mrs. Oorvasi Gunalan exemplifies compassion and resilience. She has played a pivotal role in shaping the Foundation’s operations and outreach. Her dedication to counselling women, managing programs, and sustaining grassroots engagement makes her an invaluable force behind the organisation’s impact.",
             social: {
                 linkedin: "https://www.linkedin.com/in/goorvasi/",
@@ -136,7 +136,7 @@ const About: React.FC = () => {
             {/* About Section */}
             <div
                 className="min-h-screen flex items-center justify-center py-10 px-4 bg-cover bg-center"
-                style={{ backgroundImage: "url('/assets/images/banner.png')" }}
+                style={{ backgroundImage: "url('/assets/images/untitled-529.jpeg')" }}
             >
                 <div className="bg-white max-w-4xl w-full p-8 rounded-lg shadow-lg text-center">
                     <h1 className="text-4xl font-bold text-pink-700 mb-10 text-center">About Us</h1>
