@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Card({ title, text, colorClass, center }) {
   return (
     <div
-      className={`bg-pink-200 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105  ${
+      className={`bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105  ${
         center ? "text-center" : ""
       }`}
     >
@@ -11,7 +11,7 @@ export default function Card({ title, text, colorClass, center }) {
         {title}
       </h3>
 
-      <p className="text-gray-700 font-sans " style={{ overflowWrap: "break-word" }}>
+      <p className="text-gray-700 font-sans" style={{ overflowWrap: "break-word" }}>
         {text}
       </p>
     </div>
