@@ -47,7 +47,7 @@ const About: React.FC = () => {
             id: 1,
             name: "Mr. Gunalan Lavanyan",
             title: "Founder & Chairman",
-            image: "assets/images/7.jpg?height=300&width=300",
+            image: "assets/images/Gunalan.jpg?height=300&width=300",
             bio: "A seasoned media professional with over 2 decades of experience, Mr. Gunalan Lavanyan is a passionate advocate for social justice. Since initiating the We Can Voice for Women movement in 2016, he has worked tirelessly to reshape public perceptions and attitudes toward women. His leadership combines creative communication, grassroots mobilisation, and strategic vision.",
             social: {
                 linkedin: "https://www.linkedin.com/in/gunalancity/",
@@ -59,7 +59,7 @@ const About: React.FC = () => {
             id: 2,
             name: "Mrs. Oorvasi Gunalan",
             title: "Secretary & Treasurer",
-            image: "/assets/images/9.jpg?height=300&width=300",
+            image: "/assets/images/oruvasi.jpg?height=300&width=300",
             bio: "With a strong academic background in mathematics and an unyielding passion for community welfare, Mrs. Oorvasi Gunalan exemplifies compassion and resilience. She has played a pivotal role in shaping the Foundation’s operations and outreach. Her dedication to counselling women, managing programs, and sustaining grassroots engagement makes her an invaluable force behind the organisation’s impact.",
             social: {
                 linkedin: "https://www.linkedin.com/in/goorvasi/",
@@ -70,7 +70,7 @@ const About: React.FC = () => {
         {
             id: 3,
             name: "Mr. Deepak Radhakrishnan",
-            title: "Head - Advisory Board",
+            title: "Financial Advisor",
             image: "/assets/images/10.jpg?height=300&width=300",
             bio: "He is a seasoned professional, qualified as a Taxation Advocate and CPA (USA), with deep expertise in accounting and taxation. He is passionately committed to uplifting business standards in India, especially among underserved communities. With a visionary mindset, he focuses on nurturing entrepreneurs and empowering women to build sustainable ventures. Deepak believes in transforming potential into professionalism, one business at a time. His mission is to create a generation of confident professionals and change-makers across India.",
             social: {
@@ -82,7 +82,7 @@ const About: React.FC = () => {
         {
             id: 4,
             name: "Prof Mr. A.Md.Abdulkadhar",
-            title: "Advisory Board",
+            title: "Educational Advisor",
             image: "/assets/images/8.jpg?height=300&width=300",
             bio: "Professor A. Mohamed Abdul Kadhar is a distinguished educationist dedicated to the advancement of women. With a wealth of knowledge, he has authored a compelling array of articles and books that spotlight women winners, achievers, and entrepreneurs. Known for his inspiring and confident speaking style, he serves as a trusted consultant to a variety of educational institutions. His impactful work has been recognised with numerous prestigious awards. Currently, he is playing a pivotal role in shaping the We Can Voice for Women Foundation, offering valuable insights and expertise to empower women's voices and initiatives.",
             social: {
@@ -113,12 +113,12 @@ const About: React.FC = () => {
         },
         {
             name: "Prakash V",
-            title: "Senior Full Stack Web Developer",
+            title: "Senior Full Stack Developer",
             image: "/assets/images/6.jpg",
         },
         {
             name: "Shenbagavel V",
-            title: "Junior Full Stack Web Developer",
+            title: "Junior Full Stack Developer",
             image: "/assets/images/5.jpg",
         },
         {
@@ -134,10 +134,13 @@ const About: React.FC = () => {
     return (
         <>
             {/* About Section */}
-            <div className="bg-pink-50 min-h-screen flex items-center justify-center py-10 px-4">
-                <div className=" max-w-4xl w-full p-8  text-center">
-                    <h1 className="text-4xl font-bold text-pink-700 mb-6">About Us</h1>
-                    <div className="text-lg text-pink-900 space-y-4 text-left">
+            <div
+                className="min-h-screen flex items-center justify-center py-10 px-4 bg-cover bg-center"
+                style={{ backgroundImage: "url('/assets/images/banner.png')" }}
+            >
+                <div className="bg-white max-w-4xl w-full p-8 rounded-lg shadow-lg text-center">
+                    <h1 className="text-4xl font-bold text-pink-700 mb-10 text-center">About Us</h1>
+                    <div className="text-lg text-black space-y-4 text-left">
                         {visibleContent.map((para, index) => (
                             <p key={index} className="whitespace-pre-line">
                                 {para}
@@ -153,69 +156,75 @@ const About: React.FC = () => {
                 </div>
             </div>
 
+
             {/* Leadership Team Section */}
             <section className="py-12 md:py-16 px-4 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">Leadership</h2>
                     <div className="grid gap-8 md:gap-12 md:grid-cols-2">
-                        {leaders.map((leader) => {
+                        {leaders.map((leader, index) => {
                             const isExpanded = expandedLeaderIds.includes(leader.id);
                             return (
-                                <div
-                                    key={leader.id}
-                                    className="overflow-hidden hover:shadow-xl transition-shadow h-full border rounded-lg p-6"
-                                >
-                                    <div className="grid md:grid-cols-3 gap-4 items-center">
-                                        <div className="md:col-span-1 bg-gray-50 flex items-center justify-center rounded-lg aspect-w-2 aspect-h-2">
-                                            <img
-                                                src={leader.image}
-                                                alt={leader.name}
-                                                className="w-full h-full object-cover rounded-lg shadow-md"
-                                            />
-                                        </div>
-
+                                <React.Fragment key={leader.id}>
+                                    {/* Inject "Advisory Board" title before the third card */}
+                                    {index === 2 && (
                                         <div className="md:col-span-2">
-                                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                                                <div>
-                                                    <h3 className="text-2xl font-bold text-gray-800">{leader.name}</h3>
-                                                    <p className="text-pink-600 font-medium text-base">{leader.title}</p>
-                                                </div>
-                                                <div className="flex space-x-2 mt-3 md:mt-0">
-                                                    {leader.social.linkedin && (
-                                                        <a
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            href={leader.social.linkedin}
-                                                            className="group p-2 rounded-full bg-white transition duration-300"
-                                                            aria-label={`${leader.name}'s LinkedIn`}
-                                                        >
-                                                            <Linkedin className="h-5 w-5 text-pink-600 group-hover:drop-shadow-[0_0_6px_rgba(236,72,153,0.8)] transition duration-300" />
-                                                        </a>
+                                            <h3 className="text-4xl font-bold text-pink-700 mb-10 text-center">Advisory Board</h3>
+                                        </div>
+                                    )}
 
-
-                                                    )}
-                                                </div>
+                                    <div className="overflow-hidden hover:shadow-xl transition-shadow h-full border rounded-lg p-6">
+                                        <div className="grid md:grid-cols-3 gap-4 items-center">
+                                            <div className="md:col-span-1 bg-gray-50 flex items-center justify-center rounded-lg aspect-w-2 aspect-h-2">
+                                                <img
+                                                    src={leader.image}
+                                                    alt={leader.name}
+                                                    className="w-full h-full object-cover rounded-lg shadow-md"
+                                                />
                                             </div>
 
-                                            <p className="text-gray-700 text-sm">
-                                                {isExpanded ? leader.bio : truncate(leader.bio, 140)}
-                                                {leader.bio.length > 140 && (
-                                                    <button
-                                                        onClick={() => toggleLeaderBio(leader.id)}
-                                                        className="text-pink-600 hover:text-pink-800 font-semibold ml-2"
-                                                    >
-                                                        {isExpanded ? 'Show Less' : 'Read More'}
-                                                    </button>
-                                                )}
-                                            </p>
+                                            <div className="md:col-span-2">
+                                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                                                    <div>
+                                                        <h3 className="text-2xl font-bold text-gray-800">{leader.name}</h3>
+                                                        <p className="text-pink-600 font-medium text-base">{leader.title}</p>
+                                                    </div>
+                                                    <div className="flex space-x-2 mt-3 md:mt-0">
+                                                        {leader.social.linkedin && (
+                                                            <a
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                href={leader.social.linkedin}
+                                                                className="group p-2 rounded-full bg-white transition duration-300"
+                                                                aria-label={`${leader.name}'s LinkedIn`}
+                                                            >
+                                                                <Linkedin className="h-5 w-5 text-pink-600 group-hover:drop-shadow-[0_0_6px_rgba(236,72,153,0.8)] transition duration-300" />
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                <p className="text-gray-700 text-sm">
+                                                    {isExpanded ? leader.bio : truncate(leader.bio, 140)}
+                                                    {leader.bio.length > 140 && (
+                                                        <button
+                                                            onClick={() => toggleLeaderBio(leader.id)}
+                                                            className="text-pink-600 hover:text-pink-800 font-semibold ml-2"
+                                                        >
+                                                            {isExpanded ? 'Show Less' : 'Read More'}
+                                                        </button>
+                                                    )}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </React.Fragment>
                             );
                         })}
                     </div>
                 </div>
             </section>
+
 
 
 
