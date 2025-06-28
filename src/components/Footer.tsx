@@ -32,26 +32,43 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-xl font-semibold mb-3 border-b border-white/30 pb-2">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                ['Home', '/'],
-                ['About', '/About'],
-                ['Blogs', '/Blogs'],
-                ['Media', '/Media'],
-                ['Event', '/Events'],
-                ['Get Involved', '/GetInvolved'],
-                ['Contact Us', '/Contact'],
-              ].map(([label, link]) => (
-                <li key={link}>
-                  <Link to={link} className="hover:underline" onClick={() => window.scrollTo(0, 0)}>
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              {/* Column 1 */}
+              <ul className="space-y-2">
+                {[
+                  ['Home', '/'],
+                  ['About', '/About'],
+                  ['Blogs', '/Blogs'],
+                  ['Media', '/Media'],
+                ].map(([label, link]) => (
+                  <li key={link}>
+                    <Link to={link} className="hover:underline" onClick={() => window.scrollTo(0, 0)}>
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Column 2 */}
+              <ul className="space-y-2">
+                {[
+                  ['Event', '/Events'],
+                  ['Get Involved', '/GetInvolved'],
+                  ['Contact Us', '/Contact'],
+                ].map(([label, link]) => (
+                  <li key={link}>
+                    <Link to={link} className="hover:underline" onClick={() => window.scrollTo(0, 0)}>
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+
 
           {/* Contact Info */}
           <div>
@@ -60,7 +77,7 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5" />
                 <span>
-                  32, 1st St, Sri Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Kumaran Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
+                  32, 1st Main Road, Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Virugambakkam, Chennai, Tamil Nadu 600092
                 </span>
               </li>
               <li className="flex items-center">

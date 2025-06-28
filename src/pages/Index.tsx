@@ -1,5 +1,6 @@
 // app/page.js or pages/index.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeroBanner from '@/components/HeroBanner';
 import MediaSection from '@/components/MediaSection';
 import Card from '@/components/Card';
@@ -29,16 +30,19 @@ export default function Home() {
       title: 'Enlightenment',
       text: 'When women achieve independence through education, they unlock their full potential and flourish in every aspect of life.',
       colorClass: 'text-pink-600',
+      href:'#',
     },
     {
       title: 'Enhealthment',
       text: 'A healthy woman embodies vitality. We provide essential medical support to underserved women, ensuring they thrive.',
       colorClass: 'text-pink-600',
+      href:'#',
     },
     {
       title: 'Empowerment',
       text: 'Grassroots women can improve their economic status through self-employment, and we are here to empower their journey to success.',
       colorClass: 'text-pink-600',
+      href:'#',
     },
   ];
 
@@ -68,7 +72,9 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whatWeDoData.map((item, index) => (
-            <Card1 key={index} {...item} center />
+            <Link to={item.href || '/'} key={index}>
+              <Card1 {...item} center />
+            </Link>
           ))}
         </div>
       </div>

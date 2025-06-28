@@ -1,7 +1,38 @@
 'use client';
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 export default function GetInvolved() {
+  const [formStatus, setFormStatus] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const fullName = form.fullName.value;
+    const email = form.email.value;
+    const interest = form.interest.value;
+    const phone = form.phone.value;
+
+    try {
+      const response = await fetch('http://localhost:8080/api/form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, interest, phone }),
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        form.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      console.error(error);
+      setFormStatus('error');
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -55,7 +86,7 @@ export default function GetInvolved() {
           ))}
         </div>
 
-        {/* 📝 Compact Form at the Bottom */}
+        {/* 📝 Form */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,48 +97,49 @@ export default function GetInvolved() {
           <h3 className="text-lg sm:text-xl font-semibold text-pink-600 mb-4 text-center">
             Quick Form to Get Involved
           </h3>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Thanks for signing up! (Demo only)');
-            }}
-            className="space-y-4 text-sm"
-          >
-            {/* Full Name */}
+
+          {formStatus === 'success' && (
+            <div className="text-green-600 text-center mb-4">✅ Thank you for getting involved!</div>
+          )}
+          {formStatus === 'error' && (
+            <div className="text-red-600 text-center mb-4">❌ Something went wrong. Please try again.</div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4 text-sm">
             <input
               type="text"
+              name="fullName"
               required
               placeholder="Full Name"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-400 focus:border-pink-400"
             />
 
-            {/* Email */}
             <input
               type="email"
+              name="email"
               required
               placeholder="Email Address"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-400 focus:border-pink-400"
             />
 
-            {/* Select Option */}
             <select
+              name="interest"
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-400 focus:border-pink-400"
             >
               <option value="">Choose your Interest</option>
-              <option value="donate">Career</option>
+              <option value="career">Career</option>
               <option value="volunteer">Volunteer</option>
-              <option value="awareness">Internship</option>
+              <option value="internship">Internship</option>
             </select>
 
-            {/* Phone */}
             <input
               type="tel"
+              name="phone"
               placeholder="Phone (optional)"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-400 focus:border-pink-400"
             />
 
-            {/* Submit */}
             <button
               type="submit"
               className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-md font-semibold transition"
