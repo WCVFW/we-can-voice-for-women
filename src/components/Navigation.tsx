@@ -31,7 +31,7 @@ const Navigation = () => {
             key={item.name}
             to={item.href}
             className={`text-sm font-bold transition-colors hover:text-pink-500 ${
-              isActive(item.href) ? 'text-pink-500' : 'text-muted-foreground'
+              isActive(item.href) ? 'text-' : 'text-muted-foreground'
             }`}
           >
             {item.name}
@@ -57,7 +57,7 @@ const Navigation = () => {
                   to={item.href}
                   className={`text-lg font-bold transition-colors hover:text-pink-500 ${
                     isActive(item.href)
-                      ? 'text-pink-500'
+                      ? 'text-primary'
                       : 'text-muted-foreground'
                   }`}
                   onClick={() => setIsMenuOpen(false)}

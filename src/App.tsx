@@ -1,10 +1,13 @@
+import { useState, useEffect } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+
 import MainLayout from './layouts/MainLayout';
 import AdminLayout from './layouts/AdminLayout';
+
 import Index from './pages/Index';
 import Enlightenment from './pages/Enlightenment';
 import Enhealthment from './pages/Enhealthment';
@@ -26,46 +29,56 @@ import CookiePolicy from '@/pages/cookie-policy';
 import TermsAndConditions from '@/pages/terms-and-conditions';
 import FAQ from '@/pages/FAQ';
 
+import Loader from '@/components/Loader';
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Index />} />
-              <Route path="enlightenment" element={<Enlightenment />} />
-              <Route path="enhealthment" element={<Enhealthment />} />
-              <Route path="empowerment" element={<Empowerment />} />
-              <Route path="donate" element={<Donate />} />
-              <Route path="About" element={<About />} />
-              <Route path="Blogs" element={<Blogs />} />
-              <Route path="Events" element={<Events />} />
-              <Route path="Media" element={<Media />} />
-              <Route path="GetInvolved" element={<GetInvolved />} />
-              <Route path="Contact" element={<Contact />} />
-              <Route path="Contact" element={<About />} />
-              <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
-              <Route path="RefundPolicy" element={<RefundPolicy />} />
-              <Route path="CookiePolicy" element={<CookiePolicy />} />
-              <Route path="TermsAndConditions" element={<TermsAndConditions />} />
-              <Route path="FAQ" element={<FAQ />} />
+const App = () => {
+  const [loading, setLoading] = useState(true);
 
-            </Route>
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-            </Route>
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // Adjust time as needed
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Index />} />
+                <Route path="enlightenment" element={<Enlightenment />} />
+                <Route path="enhealthment" element={<Enhealthment />} />
+                <Route path="empowerment" element={<Empowerment />} />
+                <Route path="donate" element={<Donate />} />
+                <Route path="About" element={<About />} />
+                <Route path="Blogs" element={<Blogs />} />
+                <Route path="Events" element={<Events />} />
+                <Route path="Media" element={<Media />} />
+                <Route path="GetInvolved" element={<GetInvolved />} />
+                <Route path="Contact" element={<Contact />} />
+                <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
+                <Route path="RefundPolicy" element={<RefundPolicy />} />
+                <Route path="CookiePolicy" element={<CookiePolicy />} />
+                <Route path="TermsAndConditions" element={<TermsAndConditions />} />
+                <Route path="FAQ" element={<FAQ />} />
+              </Route>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+              </Route>
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
