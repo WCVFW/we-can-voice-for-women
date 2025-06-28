@@ -4,41 +4,38 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import DonateButton from './DonateButton';
-import { motion } from 'framer-motion'; // You need to install framer-motion
 
 const Navigation = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Enlightenment', href: '/enlightenment' },
-    { name: 'Enhealthment', href: '/enhealthment' },
-    { name: 'Empowerment', href: '/empowerment' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/About' },
+    { name: 'Media', href: '/Media' },
+    { name: 'Blog', href: '/Blogs' },
+    { name: 'Get Involved', href: '/GetInvolved' },
+    { name: 'Contact Us', href: '/Contact' }
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
-    <nav className="flex items-center space-x-4 font-sans">
+    <nav className="flex items-center space-x-4">
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center space-x-6">
-        {navigation.map((item, index) => (
-          <motion.div
+        {navigation.map((item) => (
+          <Link
             key={item.name}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            to={item.href}
+            className={`text-sm font-bold transition-colors hover:text-pink-500 ${
+              isActive(item.href) ? 'text-pink-500' : 'text-muted-foreground'
+            }`}
           >
-            <Link
-              to={item.href}
-              className={`text-base font-semibold tracking-wide rounded-md px-2 py-1 transition-all duration-300 ease-in-out hover:text-white hover:bg-pink-400 ${isActive(item.href)
-                  ? 'text-white bg-pink-400'
-                  : 'text-muted-foreground'
-                }`}
-            >
-              {item.name}
-            </Link>
-          </motion.div>
+            {item.name}
+          </Link>
         ))}
         <DonateButton variant="default" />
       </div>
@@ -53,19 +50,14 @@ const Navigation = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <motion.div
-              initial={{ x: 100 }}
-              animate={{ x: 0 }}
-              transition={{ type: 'spring', stiffness: 100 }}
-              className="flex flex-col space-y-4 mt-8 font-serif"
-            >
+            <div className="flex flex-col space-y-4 mt-8">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-lg font-bold tracking-wide transition-colors hover:text-primary hover:text-white hover:bg-pink-400 ₹{
+                  className={`text-lg font-bold transition-colors hover:text-pink-500 ${
                     isActive(item.href)
-                      ? 'text-primary bg-pink-400'
+                      ? 'text-pink-500'
                       : 'text-muted-foreground'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
@@ -76,7 +68,7 @@ const Navigation = () => {
               <div className="pt-4">
                 <DonateButton className="w-full" />
               </div>
-            </motion.div>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
