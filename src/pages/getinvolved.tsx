@@ -94,10 +94,10 @@ export default function GetInvolved() {
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-400 focus:border-pink-400"
             >
-              <option value="">Select Interest</option>
+              <option value="">Choose your Interest</option>
+              <option value="donate">Career</option>
               <option value="volunteer">Volunteer</option>
-              <option value="donate">Donate</option>
-              <option value="awareness">Spread Awareness</option>
+              <option value="awareness">Internship</option>
             </select>
 
             {/* Phone */}

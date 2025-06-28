@@ -160,7 +160,7 @@ const About: React.FC = () => {
             {/* Leadership Team Section */}
             <section className="py-12 md:py-16 px-4 bg-white">
                 <div className="max-w-7xl mx-auto">
-                    <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">Leadership</h2>
+                    <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center"> Our Leadership</h2>
                     <div className="grid gap-8 md:gap-12 md:grid-cols-2">
                         {leaders.map((leader, index) => {
                             const isExpanded = expandedLeaderIds.includes(leader.id);
