@@ -13,9 +13,10 @@ const Navigation = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/About' },
     { name: 'Media', href: '/Media' },
-    { name: 'Blog', href: '/Blogs' },
+    { name: 'Project', href: '/Project' },
     { name: 'Get Involved', href: '/GetInvolved' },
-    { name: 'Contact Us', href: '/Contact' }
+    { name: 'Contact Us', href: '/Contact' },
+    // { name: 'login', href: '/Login' }
   ];
 
   const isActive = (path: string) => {

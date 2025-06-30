@@ -29,7 +29,7 @@ export default function Contact() {
             className="space-y-4 text-gray-700 text-base"
           >
             <h2 className="text-xl font-semibold text-pink-600">Reach Us At</h2>
-            <p>📍 <strong>Address:</strong> WCVFW Office, Chennai, Tamil Nadu, India</p>
+            <p>📍 <strong>Address:</strong> 32, 1st Main Road, Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Virugambakkam, Chennai, Tamil Nadu 600092</p>
             <p>📧 <strong>Email:</strong>{' '}
               <a href="mailto:support@wecvoiceforwomen.org" className="text-pink-500 hover:underline">
                 support@wecvoiceforwomen.org

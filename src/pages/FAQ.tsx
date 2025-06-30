@@ -80,8 +80,7 @@ export default function FAQ() {
           <h2 className="font-semibold text-xl text-pink-700">10. How do I contact the Foundation?</h2>
           <p className="whitespace-pre-line">
             📍 Address:
-            Plot No. 32, Door No. 3/1, Ayyappa Nagar First Main Road,
-            Virugambakkam, Chennai, Tamil Nadu – 600092
+            32, 1st Main Road, Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Virugambakkam, Chennai, Tamil Nadu 600092
           </p>
           <p>📞 Phone: +91 94448 88197</p>
           <p>

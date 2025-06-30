@@ -28,6 +28,8 @@ import RefundPolicy from '@/pages/refund-policy';
 import CookiePolicy from '@/pages/cookie-policy';
 import TermsAndConditions from '@/pages/terms-and-conditions';
 import FAQ from '@/pages/FAQ';
+import Login from './pages/admin/Login';
+
 
 import Loader from '@/components/Loader';
 
@@ -62,6 +64,7 @@ const App = () => {
                 <Route path="Media" element={<Media />} />
                 <Route path="GetInvolved" element={<GetInvolved />} />
                 <Route path="Contact" element={<Contact />} />
+                <Route path="Login" element={<Login />} />
                 <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
                 <Route path="RefundPolicy" element={<RefundPolicy />} />
                 <Route path="CookiePolicy" element={<CookiePolicy />} />
