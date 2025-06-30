@@ -31,7 +31,7 @@ const Navigation = () => {
             key={item.name}
             to={item.href}
             className={`text-sm font-bold transition-colors hover:text-pink-500 ${
-              isActive(item.href) ? 'text-' : 'text-muted-foreground'
+              isActive(item.href) ? 'text-pink-600' : 'text-muted-foreground'
             }`}
           >
             {item.name}
