@@ -25,13 +25,13 @@ function convertToEmbedUrl(url: string): string | null {
 
 // Sample data
 const mediaItems = [
-  { id: 1, type: "video", title: "We Support Women Education", videoUrl: "https://www.youtube.com/watch?v=8mTxV2JBt9U" },
+  { id: 1, type: "video", title: "Scholership For Enlightment", videoUrl: "https://www.youtube.com/watch?v=8mTxV2JBt9U" },
   { id: 2, type: "video", title: "No more Depression - Part 1", videoUrl: "https://www.youtube.com/watch?v=z3_48_JHUpY" },
   { id: 3, type: "video", title: "No more Depression - Part 2", videoUrl: "https://www.youtube.com/watch?v=v9Oh-EX9sE4" },
   { id: 4, type: "video", title: "No more Depression - Part 3", videoUrl: "https://www.youtube.com/watch?v=y-U7lw3KRJ0" },
   { id: 5, type: "video", title: "Menstrual cup A to Z in Tamil", videoUrl: "https://www.youtube.com/watch?v=KP6wuVAk3WM" },
-  { id: 6, type: "video", title: "IAS, IPS Motivational Speech", videoUrl: "https://www.youtube.com/watch?v=EYBNXErwGRA" },
-
+  { id: 6, type: "video", title: "How To Became IAS, IPS", videoUrl: "https://www.youtube.com/watch?v=EYBNXErwGRA" },
+ 
 ];
 const imageAlbums = [
   {
