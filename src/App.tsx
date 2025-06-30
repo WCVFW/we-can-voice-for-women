@@ -32,6 +32,7 @@ import Login from './pages/admin/Login';
 
 
 import Loader from '@/components/Loader';
+import CookieBanner from '@/components/CookieBanner';
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => {
       <AuthProvider>
         <TooltipProvider>
           <Toaster />
+          <CookieBanner />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<MainLayout />}>
