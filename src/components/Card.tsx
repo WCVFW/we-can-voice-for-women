@@ -1,19 +1,20 @@
-import { useState, useEffect, useRef } from "react";
-
-export default function Card({ title, text, colorClass, center }) {
+import React from 'react';
+ 
+interface CardProps {
+  id: number;
+  title: string;
+  text: string;
+  bgColor?: string;
+  textColor?: string;
+}
+ 
+const Card: React.FC<CardProps> = ({ title, text }) => {
   return (
-    <div
-      className={`bg-pink-200 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105  ${
-        center ? "text-center" : ""
-      }`}
-    >
-      <h3 className={`text-xl font-semibold ${colorClass} mb-4`}>
-        {title}
-      </h3>
-
-      <p className="text-gray-700 font-sans " style={{ overflowWrap: "break-word" }}>
-        {text}
-      </p>
+    <div className="h-full flex flex-col justify-center items-center text-center">
+      <h3 className="text-xl font-bold mb-4">{title}</h3>
+      <p className="text-base">{text}</p>
     </div>
   );
-}
+};
+ 
+export default Card;

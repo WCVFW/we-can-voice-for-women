@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -13,23 +20,21 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simple validation
+
     if (!username || !password) {
       toast.error('Please enter both username and password.');
       return;
     }
-    
-    // In a real app, you would authenticate with your backend
-    // For demo purposes, we'll accept admin/admin
-    if (username === 'admin' && password === 'admin') {
-      login();
+
+    // Replace with your actual login logic
+    if (username === 'Prakash1482' && password === '1417') {
+      login(); // from your context
       toast.success('Login successful!');
-      navigate('/admin');
+      navigate('/admin'); // redirect to dashboard
     } else {
-      toast.error('Invalid credentials. Try admin/admin for demo.');
+      toast.error('Invalid credentials. Please try again.');
     }
   };
 
@@ -46,9 +51,9 @@ export default function Login() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
-              <Input 
-                id="username" 
-                placeholder="admin" 
+              <Input
+                id="username"
+                placeholder="username id"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -61,10 +66,10 @@ export default function Login() {
                   Forgot password?
                 </a>
               </div>
-              <Input 
-                id="password" 
-                type="password" 
-                placeholder="••••••" 
+              <Input
+                id="password"
+                type="password"
+                placeholder="1234567"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -75,11 +80,6 @@ export default function Login() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col">
-          <p className="text-xs text-gray-500 text-center">
-            For demo purposes, use username <strong>admin</strong> and password <strong>admin</strong>
-          </p>
-        </CardFooter>
       </Card>
     </div>
   );

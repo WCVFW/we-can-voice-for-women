@@ -16,12 +16,10 @@ const Navigation = () => {
     { name: 'Project', href: '/Project' },
     { name: 'Get Involved', href: '/GetInvolved' },
     { name: 'Contact Us', href: '/Contact' },
-    // { name: 'login', href: '/Login' }
+    // { name: 'Login', href: '/Login' },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <nav className="flex items-center space-x-4">
@@ -32,7 +30,7 @@ const Navigation = () => {
             key={item.name}
             to={item.href}
             className={`text-sm font-bold transition-colors hover:text-pink-500 ${
-              isActive(item.href) ? 'text-pink-600' : 'text-muted-foreground'
+              isActive(item.href) ? 'text-pink-600' : 'text-black'
             }`}
           >
             {item.name}
@@ -50,16 +48,14 @@ const Navigation = () => {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right">
+          <SheetContent side="right" className="z-[9999]">
             <div className="flex flex-col space-y-4 mt-8">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className={`text-lg font-bold transition-colors hover:text-pink-500 ${
-                    isActive(item.href)
-                      ? 'text-primary'
-                      : 'text-muted-foreground'
+                    isActive(item.href) ? 'text-pink-600' : 'text-black'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >

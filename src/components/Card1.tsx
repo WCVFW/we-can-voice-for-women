@@ -1,19 +1,31 @@
-import { useState, useEffect, useRef } from "react";
+import React from 'react';
 
-export default function Card({ title, text, colorClass, center }) {
+interface Card1Props {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const Card1: React.FC<Card1Props> = ({ title, description, image }) => {
   return (
-    <div
-      className={`bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105  ${
-        center ? "text-center" : ""
-      }`}
-    >
-      <h3 className={`text-xl font-semibold ${colorClass} mb-4`}>
-        {title}
-      </h3>
+    <div className="relative h-[450px] w-full overflow-hidden rounded-xl border border-pink-300 bg-white flex flex-col justify-end">
+      {/* Background Image */}
+      <img
+        src={image}
+        alt={title}
+        className="absolute top-0 left-0 w-full h-[76%] object-cover z-0 px-2 pt-2"
+      />
 
-      <p className="text-gray-700 font-sans" style={{ overflowWrap: "break-word" }}>
-        {text}
-      </p>
+      {/* Overlay Layer */}
+      <div className="absolute top-0 left-0 w-full h-[80%] z-10" />
+
+      {/* Text Content Section */}
+      <div className="relative z-20 bg-pink-100 px-10 py-10 text-center rounded-t-[50%]">
+        <h3 className="text-pink-600 font-semibold text-lg mb-2">{title}</h3>
+        <p className="text-pink-500 text-sm leading-normal">{description}</p>
+      </div>
     </div>
   );
-}
+};
+
+export default Card1;

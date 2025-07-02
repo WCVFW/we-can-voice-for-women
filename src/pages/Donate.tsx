@@ -1,219 +1,182 @@
+'use client';
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
-import DonateButton from '@/components/DonateButton';
+import { motion } from 'framer-motion';
 
-export default function Donate() {
-  const [donationAmount, setDonationAmount] = useState('');
+export default function DonatePage() {
+  const [donationType, setDonationType] = useState<'onetime' | 'monthly'>('onetime');
+  const [amount, setAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [isMonthly, setIsMonthly] = useState(false);
 
-  const handleDonationSubmit = (e) => {
-    e.preventDefault();
-    
-    const amount = donationAmount === 'custom' ? customAmount : donationAmount;
-    
-    // Here you would typically integrate with a payment processor
-    console.log('Processing donation:', {
-      amount,
-      name,
-      email,
-      message,
-      isMonthly
-    });
-    
-    toast.success(`Thank you for your ₹{isMonthly ? 'monthly' : 'one-time'} donation of ₹₹{amount}!`, {
-      description: 'Your generosity helps us empower more women.'
-    });
-  };
+  const renderForm = () => (
+    <form className="space-y-6">
+      <div>
+        <Label className="block mb-2 font-semibold">Choose Amount</Label>
+        <RadioGroup
+          value={amount}
+          onValueChange={setAmount}
+          className="grid grid-cols-2 sm:grid-cols-3 gap-2"
+        >
+          {['500', '1000', '2000', '5000', '10000'].map((a) => (
+            <div key={a}>
+              <RadioGroupItem value={a} id={`amt-${a}`} className="peer sr-only" />
+              <Label
+                htmlFor={`amt-${a}`}
+                className="block text-center border rounded-md p-2 cursor-pointer 
+                  hover:bg-pink-100 peer-checked:bg-pink-600 
+                  peer-checked:text-white peer-checked:border-pink-600 transition"
+              >
+                ₹{a}
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+
+        <Input
+          placeholder="Other Amount"
+          value={customAmount}
+          onChange={(e) => setCustomAmount(e.target.value)}
+          className="mt-3"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input placeholder="Full Name" required />
+        <Input placeholder="Email ID" required />
+        <Input placeholder="Mobile No" required />
+        <Input type="date" placeholder="Date of Birth" required />
+        <Input placeholder="PAN Number" />
+        <Input placeholder="Country" value="India" readOnly />
+        <Input placeholder="State" />
+        <Input placeholder="City" />
+      </div>
+
+      <Textarea placeholder="Address" rows={3} />
+      <Input placeholder="Pincode" />
+
+      <p className="text-xs text-gray-500 leading-snug">
+        "YOUR CONTRIBUTIONS ARE ELIGIBLE FOR UPTO 50% TAX BENEFIT UNDER SECTION 80G AS WE CAN VOICE FOR WOMEN FOUNDATION IS REGISTERED AS NON PROFIT ORGANIZATION"
+        <br /> <br />
+        PAN: ACT579736J | BOG: ACT579736F2010
+      </p>
+
+      <div className="flex items-start space-x-2 text-sm">
+        <input type="checkbox" className="mt-1" />
+        <span>
+          I agree to receive updates from We Can Voice For Women Foundation via WhatsApp,
+          SMS, email, and phone.
+        </span>
+      </div>
+
+      <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+        Submit Donation
+      </Button>
+    </form>
+  );
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-6 lg:px-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Support Our Mission</h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          Your donation helps us empower women through education, health initiatives, and economic opportunities.
-          Together, we can create lasting change in the lives of women everywhere.
-        </p>
-      </div>
+    <div className="font-serif">
+      {/* Top Banner Image */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <img
+          src="/assets/images/Hero_Banner1.png"
+          alt="Donate"
+          className="w-full h-[550px] object-cover rounded-b-lg shadow-lg"
+        />
+      </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div>
-          <Card className="border-2 border-primary/20">
-            <CardHeader>
-              <CardTitle>Make a Donation</CardTitle>
-              <CardDescription>Your contribution makes a difference</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleDonationSubmit} className="space-y-6">
-                <div className="space-y-3">
-                  <Label>Select Donation Type</Label>
-                  <div className="flex items-center space-x-4">
-                    <Button 
-                      type="button"
-                      variant={isMonthly ? "outline" : "default"}
-                      onClick={() => setIsMonthly(false)}
-                    >
-                      One-time
-                    </Button>
-                    <Button 
-                      type="button"
-                      variant={isMonthly ? "default" : "outline"}
-                      onClick={() => setIsMonthly(true)}
-                    >
-                      Monthly
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label>Select Amount</Label>
-                  <RadioGroup 
-                    value={donationAmount}
-                    onValueChange={setDonationAmount}
-                    className="grid grid-cols-3 gap-2"
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
+        {/* Donation + Info */}
+        <div className="flex flex-col lg:flex-row gap-10">
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="w-full lg:w-1/2"
+          >
+            <Card className="rounded-xl shadow-2xl border border-gray-200 p-6 bg-white">
+              <CardHeader className="text-center space-y-3">
+                <div className="flex justify-center border-b pb-3">
+                  <Button
+                    variant={donationType === 'onetime' ? 'default' : 'outline'}
+                    onClick={() => setDonationType('onetime')}
+                    className="rounded-none w-1/2"
                   >
-                    {['25', '50', '100', '250', '500', 'custom'].map((amount) => (
-                      <div key={amount} className="flex items-center">
-                        <RadioGroupItem 
-                          value={amount} 
-                          id={`amount-₹{amount}`} 
-                          className="peer sr-only"
-                        />
-                        <Label
-                          htmlFor={`amount-₹{amount}`}
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-white p-4 hover:bg-gray-50 hover:border-primary peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                        >
-                          {amount === 'custom' ? (
-                            'Custom'
-                          ) : (
-                            <span>₹{amount}</span>
-                          )}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-
-                  {donationAmount === 'custom' && (
-                    <div className="mt-2">
-                      <Label htmlFor="custom-amount">Custom Amount (₹)</Label>
-                      <Input
-                        id="custom-amount"
-                        placeholder="Enter amount"
-                        value={customAmount}
-                        onChange={(e) => setCustomAmount(e.target.value)}
-                        className="mt-1"
-                      />
-                    </div>
-                  )}
+                    ONE TIME DONATION
+                  </Button>
+                  <Button
+                    variant={donationType === 'monthly' ? 'default' : 'outline'}
+                    onClick={() => setDonationType('monthly')}
+                    className="rounded-none w-1/2"
+                  >
+                    MONTHLY DONATION
+                  </Button>
                 </div>
+                <CardTitle className="text-2xl">Support the Cause</CardTitle>
+                <CardDescription>
+                  Make a difference with your {donationType} donation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>{renderForm()}</CardContent>
+            </Card>
+          </motion.div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message (Optional)</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Share why you're supporting us"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="resize-none"
-                    rows={3}
-                  />
-                </div>
-
-                <Button type="submit" className="w-full">Complete Donation</Button>
-              </form>
-            </CardContent>
-          </Card>
+          {/* Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="w-full lg:w-1/2 space-y-6 text-gray-800"
+          >
+            <h2 className="text-3xl font-bold">Why Your Help Matters</h2>
+            <p>
+              Your donation supports essential programs including education, healthcare,
+              and skill development for women and children in need.
+            </p>
+            <p>
+              Each contribution brings us closer to breaking the cycle of poverty and
+              empowering communities through sustainable impact.
+            </p>
+            <p>
+              We value transparency and ensure your donation reaches those who need it
+              most. Thank you for being a change-maker.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Impact</CardTitle>
-              <CardDescription>See how your donation helps</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">₹25 can provide</h3>
-                <p>Educational materials for 5 women in our literacy programs</p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">₹50 can provide</h3>
-                <p>Health screening services for 10 women in underserved communities</p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">₹100 can provide</h3>
-                <p>Business skills training for a woman entrepreneur</p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold mb-2">₹250 can provide</h3>
-                <p>A microloan to help a woman start her own business</p>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">₹500 can provide</h3>
-                <p>A full scholarship for a woman to complete job skills training</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Other Ways to Give</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h3 className="font-semibold">Volunteer Your Time</h3>
-                <p className="text-gray-600 mt-1">Share your skills and expertise with women in our programs.</p>
-                <Button variant="outline" className="mt-3">Learn About Volunteering</Button>
-              </div>
-              <div className="pt-4 border-t">
-                <h3 className="font-semibold">Corporate Partnerships</h3>
-                <p className="text-gray-600 mt-1">Explore partnership opportunities for your organization.</p>
-                <Button variant="outline" className="mt-3">Become a Partner</Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      <div className="mt-12 bg-primary/5 rounded-lg p-8 text-center">
-        <h2 className="text-2xl font-bold mb-4">Need Help With Your Donation?</h2>
-        <p className="text-gray-600 mb-6">Our team is available to answer any questions you may have about donating to We Can Voice For Women.</p>
-        <div className="flex justify-center gap-4">
-          <Button variant="outline">Contact Us</Button>
-          <Button variant="outline">FAQ</Button>
-        </div>
+        {/* Contact & FAQ */}
+        {/* <div className="flex flex-col sm:flex-row gap-4 mt-10 justify-center">
+          <Button
+            variant="outline"
+            onClick={() => window.location.href = '/contact'}
+            className="border-pink-600 text-pink-600 hover:bg-pink-100"
+          >
+            Go to Contact Us
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => window.location.href = '/faq'}
+            className="border-pink-600 text-pink-600 hover:bg-pink-100"
+          >
+            Go to FAQs
+          </Button>
+        </div> */}
       </div>
     </div>
   );
