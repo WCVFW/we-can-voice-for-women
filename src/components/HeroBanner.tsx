@@ -26,8 +26,8 @@ const HeroBanner = () => {
         <div className="max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto">
           <h1
             className="font-bold uppercase text-center mb-20
-    text-[16px] xs:text-[18px] sm:text-[24px] md:text-[28px] lg:text-[36px] xl:text-[44px] 2xl:text-[52px]
-    leading-[1.2] tracking-[0.075em] bg-gradient-to-r from-gray-300 via-pink-200 to-pink-600 bg-clip-text text-transparent"
+    text-[16px] xs:text-[18px] sm:text-[24px] md:text-[28px] lg:text-[38px] xl:text-[54px] 2xl:text-[62px]
+    leading-[1.2] tracking-[0.075em] bg-gradient-to-r from-gray-300 via-pink-200 to-pink-600 bg-clip-text text-transparent xl:mb-2"
           >
             Empowering Women is <br />
             Vital For the Prosperity <br />

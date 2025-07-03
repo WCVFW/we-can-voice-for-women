@@ -123,7 +123,7 @@ export default function Footer(): JSX.Element {
               <div className="flex items-start">
                 <MapPin className="h-6 w-6 mr-2 mt-1 flex-shrink-0" style={{ color: accentColor }} />
                 <span className="text-sm md:text-base leading-snug">
-                  32, 1st Main Road, Ayyappa Nagar, Chinmaya Nagar Stage II Extension, Virugambakkam, Chennai, Tamil Nadu 600092
+                  32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
                 </span>
               </div>
               <div className="flex items-center">
