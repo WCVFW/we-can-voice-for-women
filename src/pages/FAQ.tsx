@@ -80,7 +80,7 @@ export default function FAQ() {
           <h2 className="font-semibold text-xl text-pink-700">10. How do I contact the Foundation?</h2>
           <p className="whitespace-pre-line">
             📍 Address:
-            32, 1st Main Road, Ayyappa Nagar,, Virugambakkam, Chennai, Tamil Nadu 600092
+            32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
           </p>
           <p>📞 Phone: +91 94448 88197</p>
           <p>
@@ -90,17 +90,6 @@ export default function FAQ() {
               className="underline text-pink-700"
             >
               support@wecanvoiceforwomen.org
-            </a>
-          </p>
-          <p>
-            🌐 Website:{" "}
-            <a
-              href="https://wecanvoiceforwomen.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline text-pink-700"
-            >
-              wecanvoiceforwomen.org
             </a>
           </p>
         </div>

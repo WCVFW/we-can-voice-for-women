@@ -62,7 +62,7 @@ export default function CookiePolicy() {
       <ul className="mb-6">
         <li><strong>We Can Voice for Women Foundation</strong></li>
         <li>Email: <a href="mailto:support@wecanvoiceforwomen.org" className="underline text-pink-700">support@wecanvoiceforwomen.org</a></li>
-        <li>Website: <a href="https://www.wecanvoiceforwomen.org" className="underline text-pink-700" target="_blank" rel="noopener noreferrer">www.wecanvoiceforwomen.org</a></li>
+        <li>Address: 32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai, Tamil Nadu 600092</li>
       </ul>
     </div>
   );
