@@ -1,71 +1,58 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ShieldCheck, XCircle, Settings } from 'lucide-react';
 
 const COOKIE_KEY = 'cookie_consent';
-const COOKIE_EXPIRY_DAYS = 180;
+const IMAGES_KEY = 'cached_images';
 
 const CookieBanner = () => {
   const [visible, setVisible] = useState(false);
 
-  // Check cookie on first load
   useEffect(() => {
-    const stored = localStorage.getItem(COOKIE_KEY);
-    if (stored) {
-      try {
-        const { value, timestamp } = JSON.parse(stored);
-        const isExpired =
-          Date.now() - timestamp > COOKIE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
-
-        if (!isExpired && (value === 'accepted' || value === 'rejected')) {
-          return; // Still valid, no need to show
-        }
-      } catch {
-        // invalid JSON or corrupted data — show banner again
-      }
-    }
-    setVisible(true);
+    const consent = localStorage.getItem(COOKIE_KEY);
+    if (!consent) setVisible(true);
   }, []);
 
-  // Handle Accept or Reject
-  const handleConsent = (value: 'accepted' | 'rejected') => {
-    const data = {
-      value,
-      timestamp: Date.now(),
-    };
-    localStorage.setItem(COOKIE_KEY, JSON.stringify(data));
+  const preloadImages = (urls: string[]) => {
+    urls.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  };
+
+  const handleConsent = () => {
+    const imageUrls = [
+      '/assets/images/Logo.png',
+      '/assets/images/hero-banner.jpeg',
+    ];
+
+    // Save consent & preload image URLs
+    localStorage.setItem(COOKIE_KEY, 'accepted');
+    localStorage.setItem(IMAGES_KEY, JSON.stringify(imageUrls));
+
+    preloadImages(imageUrls);
     setVisible(false);
   };
 
-  // Don't render if not needed
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 bg-gray-800 text-white px-4 py-4 z-50 shadow-md">
+    <div className="fixed bottom-0 inset-x-0 bg-gray-900 text-white px-4 py-5 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p className="text-sm sm:text-base">
-          We use cookies to improve your experience. You can manage your preferences at any time.
+        <p className="text-sm sm:text-base flex items-center gap-2">
+          <ShieldCheck className="w-5 h-5 text-pink-500" />
+          We use cookies to improve your experience.
         </p>
-
         <div className="flex gap-2 flex-wrap">
-          <Button
-            onClick={() => handleConsent('accepted')}
-            className="bg-pink-600 hover:bg-pink-700 text-white"
-          >
-            Accept All
+          <Button onClick={handleConsent} className="bg-pink-600 hover:bg-pink-700 text-white flex items-center gap-1">
+            <ShieldCheck className="w-4 h-4" /> Accept
           </Button>
-          <Button
-            onClick={() => handleConsent('rejected')}
-            className="bg-gray-700 hover:bg-gray-600 text-white"
-          >
-            Reject
+          <Button onClick={() => setVisible(false)} className="bg-white text-pink-600 hover:bg-gray-100 border border-white flex items-center gap-1">
+            <XCircle className="w-4 h-4" /> Reject
           </Button>
-          <Button
-            onClick={() => (window.location.href = '/cookie-policy')}
-            variant="ghost"
-            className="text-pink-300 hover:text-white underline"
-          >
-            Cookie Settings
+          <Button onClick={() => window.location.href = '/cookie-policy'} className="text-pink-200 hover:text-white underline flex items-center gap-1" variant="ghost">
+            <Settings className="w-4 h-4" /> Cookie Settings
           </Button>
         </div>
       </div>

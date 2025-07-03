@@ -19,7 +19,10 @@ const Header = () => {
             alt="Logo"
             className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
           />
-          <span className="text-[16px] font-bold font-roboto bg-gradient-to-r from-rose-500 to-pink-300 bg-clip-text text-transparent">
+          <span
+            className="font-bold font-roboto bg-gradient-to-r from-rose-500 to-pink-400 bg-clip-text text-transparent 
+  text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
+          >
             We Can Voice For Women
           </span>
         </Link>

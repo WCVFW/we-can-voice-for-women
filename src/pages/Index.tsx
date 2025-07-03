@@ -94,7 +94,7 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-pink-600">
               Our Foundation
             </h2>
-            <p className="text-base sm:text-lg text-pink-600 max-w-4xl mx-auto font-sans">
+            <p className="text-base sm:text-lg max-w-4xl mx-auto font-sans">
               ‘We Can Voice for Women’ is a grassroots movement dedicated to empowering women.
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function Home() {
       </div>
 
       <section
-        className="relative w-full bg-cover bg-center text-pink-400 py-24 px-4"
+        className="relative w-full bg-cover bg-center py-24 px-4"
         style={{ backgroundImage: "url('/assets/images/get-involved-bg.jpg')" }}
       >
         {/* Black overlay */}
@@ -161,11 +161,10 @@ export default function Home() {
 
         {/* Content above overlay */}
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Volunteer</h2>
-          <p className="text-lg sm:text-xl mb-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-pink-600">Volunteer</h2>
+          <p className="text-lg sm:text-xl mb-8 text-white">
             Join us in empowering women through education, healthcare, and opportunity.
           </p>
-
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mt-6">
               <a

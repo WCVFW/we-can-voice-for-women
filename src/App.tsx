@@ -8,12 +8,12 @@ import { AuthProvider } from './context/AuthContext';
 import CookieBanner from '@/components/CookieBanner';
 import Loader from '@/components/Loader';
 
-import MainLayout from './layouts/MainLayout';
-import AdminLayout from './layouts/AdminLayout';
+import MainLayout from '@/layouts/MainLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminLogin from './pages/admin/Login';
-import NotFound from './pages/NotFound';
+import AdminDashboard from '@/pages/admin/Dashboard';
+import AdminLogin from '@/pages/admin/Login';
+import NotFound from '@/pages/NotFound';
 
 import {
   QueryClient,
@@ -66,25 +66,21 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const preloadImages = async () => {
-      const imageUrls = [
-        '/assets/images/Logo.png',
-        '/assets/images/hero-banner.jpeg',
-      ];
+    const preloadImages = () => {
+      const consent = localStorage.getItem('cookie_consent');
+      const cached = localStorage.getItem('cached_images');
 
-      const load = (src: string) =>
-        new Promise<void>((resolve) => {
+      if (consent === 'accepted' && cached) {
+        const urls = JSON.parse(cached);
+        urls.forEach((src: string) => {
           const img = new Image();
           img.src = src;
-          img.onload = () => resolve();
-          img.onerror = () => resolve(); // Resolve even if image fails
         });
-
-      await Promise.all(imageUrls.map(load));
-      setLoading(false);
+      }
     };
 
     preloadImages();
+    setLoading(false); // remove artificial loader delay
   }, []);
 
   if (loading) return <Loader />;
@@ -119,8 +115,8 @@ const App = () => {
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminDashboard />} />
                 </Route>
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="/admin/Login" element={<AdminLogin />} />
+                <Route path="*" element={<AdminLogin />} />
               </Routes>
             </Suspense>
           </BrowserRouter>
