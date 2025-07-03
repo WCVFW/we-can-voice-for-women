@@ -8,52 +8,62 @@ const COOKIE_EXPIRY_DAYS = 180;
 const CookieBanner = () => {
   const [visible, setVisible] = useState(false);
 
+  // Check cookie on first load
   useEffect(() => {
     const stored = localStorage.getItem(COOKIE_KEY);
     if (stored) {
       try {
         const { value, timestamp } = JSON.parse(stored);
-        const expired =
+        const isExpired =
           Date.now() - timestamp > COOKIE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
-        if (!expired) return; // Still valid, don't show again
+
+        if (!isExpired && (value === 'accepted' || value === 'rejected')) {
+          return; // Still valid, no need to show
+        }
       } catch {
-        // corrupted data, re-show banner
+        // invalid JSON or corrupted data — show banner again
       }
     }
     setVisible(true);
   }, []);
 
-  const handleConsent = (value: string) => {
-    const data = { value, timestamp: Date.now() };
+  // Handle Accept or Reject
+  const handleConsent = (value: 'accepted' | 'rejected') => {
+    const data = {
+      value,
+      timestamp: Date.now(),
+    };
     localStorage.setItem(COOKIE_KEY, JSON.stringify(data));
     setVisible(false);
   };
 
+  // Don't render if not needed
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 bg-gray-800 text-white px-4 py-4 z-50 shadow-lg">
+    <div className="fixed bottom-0 inset-x-0 bg-gray-800 text-white px-4 py-4 z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p className="text-sm sm:text-base">
-          We use cookies to improve your experience. You can manage your preferences any time.
+          We use cookies to improve your experience. You can manage your preferences at any time.
         </p>
+
         <div className="flex gap-2 flex-wrap">
           <Button
             onClick={() => handleConsent('accepted')}
             className="bg-pink-600 hover:bg-pink-700 text-white"
           >
-            Accept
+            Accept All
           </Button>
           <Button
             onClick={() => handleConsent('rejected')}
-            className="bg-pink-600 hover:bg-pink-700 text-white border border-white"
+            className="bg-gray-700 hover:bg-gray-600 text-white"
           >
             Reject
           </Button>
           <Button
-            onClick={() => window.location.href = '/cookie-policy'}
-            className="text-pink-200 hover:text-white underline"
+            onClick={() => (window.location.href = '/cookie-policy')}
             variant="ghost"
+            className="text-pink-300 hover:text-white underline"
           >
             Cookie Settings
           </Button>

@@ -1,16 +1,12 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
-import {
-  persistQueryClient,
-} from '@tanstack/react-query-persist-client';
-import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+
+import CookieBanner from '@/components/CookieBanner';
+import Loader from '@/components/Loader';
 
 import MainLayout from './layouts/MainLayout';
 import AdminLayout from './layouts/AdminLayout';
@@ -19,10 +15,16 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminLogin from './pages/admin/Login';
 import NotFound from './pages/NotFound';
 
-import CookieBanner from '@/components/CookieBanner';
-import Loader from '@/components/Loader';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import {
+  persistQueryClient,
+} from '@tanstack/react-query-persist-client';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
-// Lazy-loaded routes
+// Lazy-loaded pages
 const Index = lazy(() => import('./pages/Index'));
 const Enlightenment = lazy(() => import('./pages/Enlightenment'));
 const Enhealthment = lazy(() => import('./pages/Enhealthment'));
@@ -39,14 +41,11 @@ const RefundPolicy = lazy(() => import('@/pages/refund-policy'));
 const CookiePolicy = lazy(() => import('@/pages/cookie-policy'));
 const TermsAndConditions = lazy(() => import('@/pages/terms-and-conditions'));
 const FAQ = lazy(() => import('@/pages/FAQ'));
-const Login = lazy(() => import('./pages/admin/Login'));
 
-// React Query Setup
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5,
-      // cacheTime: 1000 * 60 * 60,
+      staleTime: 1000 * 60 * 5, // 5 minutes
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -78,15 +77,11 @@ const App = () => {
           const img = new Image();
           img.src = src;
           img.onload = () => resolve();
-          img.onerror = () => resolve();
+          img.onerror = () => resolve(); // Resolve even if image fails
         });
 
       await Promise.all(imageUrls.map(load));
-
-      // Ensure loader is visible for at least 3 seconds
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      setLoading(false);
     };
 
     preloadImages();
@@ -115,7 +110,6 @@ const App = () => {
                   <Route path="Media" element={<Media />} />
                   <Route path="GetInvolved" element={<GetInvolved />} />
                   <Route path="Contact" element={<Contact />} />
-                  <Route path="Login" element={<Login />} />
                   <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
                   <Route path="RefundPolicy" element={<RefundPolicy />} />
                   <Route path="CookiePolicy" element={<CookiePolicy />} />

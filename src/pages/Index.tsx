@@ -5,6 +5,7 @@ import HeroBanner from '@/components/HeroBanner';
 import MediaSection from '@/components/MediaSection';
 import Card from '@/components/Card';
 import Card1 from '@/components/Card1';
+import { HandHeart, Mail } from 'lucide-react';
 
 export default function Home() {
   const foundationData = [
@@ -66,7 +67,8 @@ export default function Home() {
         <img
           src="assets/images/Asset_1.png"
           alt="Left Decoration"
-          className="hidden lg:block absolute z-0 object-contain w-[150px] sm:w-[180px] lg:w-[420px]"
+          className="hidden sm:block absolute z-0 object-contain
+             w-[120px] sm:w-[160px] md:w-[220px] lg:w-[300px] xl:w-[420px]"
           style={{
             left: '-15%',
             top: '45%',
@@ -77,7 +79,8 @@ export default function Home() {
         <img
           src="assets/images/Asset_2.png"
           alt="Right Decoration"
-          className="hidden lg:block absolute z-0 object-contain w-[150px] sm:w-[180px] lg:w-[420px]"
+          className="hidden sm:block absolute z-0 object-contain
+             w-[120px] sm:w-[160px] md:w-[220px] lg:w-[300px] xl:w-[420px]"
           style={{
             right: '-10%', // changed from -15% to prevent scroll
             top: '0%',
@@ -101,9 +104,21 @@ export default function Home() {
             {foundationData.map((item, index) => (
               <div
                 key={item.id}
-                className={`w-[335px] h-[356px] rounded-[10px] border border-gray-200 p-6 shadow-sm transition duration-300 transform hover:scale-105 ${
-                  item.id === 2 ? 'md:-mt-32' : 'hover:shadow-lg'
-                }`}
+                className={`
+    w-full
+    max-w-[335px]
+    h-[340px]            // default height
+    sm:h-[360px]         // small screens
+    md:h-[380px]         // tablets
+    lg:h-[400px]         // laptops
+    xl:h-[420px]         // desktops
+    rounded-[10px]
+    border border-gray-200
+    p-6
+    shadow-sm
+    transition duration-300 transform hover:scale-105
+    ${item.id === 2 ? 'md:-mt-20' : 'hover:shadow-lg'}
+  `}
                 style={{
                   backgroundColor: item.bgColor,
                   color: item.textColor,
@@ -111,6 +126,8 @@ export default function Home() {
               >
                 <Card {...item} />
               </div>
+
+
             ))}
           </div>
         </div>
@@ -125,12 +142,54 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
           {whatWeDoData.map((item, index) => (
             <Link to={item.href || '/'} key={index}>
-              <Card1 {...item} />
+              <div
+                className="group rounded-xl overflow-hidden border border-gray-200 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+              >
+                <Card1 {...item} />
+              </div>
             </Link>
           ))}
         </div>
       </div>
 
+      <section
+        className="relative w-full bg-cover bg-center text-pink-400 py-24 px-4"
+        style={{ backgroundImage: "url('/assets/images/get-involved-bg.jpg')" }}
+      >
+        {/* Black overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div> {/* ← You can adjust opacity */}
+
+        {/* Content above overlay */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Volunteer</h2>
+          <p className="text-lg sm:text-xl mb-8">
+            Join us in empowering women through education, healthcare, and opportunity.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mt-6">
+              <a
+                href="/getinvolved"
+                className="w-fit sm:w-auto flex items-center gap-2 text-center bg-transparent hover:bg-pink-600 text-white hover:text-white border border-pink-600 
+      px-3 py-2 text-sm sm:px-5 sm:py-3 sm:text-base md:px-6 md:py-3 md:text-lg 
+      rounded-lg font-semibold transition-colors duration-300"
+              >
+                <HandHeart className="w-4 h-4 sm:w-5 sm:h-5" />
+                Get Involved
+              </a>
+              <a
+                href="/contact"
+                className="w-fit sm:w-auto flex items-center gap-2 text-center bg-transparent hover:bg-pink-600 text-white hover:text-white border border-pink-600 
+      px-3 py-2 text-sm sm:px-5 sm:py-3 sm:text-base md:px-6 md:py-3 md:text-lg 
+      rounded-lg font-semibold transition-colors duration-300"
+              >
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* <MediaSection /> */}
     </div>
   );
