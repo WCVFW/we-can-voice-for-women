@@ -104,30 +104,31 @@ const About: React.FC = () => {
         email: "Kadharchem@gmail.com",
       },
     },
-    // {
-    //   id: 5,
-    //   name: "Mr. Sudarshan Meenakshi Sundharam ",
-    //   title: "Toronto, Canada",
-    //   image: "/assets/images/sub5.png",
-    //   bio: "Sudarshan Meenakshi Sundharam has a degree in Electronics Engineering and a diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
-    //   social: {
-    //     linkedin: "#",
-    //     twitter: "#",
-    //     email: "amara@voiceforwomen.org",
-    //   },
-    // },
-    // {
-    //   id: 6,
-    //   name: "Ms. Sripriya V",
-    //   title: "Consultant Psychologist",
-    //   image: "/assets/images/sub6.png",
-    //   bio: "Mrs. Sripriya V is a psychologist specialising in counselling, psychotherapy, and psychometric assessments. As a certified hypnotherapist, she has experience in substance abuse rehabilitation and leads Employee Assistance Program (EAP) sessions. Fluent in multiple languages, she creates a comfortable space for clients.",
-    //   social: {
-    //     linkedin: "https://www.linkedin.com/in/sripriya-psy/",
-    //     twitter: "#",
-    //     email: "amara@voiceforwomen.org",
-    //   },
-    // },
+    {
+      id: 5,
+      name: "Mr. Sudarshan Meenakshi Sundharam ",
+      title: "Toronto, Canada",
+      image: "/assets/images/sub5.png",
+      bio: "Sudarshan Meenakshi Sundharam has a degree in Electronics Engineering and a diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        email: "amara@voiceforwomen.org",
+      },
+    },
+    {
+      id: 6,
+      name: "Ms. Sripriya V",
+      title: "Consultant Psychologist",
+      image: "/assets/images/sub6.png",
+      bio: "Mrs. Sripriya V is a psychologist specialising in counselling, psychotherapy, and psychometric assessments. As a certified hypnotherapist, she has experience in substance abuse rehabilitation and leads Employee Assistance Program (EAP) sessions. Fluent in multiple languages, she creates a comfortable space for clients.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/sripriya-psy/",
+        twitter: "#",
+        email: "amara@voiceforwomen.org",
+      },
+    },
+
   ];
 
   const teamMembers = [
@@ -161,16 +162,16 @@ const About: React.FC = () => {
       title: "Director of Photography",
       image: "/assets/images/4.jpg",
     },
-    {
-      name: "Pradeep E",
-      title: "Visual Editor",
-      image: "/assets/images/.jpg",
-    },
-    {
-      name: "Harini Ga",
-      title: "Graphic Design",
-      image: "/assets/images/.jpg",
-    },
+    // {
+    //   name: "Pradeep E",
+    //   title: "Visual Editor",
+    //   image: "/assets/images/.jpg",
+    // },
+    // {
+    //   name: "Harini Ga",
+    //   title: "Graphic Design",
+    //   image: "/assets/images/.jpg",
+    // },
   ];
 
   const truncate = (text: string, maxLength: number): string =>
