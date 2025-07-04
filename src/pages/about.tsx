@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, MapPin } from 'lucide-react';
 
 interface SocialLinks {
   linkedin: string;
@@ -15,6 +15,7 @@ interface Leader {
   bio: string;
   social: SocialLinks;
   imageStyle?: React.CSSProperties;
+  location?: string;
 }
 
 const About: React.FC = () => {
@@ -110,7 +111,8 @@ const About: React.FC = () => {
     {
       id: 5,
       name: "Mr. Sudarshan Meenakshi Sundharam ",
-      title: "Toronto, Canada",
+      title: "Global advisor",
+      location: "Toronto, Canada",
       image: "/assets/images/sub5.png",
       bio: "Sudarshan Meenakshi Sundharam has a degree in Electronics Engineering and a diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
       social: {
@@ -230,7 +232,7 @@ const About: React.FC = () => {
               alt="About 3"
               className="object-cover rounded-2xl shadow-md bg-white border"
               style={{
-                padding:'8px',
+                padding: '8px',
                 width: '100%',
                 maxWidth: '360px',
                 height: '240px',
@@ -301,12 +303,23 @@ const About: React.FC = () => {
                           >
                             <div className="flex-1 bg-opacity-80 p-3 rounded-lg text-center overflow-hidden">
                               <h3 className="text-lg font-bold text-black" style={{ color: head }}>{leader.name}</h3>
+                              {leader.id === 5 && leader.location && (
+                                <p className="mt-2 text-sm font-semibold flex justify-center items-center">
+                                  <MapPin className="w-4 h-4 mr-1" />
+                                  {leader.location}
+                                </p>
+                              )}
                               <p className="text-sm text-black font-bold mb-2">{leader.title}</p>
 
-                              <div className=" font-bold text-left text-sm overflow-hidden"style={{color:pargraph}}>
+                              {/* Bio */}
+                              <div className="font-bold text-left text-sm overflow-hidden" style={{ color: pargraph }}>
                                 <p>{leader.bio}</p>
                               </div>
+
+                              {/* Location (only for ID 5) */}
+
                             </div>
+
                             {/* Social Icon */}
                             <div className="absolute bottom-4 right-4">
                               {leader.social?.linkedin && (
@@ -321,6 +334,7 @@ const About: React.FC = () => {
                               )}
                             </div>
                           </div>
+
                         </div>
                       );
                     })}
