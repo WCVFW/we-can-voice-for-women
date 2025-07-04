@@ -165,16 +165,16 @@ const About: React.FC = () => {
       title: "Director of Photography",
       image: "/assets/images/4.jpg",
     },
-    // {
-    //   name: "Pradeep E",
-    //   title: "Visual Editor",
-    //   image: "/assets/images/.jpg",
-    // },
-    // {
-    //   name: "Harini Ga",
-    //   title: "Graphic Design",
-    //   image: "/assets/images/.jpg",
-    // },
+    {
+      name: "Pradeep E",
+      title: "Visual Editor",
+      image: "/assets/images/Pradeep.jpg",
+    },
+    {
+      name: "Harini Ga",
+      title: "Graphic Design",
+      image: "/assets/images/harini.jpg",
+    },
   ];
 
   const truncate = (text: string, maxLength: number): string =>
@@ -301,7 +301,7 @@ const About: React.FC = () => {
                           >
                             <div className="flex-1 bg-opacity-80 p-3 rounded-lg text-center overflow-hidden">
                               <h3 className="text-lg font-bold text-black" style={{ color: head }}>{leader.name}</h3>
-                              <p className="text-sm text-black font-bold mb-2"style={{ color: head }}>{leader.title}</p>
+                              <p className="text-sm text-black font-bold mb-2">{leader.title}</p>
 
                               <div className=" font-bold text-left text-sm overflow-hidden"style={{color:pargraph}}>
                                 <p>{leader.bio}</p>
