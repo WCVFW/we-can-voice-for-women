@@ -34,6 +34,7 @@ const About = lazy(() => import('@/pages/about'));
 const Blogs = lazy(() => import('@/pages/blogs'));
 const Media = lazy(() => import('@/pages/media'));
 const Events = lazy(() => import('@/pages/events'));
+const Project = lazy(() => import('@/pages/Project'));
 const GetInvolved = lazy(() => import('@/pages/getinvolved'));
 const Contact = lazy(() => import('@/pages/contact'));
 const PrivacyPolicy = lazy(() => import('@/pages/privacy-policy'));
@@ -105,6 +106,7 @@ const App = () => {
                   <Route path="Events" element={<Events />} />
                   <Route path="Media" element={<Media />} />
                   <Route path="GetInvolved" element={<GetInvolved />} />
+                  <Route path="Project" element={<Project />} />
                   <Route path="Contact" element={<Contact />} />
                   <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
                   <Route path="RefundPolicy" element={<RefundPolicy />} />

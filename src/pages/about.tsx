@@ -46,6 +46,9 @@ const About: React.FC = () => {
   ];
 
   const visibleContent = showMore ? content : content.slice(0, 4);
+  const head = 'rgb(219 39 119)';
+  const pargraph = '#C2185B';
+
 
   const leaders: Leader[] = [
     {
@@ -94,7 +97,7 @@ const About: React.FC = () => {
     },
     {
       id: 4,
-      name: "Prof Mr. A.Md.Abdulkadhar",
+      name: "Prof Mr.A.Md.Abdulkadhar",
       title: "Educational Advisor",
       image: "/assets/images/sub4.png",
       bio: "Professor A. Mohamed Abdul Kadhar is an educationist committed to women's advancement. He has written extensively on women achievers and serves as a consultant for educational institutions. Currently, he supports the We Can Voice for Women Foundation, empowering women's initiatives.",
@@ -214,7 +217,7 @@ const About: React.FC = () => {
 
             {/* Second Image */}
             <img
-              src="/assets/images/IMG_20190116_074215.jpg"
+              src="/assets/images/2540d9abd673d7579cfbe93b02f0fa44376fa8bb.jpg"
               alt="About 2"
               className="w-full object-cover rounded-2xl shadow-md"
               style={{ height: '340px' }}
@@ -223,10 +226,11 @@ const About: React.FC = () => {
             {/* Third Image */}
             {/* <div className="relative w-full flex justify-center md:justify-start"> */}
             <img
-              src="/assets/images/2540d9abd673d7579cfbe93b02f0fa44376fa8bb.jpg"
+              src="/assets/images/IMG_20190116_074215.jpg"
               alt="About 3"
               className="object-cover rounded-2xl shadow-md bg-white border"
               style={{
+                padding:'8px',
                 width: '100%',
                 maxWidth: '360px',
                 height: '240px',
@@ -296,14 +300,13 @@ const About: React.FC = () => {
                             }}
                           >
                             <div className="flex-1 bg-opacity-80 p-3 rounded-lg text-center overflow-hidden">
-                              <h3 className="text-lg font-bold text-black">{leader.name}</h3>
-                              <p className="text-sm text-black font-bold mb-2">{leader.title}</p>
+                              <h3 className="text-lg font-bold text-black" style={{ color: head }}>{leader.name}</h3>
+                              <p className="text-sm text-black font-bold mb-2"style={{ color: head }}>{leader.title}</p>
 
-                              <div className="text-pink-600 font-bold text-left text-sm overflow-hidden">
+                              <div className=" font-bold text-left text-sm overflow-hidden"style={{color:pargraph}}>
                                 <p>{leader.bio}</p>
                               </div>
                             </div>
-
                             {/* Social Icon */}
                             <div className="absolute bottom-4 right-4">
                               {leader.social?.linkedin && (
