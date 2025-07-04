@@ -36,7 +36,8 @@ const policyLinks: [string, string][] = [
 ];
 
 export default function Footer(): JSX.Element {
-  const accentColor = '#c2185b';
+  const accentColor = 'rgb(219 39 119)';
+  const accentColor1 = '#C2185B';
 
   return (
     <footer className="font-inter text-black">
@@ -54,11 +55,11 @@ export default function Footer(): JSX.Element {
               className="h-16 w-auto mt-1"
             />
             <div className="flex justify-center">
-              <div style={{ color: accentColor }} className="text-left">
-                <h2 className="text-2xl font-bold mb-3">
+              <div className="text-left">
+                <h2 className="text-2xl font-bold mb-3" style={{ color: accentColor }} >
                   We Can Voice For Women Foundation
                 </h2>
-                <p className="text-sm leading-snug">
+                <p className="text-sm leading-snug" style={{ color: accentColor1 }} >
                   Empowering women through education, health initiatives, and economic opportunities.
                 </p>
               </div>
@@ -77,8 +78,9 @@ export default function Footer(): JSX.Element {
               {quickLinks.map(([label, link]) => (
                 <li key={link}>
                   <Link
+                  style={{ color: accentColor1 }}
                     to={link}
-                    className="hover:underline text-black"
+                    className="hover:underline text-pink-400"
                     onClick={() => window.scrollTo(0, 0)}
                   >
                     {label}
@@ -100,6 +102,7 @@ export default function Footer(): JSX.Element {
               {whatWeDoLinks.map(([label, link]) => (
                 <li key={label}>
                   <Link
+                  style={{ color: accentColor1 }}
                     to={link}
                     className="hover:underline text-black"
                     onClick={() => window.scrollTo(0, 0)}
@@ -119,20 +122,20 @@ export default function Footer(): JSX.Element {
             >
               Contact Us
             </h3>
-            <address className="not-italic space-y-3 text-sm">
+            <address className="not-italic space-y-3 text-sm" style={{ color: accentColor1 }} >
               <div className="flex items-start">
-                <MapPin className="h-6 w-6 mr-2 mt-1 flex-shrink-0" style={{ color: accentColor }} />
-                <span className="text-sm md:text-base leading-snug">
+                <MapPin className="h-6 w-6 mr-2 mt-1 flex-shrink-0" />
+                <span className="text-sm md:text-base leading-snug" >
                   32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
                 </span>
               </div>
               <div className="flex items-center">
-                <Phone className="h-5 w-5 mr-2" style={{ color: accentColor }} />
-                <span>+91 9444888197</span>
+                <Phone className="h-5 w-5 mr-2" />
+                <span >+91 9444888197</span>
               </div>
               <div className="flex items-center">
-                <Mail className="h-5 w-5 mr-2" style={{ color: accentColor }} />
-                <span>support@wecanvoiceforwomen.org</span>
+                <Mail className="h-5 w-5 mr-2" />
+                <span >support@wecanvoiceforwomen.org</span>
               </div>
             </address>
           </div>
@@ -146,7 +149,7 @@ export default function Footer(): JSX.Element {
           backgroundColor: '#f9afc9',
           borderTopLeftRadius: '25px',
           borderTopRightRadius: '25px',
-          color: accentColor,
+          color: accentColor1,
         }}
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
