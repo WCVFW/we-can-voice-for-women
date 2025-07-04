@@ -57,7 +57,7 @@ const About: React.FC = () => {
       name: "Mr. Gunalan Lavanyan",
       title: "Founder & Chairman",
       image: "assets/images/sub1.png",
-      bio: "A seasoned media professional with over 2 decades of experience, Mr. Gunalan Lavanyan is a passionate advocate for social justice. Since initiating the We Can Voice for Women movement in 2016, he has worked tirelessly to reshape public perceptions and attitudes toward women.",
+      bio: "A seasoned media professional with over 2 decades of experience, Mr. Gunalan Lavanyan is a passionate advocate for social justice. Since initiating the We Can Voice for Women movement in 2016, he has worked tirelessly to reshape public perceptions and attitudes toward women.His leadership combines creative communication, grassroots mobilisation, and strategic vision.",
       social: {
         linkedin: "https://www.linkedin.com/in/gunalancity/",
         twitter: "#",
