@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -15,32 +15,43 @@ function convertToEmbedUrlFromId(videoId: string): string {
   return `https://www.youtube.com/embed/${videoId}`;
 }
 
-const GalleryAlbums = [
-  {
-    title: "Album 1",
-    cover: "/assets/Gallerys/4.jpg",
-    Gallerys: ["/assets/Gallerys/4.jpg", "/assets/Gallerys/Hero_Banner.png"],
-  },
-];
+// const GalleryAlbums = [
+//   {
+//     title: "Album 1",
+//     cover: "/assets/Gallerys/4.jpg",
+//     Gallerys: ["/assets/Gallerys/4.jpg", "/assets/Gallerys/Hero_Banner.png"],
+//   },
+// ];
 
 const blogItems = [
   {
     id: 1,
-    title: "Breaking Barriers in Thanjavur: How Meena Turned Her Kitchen into a Profitable Empire",
+    title:
+      "Breaking Barriers in Thanjavur: How Meena Turned Her Kitchen into a Profitable Empire",
     author: "Staff Writer",
     category: "Women & Enterprise",
     date: "July 2025",
-    excerpt: "In a quiet lane of Thanjavur, lives Meena Subramaniam — a homemaker turned entrepreneur inspiring a generation...",
+    excerpt:
+      "In a quiet lane of Thanjavur, lives Meena Subramaniam — a homemaker turned entrepreneur inspiring a generation...",
     content: `<p>Full blog content here…</p>`,
   },
 ];
 
 export default function MediaPage() {
-  const [filter, setFilter] = useState<"video" | "Gallery" | "magazine" | "blog" | "press">("video");
-  const [playingVideoItem, setPlayingVideoItem] = useState<{ id: string; title: string } | null>(null);
-  const [selectedAlbumIndex, setSelectedAlbumIndex] = useState<number | null>(null);
+  const [filter, setFilter] = useState<
+    "video" | "Gallery" | "magazine" | "blog" | "press" | "Podcast"
+  >("video");
+  const [playingVideoItem, setPlayingVideoItem] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
+  const [selectedAlbumIndex, setSelectedAlbumIndex] = useState<number | null>(
+    null
+  );
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
-  const [selectedBlog, setSelectedBlog] = useState<typeof blogItems[0] | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<
+    (typeof blogItems)[0] | null
+  >(null);
 
   const { videos, error } = useYouTubeVideos(6);
 
@@ -50,6 +61,7 @@ export default function MediaPage() {
     ["magazine", "Magazine"],
     ["blog", "Blog"],
     ["press", "Press"],
+    ["Podcast", "Podcast"],
   ] as const;
 
   return (
@@ -80,17 +92,24 @@ export default function MediaPage() {
 
       {filter === "video" && (
         <div className="my-10">
-          <h2 className="text-3xl font-bold text-pink-700 mb-6 text-center underline">Videos</h2>
+          <h2 className="text-3xl font-bold text-pink-700 mb-6 text-center underline">
+            Videos
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {error && <p className="text-red-500">{error}</p>}
             {videos.map((item) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="group">
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="group"
+              >
                 <Card className="overflow-hidden hover:shadow-2xl transition duration-300">
                   <CardContent className="p-0 relative">
                     <img
                       src={item.thumbnail}
                       alt={item.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-contain block"
                     />
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
@@ -98,7 +117,11 @@ export default function MediaPage() {
                         className="p-3 bg-red-600 rounded-full"
                         aria-label="Play video"
                       >
-                        <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="white"
+                          className="w-6 h-6"
+                        >
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </button>

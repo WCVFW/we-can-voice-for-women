@@ -14,10 +14,7 @@ import { Link } from 'react-router-dom';
 const quickLinks: [string, string][] = [
   ['Home', '/'],
   ['About', '/About'],
-  ['Blogs', '/Blogs'],
-  ['Media', '/Media'],
   ['Event', '/Events'],
-  ['Get Involved', '/GetInvolved'],
   ['Contact Us', '/Contact'],
 ];
 
@@ -25,6 +22,22 @@ const whatWeDoLinks: [string, string][] = [
   ['Enlightenment', '/Enlightenment'],
   ['Enhealthment', '/Enhealthment'],
   ['Empowerment', '/Empowerment'],
+];
+
+const getInvolvedLinks: [string, string][] = [
+  ['Volunteer', '/GetInvolved'],
+  ['Internship', '/GetInvolved'],
+  ['Career', '/GetInvolved'],
+  ['Partner', '/GetInvolved'],
+];
+
+const mediaLinks: [string, string][] = [
+  ['Videos', '/Media'],
+  ['Images', '/Media'],
+  ['Magazine', '/Media'],
+  ['Blog', '/Media'],
+  ['Press', '/Media'],
+  ['Podcast', '/Media'],
 ];
 
 const policyLinks: [string, string][] = [
@@ -46,7 +59,7 @@ export default function Footer(): JSX.Element {
         className="w-full px-6 lg:px-12 py-12"
         style={{ backgroundColor: '#ffe3ee' }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(3,1fr)] gap-8 items-start">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)] gap-8 items-start">
           {/* Column 1: Logo & Info */}
           <div className="flex items-start gap-4 text-left">
             <img
@@ -78,7 +91,7 @@ export default function Footer(): JSX.Element {
               {quickLinks.map(([label, link]) => (
                 <li key={link}>
                   <Link
-                  style={{ color: accentColor1 }}
+                    style={{ color: accentColor1 }}
                     to={link}
                     className="hover:underline text-pink-400"
                     onClick={() => window.scrollTo(0, 0)}
@@ -90,7 +103,7 @@ export default function Footer(): JSX.Element {
             </ul>
           </div>
 
-          {/* Column 3: What We Do */}
+          {/* Column 3: What We Do + Get Involved */}
           <div>
             <h3
               className="text-xl font-semibold mb-3 pb-2 border-b border-pink-300"
@@ -98,13 +111,31 @@ export default function Footer(): JSX.Element {
             >
               What We Do
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm mb-5">
               {whatWeDoLinks.map(([label, link]) => (
                 <li key={label}>
                   <Link
-                  style={{ color: accentColor1 }}
+                    style={{ color: accentColor1 }}
                     to={link}
-                    className="hover:underline text-black"
+                    className="hover:underline"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="text-lg font-semibold mb-2 pb-2 border-b border-pink-300" style={{ color: accentColor }}>
+              Get Involved
+            </h4>
+            <ul className="space-y-2 text-sm">
+              {getInvolvedLinks.map(([label, link]) => (
+                <li key={label}>
+                  <Link
+                    style={{ color: accentColor1 }}
+                    to={link}
+                    className="hover:underline"
                     onClick={() => window.scrollTo(0, 0)}
                   >
                     {label}
@@ -114,7 +145,31 @@ export default function Footer(): JSX.Element {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
+          {/* Column 4: Media */}
+          <div>
+            <h3
+              className="text-xl font-semibold mb-3 pb-2 border-b border-pink-300"
+              style={{ color: accentColor }}
+            >
+              Media
+            </h3>
+            <ul className="space-y-2 text-sm">
+              {mediaLinks.map(([label, link]) => (
+                <li key={label}>
+                  <Link
+                    style={{ color: accentColor1 }}
+                    to={link}
+                    className="hover:underline"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5: Contact Info */}
           <div>
             <h3
               className="text-xl font-semibold mb-3 pb-2 border-b border-pink-300"
@@ -125,17 +180,17 @@ export default function Footer(): JSX.Element {
             <address className="not-italic space-y-3 text-sm" style={{ color: accentColor1 }} >
               <div className="flex items-start">
                 <MapPin className="h-6 w-6 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-sm md:text-base leading-snug" >
+                <span className="text-sm md:text-base leading-snug">
                   32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai, Tamil Nadu 600092
                 </span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
-                <span >+91 9444888197</span>
+                <span>+91 9444888197</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                <span >support@wecanvoiceforwomen.org</span>
+                <span>support@wecanvoiceforwomen.org</span>
               </div>
             </address>
           </div>

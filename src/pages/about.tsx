@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Linkedin, MapPin } from 'lucide-react';
+import React, { useState } from "react";
+import { Linkedin, MapPin } from "lucide-react";
 
 interface SocialLinks {
   linkedin: string;
@@ -24,7 +24,7 @@ const About: React.FC = () => {
 
   const toggleReadMore = () => {
     setShowMore(!showMore);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleLeaderBio = (id: number) => {
@@ -47,9 +47,8 @@ const About: React.FC = () => {
   ];
 
   const visibleContent = showMore ? content : content.slice(0, 4);
-  const head = 'rgb(219 39 119)';
-  const pargraph = '#C2185B';
-
+  const head = "rgb(219 39 119)";
+  const pargraph = "#C2185B";
 
   const leaders: Leader[] = [
     {
@@ -64,8 +63,8 @@ const About: React.FC = () => {
         email: "chairman@wecanvoiceforwomen.org",
       },
       imageStyle: {
-        width: '260px',
-        height: '420px',
+        width: "260px",
+        height: "420px",
       },
     },
     {
@@ -80,8 +79,8 @@ const About: React.FC = () => {
         email: "secretary@wecanvoiceforwomen.org",
       },
       imageStyle: {
-        width: '260px',
-        height: '420px',
+        width: "260px",
+        height: "420px",
       },
     },
     {
@@ -133,7 +132,6 @@ const About: React.FC = () => {
         email: "amara@voiceforwomen.org",
       },
     },
-
   ];
 
   const teamMembers = [
@@ -189,10 +187,14 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 mt-24 px-4">
           {/* About Content - narrower */}
           <div className="w-full md:w-1/2 rounded-lg">
-            <h1 className="text-3xl md:text-4xl font-bold text-pink-700 mb-6 text-center">About Us</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-pink-700 mb-6 text-center">
+              About Us
+            </h1>
             <div className="text-base text-black space-y-4 text-left">
               {visibleContent.map((para, index) => (
-                <p key={index} className="whitespace-pre-line">{para}</p>
+                <p key={index} className="whitespace-pre-line">
+                  {para}
+                </p>
               ))}
             </div>
             <br />
@@ -200,8 +202,8 @@ const About: React.FC = () => {
               onClick={toggleReadMore}
               className="mt-6 bg-pink-500 text-white hover:bg-pink-200 hover:text-pink-800 font-semibold focus:outline-none px-6 py-2 relative"
               style={{
-                clipPath: 'polygon(0 0, 100% 0, 85% 100%, 0% 100%)',
-                borderRadius: '8px' // adjust value as needed
+                clipPath: "polygon(0 0, 100% 0, 85% 100%, 0% 100%)",
+                borderRadius: "8px", // adjust value as needed
               }}
             >
               {showMore ? "Read Less" : "Read More"}
@@ -214,7 +216,7 @@ const About: React.FC = () => {
             <img
               src="/assets/images/with out text.jpg"
               alt="About 1"
-              className="w-full h-56 md:h-52 object-cover rounded-2xl shadow-md"
+              className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover rounded-2xl shadow-md"
             />
 
             {/* Second Image */}
@@ -222,7 +224,7 @@ const About: React.FC = () => {
               src="/assets/images/2540d9abd673d7579cfbe93b02f0fa44376fa8bb.jpg"
               alt="About 2"
               className="w-full object-cover rounded-2xl shadow-md"
-              style={{ height: '340px' }}
+              style={{ height: "340px" }}
             />
 
             {/* Third Image */}
@@ -232,12 +234,12 @@ const About: React.FC = () => {
               alt="About 3"
               className="object-cover rounded-2xl shadow-md bg-white border"
               style={{
-                padding: '8px',
-                width: '100%',
-                maxWidth: '360px',
-                height: '240px',
+                padding: "8px",
+                width: "100%",
+                maxWidth: "360px",
+                height: "240px",
                 // marginLeft: '0px',
-                marginTop: '-60px',
+                marginTop: "-60px",
               }}
             />
 
@@ -252,105 +254,121 @@ const About: React.FC = () => {
     `}</style> */}
           </div>
         </div>
-
       </div>
       {/* </div> */}
-
 
       {/* Leadership Team Section */}
       <section className="py-12 md:py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">Our Leadership</h2>
+          <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">
+            Our Leadership
+          </h2>
 
           <div className="space-y-16">
-            {Array.from({ length: Math.ceil(leaders.length / 2) }, (_, rowIndex) => {
-              const rowLeaders = leaders.slice(rowIndex * 2, rowIndex * 2 + 2);
+            {Array.from(
+              { length: Math.ceil(leaders.length / 2) },
+              (_, rowIndex) => {
+                const rowLeaders = leaders.slice(
+                  rowIndex * 2,
+                  rowIndex * 2 + 2
+                );
 
-              return (
-                <React.Fragment key={rowIndex}>
-                  {rowIndex === 1 && (
-                    <h3 className="text-3xl font-semibold text-pink-600 mb-6 text-center">
-                      Advisory Board
-                    </h3>
-                  )}
+                return (
+                  <React.Fragment key={rowIndex}>
+                    {rowIndex === 1 && (
+                      <h3 className="text-3xl font-semibold text-pink-600 mb-6 text-center">
+                        Advisory Board
+                      </h3>
+                    )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4 md:px-16 justify-center">
-                    {rowLeaders.map((leader) => {
-                      const isReversed = [3, 4, 5, 6].includes(leader.id);
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4 md:px-16 justify-center">
+                      {rowLeaders.map((leader) => {
+                        const isReversed = [3, 4, 5, 6].includes(leader.id);
 
-                      return (
-                        <div
-                          key={leader.id}
-                          className={`flex flex-col sm:flex-row ${isReversed ? 'sm:flex-row-reverse' : ''
-                            } gap-4 items-center justify-center`}
-                        >
-                          {/* Image Card */}
-                          <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-[280px] h-[420px] flex items-center justify-center">
-                            <img
-                              src={leader.image}
-                              alt={leader.name}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-
-                          {/* Detail Card */}
+                        return (
                           <div
-                            className="relative shadow-lg rounded-2xl p-4 w-[280px] h-[420px] flex flex-col bg-no-repeat bg-center bg-pink-50"
-                            style={{
-                              backgroundImage: `url('assets/images/AC.png')`,
-                              backgroundSize: '160px',
-                            }}
+                            key={leader.id}
+                            className={`flex flex-col sm:flex-row ${
+                              isReversed ? "sm:flex-row-reverse" : ""
+                            } gap-4 items-center justify-center`}
                           >
-                            <div className="flex-1 bg-opacity-80 p-3 rounded-lg text-center overflow-hidden">
-                              <h3 className="text-lg font-bold text-black" style={{ color: head }}>{leader.name}</h3>
-                              {leader.id === 5 && leader.location && (
-                                <p className="mt-2 text-sm font-semibold flex justify-center items-center">
-                                  <MapPin className="w-4 h-4 mr-1" />
-                                  {leader.location}
-                                </p>
-                              )}
-                              <p className="text-sm text-black font-bold mb-2">{leader.title}</p>
+                            {/* Image Card */}
+                            <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-[280px] h-[420px] flex items-center justify-center">
+                              <img
+                                src={leader.image}
+                                alt={leader.name}
+                                className="object-cover w-full h-full"
+                              />
+                            </div>
 
-                              {/* Bio */}
-                              <div className="font-bold text-left text-sm overflow-hidden" style={{ color: pargraph }}>
-                                <p>{leader.bio}</p>
+                            {/* Detail Card */}
+                            <div
+                              className="relative shadow-lg rounded-2xl p-4 w-[280px] h-[420px] flex flex-col bg-no-repeat bg-center bg-pink-50"
+                              style={{
+                                backgroundImage: `url('assets/images/AC.png')`,
+                                backgroundSize: "160px",
+                              }}
+                            >
+                              <div className="flex-1 bg-opacity-80 p-3 rounded-lg text-center overflow-hidden">
+                                <h3
+                                  className="text-lg font-bold text-black"
+                                  style={{ color: head }}
+                                >
+                                  {leader.name}
+                                </h3>
+                                {leader.id === 5 && leader.location && (
+                                  <p className="mt-2 text-sm font-semibold flex justify-center items-center">
+                                    <MapPin className="w-4 h-4 mr-1" />
+                                    {leader.location}
+                                  </p>
+                                )}
+                                <p className="text-sm text-black font-bold mb-2">
+                                  {leader.title}
+                                </p>
+
+                                {/* Bio */}
+                                <div
+                                  className="font-bold text-left text-sm overflow-hidden"
+                                  style={{ color: pargraph }}
+                                >
+                                  <p>{leader.bio}</p>
+                                </div>
+
+                                {/* Location (only for ID 5) */}
                               </div>
 
-                              {/* Location (only for ID 5) */}
-
-                            </div>
-
-                            {/* Social Icon */}
-                            <div className="absolute bottom-4 right-4">
-                              {leader.social?.linkedin && (
-                                <a
-                                  href={leader.social.linkedin}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="w-8 h-8 flex items-center justify-center bg-pink-50 rounded-full hover:bg-pink-100 transition"
-                                >
-                                  <Linkedin className="text-pink-600 w-4 h-4" />
-                                </a>
-                              )}
+                              {/* Social Icon */}
+                              <div className="absolute bottom-4 right-4">
+                                {leader.social?.linkedin && (
+                                  <a
+                                    href={leader.social.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-8 h-8 flex items-center justify-center bg-pink-50 rounded-full hover:bg-pink-100 transition"
+                                  >
+                                    <Linkedin className="text-pink-600 w-4 h-4" />
+                                  </a>
+                                )}
+                              </div>
                             </div>
                           </div>
-
-                        </div>
-                      );
-                    })}
-                  </div>
-                </React.Fragment>
-              );
-            })}
+                        );
+                      })}
+                    </div>
+                  </React.Fragment>
+                );
+              }
+            )}
           </div>
         </div>
       </section>
       {/* Team Members */}
       <section className="py-12 md:py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">Our Team</h2>
-          <div
-            className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-pink-700 mb-10 text-center">
+            Our Team
+          </h2>
+          <div className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
             {teamMembers.map((member, idx) => (
               <div
                 key={idx}
@@ -366,7 +384,9 @@ const About: React.FC = () => {
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-pink-700">{member.name}</h3>
+                <h3 className="text-xl font-semibold text-pink-700">
+                  {member.name}
+                </h3>
                 <p className="text-gray-700 text-base">{member.title}</p>
               </div>
             ))}
