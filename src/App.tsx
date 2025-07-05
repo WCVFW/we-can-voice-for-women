@@ -15,6 +15,7 @@ import AdminDashboard from '@/pages/admin/Dashboard';
 import AdminLogin from '@/pages/admin/Login';
 import NotFound from '@/pages/NotFound';
 
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -23,6 +24,7 @@ import {
   persistQueryClient,
 } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import POSHPolicy from './pages/Posh-Policy';
 
 // Lazy-loaded pages
 const Index = lazy(() => import('./pages/Index'));
@@ -111,6 +113,7 @@ const App = () => {
                   <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
                   <Route path="RefundPolicy" element={<RefundPolicy />} />
                   <Route path="CookiePolicy" element={<CookiePolicy />} />
+                  <Route path="POSHPolicy" element={<POSHPolicy />} />
                   <Route path="TermsAndConditions" element={<TermsAndConditions />} />
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>

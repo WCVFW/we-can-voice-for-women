@@ -45,6 +45,7 @@ const policyLinks: [string, string][] = [
   ['Refund Policy', '/RefundPolicy'],
   ['Cookies Policy', '/CookiePolicy'],
   ['Terms & Conditions', '/TermsAndConditions'],
+  ['POSH Policy', '/POSHPolicy'],
   ['FAQ', '/FAQ'],
 ];
 
