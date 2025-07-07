@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -15,7 +15,6 @@ import AdminDashboard from '@/pages/admin/Dashboard';
 import AdminLogin from '@/pages/admin/Login';
 import NotFound from '@/pages/NotFound';
 
-
 import {
   QueryClient,
   QueryClientProvider,
@@ -24,6 +23,7 @@ import {
   persistQueryClient,
 } from '@tanstack/react-query-persist-client';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+
 import POSHPolicy from './pages/Posh-Policy';
 
 // Lazy-loaded pages
@@ -97,6 +97,7 @@ const App = () => {
           <BrowserRouter>
             <Suspense fallback={<Loader />}>
               <Routes>
+                {/* Public Site */}
                 <Route path="/" element={<MainLayout />}>
                   <Route index element={<Index />} />
                   <Route path="enlightenment" element={<Enlightenment />} />
@@ -117,11 +118,16 @@ const App = () => {
                   <Route path="TermsAndConditions" element={<TermsAndConditions />} />
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>
+
+                {/* Admin Dashboard (with Admin Layout) */}
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminDashboard />} />
                 </Route>
-                <Route path="/admin/Login" element={<AdminLogin />} />
-                <Route path="*" element={<AdminLogin />} />
+
+                {/* Admin Login (no layout) */}
+                <Route path="login" element={<AdminLogin />} />
+                {/* 404 Not Found */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </BrowserRouter>

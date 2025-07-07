@@ -108,10 +108,10 @@ export default function Home() {
     w-full
     max-w-[335px]
     h-[340px]            // default height
-    sm:h-[360px]         // small screens
-    md:h-[380px]         // tablets
-    lg:h-[400px]         // laptops
-    xl:h-[420px]         // desktops
+    sm:h-[200px]         // small screens
+    md:h-[200px]         // tablets
+    lg:h-[200px]         // laptops
+    xl:h-[220px]         // desktops
     rounded-[10px]
     border border-gray-200
     p-6
