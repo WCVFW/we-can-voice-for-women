@@ -142,7 +142,7 @@ const About: React.FC = () => {
     // },
     {
       name: "Logasri P",
-      title: "Admin",
+      title: "Field Coordinator",
       image: "/assets/images/1.jpg",
     },
     {
