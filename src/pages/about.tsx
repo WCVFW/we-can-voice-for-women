@@ -172,7 +172,7 @@ const About: React.FC = () => {
     },
     {
       name: "Harini Ga",
-      title: "Graphic Design",
+      title: "Graphic Designer",
       image: "/assets/images/harini.jpg",
     },
   ];

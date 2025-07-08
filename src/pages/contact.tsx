@@ -34,9 +34,10 @@ export default function Contact() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="min-h-screen bg-gradient-to-b from-pink-50 to-white px-4 py-20 font-sans"
+      className="bg-gradient-to-b from-pink-50 to-white px-4 pt-32 pb-20 font-sans"
     >
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-10 md:p-14">
+      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg px-6 sm:px-10 lg:px-16 py-12">
+        {/* Title */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-pink-600 mb-4">Contact Us</h1>
           <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
@@ -44,27 +45,44 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="space-y-4 text-gray-700 text-base"
+            className="rounded-xl p-4 sm:p-6 space-y-6 text-gray-700 text-base"
           >
-            <h2 className="text-xl font-semibold text-pink-600">Reach Us At</h2>
-            <p>📍 <strong>Address:</strong> 32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai</p>
-            <p>📧 <strong>Email:</strong>{' '}
-              <a href="mailto:support@wecvoiceforwomen.org" className="text-pink-500 hover:underline">
-                support@wecvoiceforwomen.org
-              </a>
-            </p>
-            <p>📞 <strong>Phone:</strong>{' '}
-              <a href="tel:+919444888197" className="text-pink-500 hover:underline">
-                +91 9444888197
-              </a>
-            </p>
-          </motion.div>
+            {/* Google Map Embed */}
+            <div className="w-full h-64 sm:h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
+              <iframe
+                title="WCVFW Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.1981583347587!2d80.19293781523865!3d13.042676416378328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526141f98d9ae7%3A0xe4c0b6e0e0c13be5!2s32%2C%201st%20Main%20Rd%2C%20Ayyappa%20Nagar%2C%20Virugambakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600092%2C%20India!5e0!3m2!1sen!2sin!4v1717748800000!5m2!1sen!2sin"
+                className="w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
 
+            {/* Contact Info Card */}
+            <div className="space-y-4">
+              <h2 className="text-xl sm:text-2xl font-semibold text-pink-600">Reach Us At</h2>
+              <p>📍 <strong>Address:</strong> 32, 1st Main Road, Ayyappa Nagar, Virugambakkam, Chennai</p>
+              <p>📧 <strong>Email:</strong>{' '}
+                <a href="mailto:support@wecvoiceforwomen.org" className="text-pink-500 hover:underline">
+                  support@wecvoiceforwomen.org
+                </a>
+              </p>
+              <p>📞 <strong>Phone:</strong>{' '}
+                <a href="tel:+919444888197" className="text-pink-500 hover:underline">
+                  +91 9444888197
+                </a>
+              </p>
+            </div>
+          </motion.div>
+          {/* Contact Form */}
           <motion.form
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
