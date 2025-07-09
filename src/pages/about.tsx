@@ -135,19 +135,24 @@ const About: React.FC = () => {
   ];
 
   const teamMembers = [
-    // {
-    //   name: "Name",
-    //   title: "Desiganation",
-    //   image: "/assets/images/",
-    // },
+    {
+      name: "Sreedevi K",
+      title: "Project Co-ordinator",
+      image: "/assets/images/15.jpg",
+    },
     {
       name: "Logasri P",
-      title: "Field Coordinator",
+      title: "Field Co-ordinator",
       image: "/assets/images/1.jpg",
     },
     {
+      name: "Kavi Muhil Sriraman",
+      title: "Fundraiser Executive",
+      image: "/assets/images/14.jpg",
+    },
+    {
       name: "Charulatha H",
-      title: "Entrepreneurship Coordinator",
+      title: "Entrepreneurship Co-ordinator",
       image: "/assets/images/3.jpg",
     },
     {
@@ -162,18 +167,13 @@ const About: React.FC = () => {
     },
     {
       name: "Rajesh M",
-      title: "Director of Photography",
+      title: "Videographer",
       image: "/assets/images/4.jpg",
     },
     {
       name: "Pradeep E",
       title: "Visual Editor",
       image: "/assets/images/Pradeep.jpg",
-    },
-    {
-      name: "Harini Ga",
-      title: "Graphic Designer",
-      image: "/assets/images/harini.jpg",
     },
   ];
 
