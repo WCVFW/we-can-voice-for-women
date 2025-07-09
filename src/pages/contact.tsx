@@ -12,7 +12,7 @@ export default function Contact() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:9090/api/contact', {
+      const res = await fetch('http://16.171.19.4:9090/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -55,7 +55,7 @@ export default function Contact() {
             className="rounded-xl p-4 sm:p-6 space-y-6 text-gray-700 text-base"
           >
             {/* Google Map Embed */}
-            <div className="w-full h-64 sm:h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
+            {/* <div className="w-full h-64 sm:h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
               <iframe
                 title="WCVFW Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.1981583347587!2d80.19293781523865!3d13.042676416378328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526141f98d9ae7%3A0xe4c0b6e0e0c13be5!2s32%2C%201st%20Main%20Rd%2C%20Ayyappa%20Nagar%2C%20Virugambakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600092%2C%20India!5e0!3m2!1sen!2sin!4v1717748800000!5m2!1sen!2sin"
@@ -64,7 +64,7 @@ export default function Contact() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
+            </div> */}
 
             {/* Contact Info Card */}
             <div className="space-y-4">
