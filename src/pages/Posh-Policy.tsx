@@ -51,7 +51,7 @@ export default function POSHPolicy() {
         <p>The IC consists of the following members:</p>
         <ul className="list-disc pl-6 space-y-2">
           <li>Mrs.Oorvasi Gunalan - Presiding Officer (+91 8939412190)</li>
-          <li>Miss.Charulatha (+91 9500696311), Miss.Harini (+91 9786900840) – Members</li>
+          <li>Miss.Charulatha (+91 9500696311), Miss.Logasri (+91 8838881429) – Members</li>
           <li>Mrs.Manonmani (+91 9444135228) - External Member</li>
         </ul>
         <h2 className="text-2xl font-semibold text-pink-700 mt-8">Contact Information</h2>
