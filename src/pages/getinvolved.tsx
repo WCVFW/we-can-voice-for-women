@@ -69,7 +69,7 @@ const indianStates = [
   "Ladakh",
   "Lakshadweep",
   "Puducherry",
-  "Other"
+  "Othr"
 ];
 
 export default function GetInvolved() {
