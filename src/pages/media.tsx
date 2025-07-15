@@ -1,30 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from 'next/router';
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useYouTubeVideos } from "@/hooks/useYouTubeVideos";
 import type { Album } from "@/components/admin/DynamicGalleryManager"; // Make sure this path is correct
+import MagazineFlipBook from "./Magazine";
+import Blogs from "./blogs";
 
 function convertToEmbedUrlFromId(videoId: string): string {
   return `https://www.youtube.com/embed/${videoId}`;
 }
 
-const blogItems = [
-  {
-    id: 1,
-    title:
-      "Breaking Barriers in Thanjavur: How Meena Turned Her Kitchen into a Profitable Empire",
-    author: "Staff Writer",
-    category: "Women & Enterprise",
-    date: "July 2025",
-    excerpt:
-      "In a quiet lane of Thanjavur, lives Meena Subramaniam — a homemaker turned entrepreneur inspiring a generation...",
-    content: `<p>Full blog content here…</p>`,
-  },
-];
 
 export default function MediaPage() {
   const [filter, setFilter] = useState<
@@ -35,24 +25,60 @@ export default function MediaPage() {
     title: string;
   } | null>(null);
 
+
+  // album
   const [albums, setAlbums] = useState<Album[]>([
     {
-      title: "Empowerment Workshop",
-      cover: "/assets/Gallerys/cover1.jpg",
-      images: ["/assets/Gallerys/1.jpg", "/assets/Gallerys/2.jpg"],
+      title: "1 Lakh Candle Lights",
+      cover: "/assets/images/cl/c4.jpg",
+      images: ["/assets/images/cl/c1.jpg", "/assets/images/cl/c2.jpg", "/assets/images/cl/c3.jpg", "/assets/images/cl/c4.jpg", "/assets/images/cl/c5.jpg", "/assets/images/cl/c6.jpg", "/assets/images/cl/c7.jpg", "/assets/images/cl/c8.jpg", "/assets/images/cl/c9.jpg", "/assets/images/cl/c10.jpg", "/assets/images/cl/c11.jpg", "/assets/images/cl/c12.jpg", "/assets/images/cl/c13.jpg", "/assets/images/cl/c14.jpg", "/assets/images/cl/c15.jpg", "/assets/images/cl/c16.jpg", "/assets/images/cl/c17.jpg", "/assets/images/cl/c18.jpg", "/assets/images/cl/c19.jpg", "/assets/images/cl/c20.jpg", "/assets/images/cl/c21.jpg", "/assets/images/cl/c22.jpg", "/assets/images/cl/c23.jpg", "/assets/images/cl/c24.jpg", "/assets/images/cl/c25.jpg", "/assets/images/cl/c26.jpg"
+      ],
     },
     {
-      title: "Rural Health Drive",
-      cover: "/assets/Gallerys/cover2.jpg",
-      images: ["/assets/Gallerys/5.jpg", "/assets/Gallerys/6.jpg"],
+      title: "Scolership For Higher Education",
+      cover: "/assets/images/ci/ci1.png",
+      images: ["/assets/images/ci/ci1.png", "/assets/images/ci/ci2.png", "/assets/images/ci/ci3.png", "/assets/images/ci/ci4.png"],
     },
+    {
+      title: "Why Are Women Slaves?",
+      cover: "/assets/images/bd/bd1.jpg",
+      images: [
+        "/assets/images/bd/bd1.jpg",
+        "/assets/images/bd/bd2.JPG",
+        "/assets/images/bd/bd4.JPG",
+        "/assets/images/bd/bd5.jpg",
+        "/assets/images/bd/bd6.JPG",
+        "/assets/images/bd/bd7.JPG",
+        "/assets/images/bd/bd8.JPG",
+        "/assets/images/bd/bd9.jpeg",
+        "/assets/images/bd/bd10.jpg",
+        "/assets/images/bd/bd11.jpg",
+        "/assets/images/bd/bd12.jpg",
+        "/assets/images/bd/bd13.jpg",
+        "/assets/images/bd/bd14.JPG",
+        "/assets/images/bd/bd15.JPG",
+        "/assets/images/bd/bd17.jpg",
+        "/assets/images/bd/bd18.jpg",
+        "/assets/images/bd/bd19.JPG",
+        "/assets/images/bd/bd20.JPG"
+      ]
+    },
+
+    {
+      title: "Cancer Awareness Medical Camp",
+      cover: "/assets/images/ca/ca3.jpg",
+      images: ["/assets/images/ca/ca1.jpg", "/assets/images/ca/ca2.jpg", "/assets/images/ca/ca3.jpg", "/assets/images/ca/ca4.jpg", "/assets/images/ca/ca5.jpg", "/assets/images/ca/ca6.jpg"],
+    },
+
   ]);
 
   const [selectedAlbumIndex, setSelectedAlbumIndex] = useState<number | null>(
     null
   );
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
+  const [albumPageIndex, setAlbumPageIndex] = useState(0);
 
+  //  Video button
   const { videos, error } = useYouTubeVideos(30);
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 6;
@@ -60,6 +86,20 @@ export default function MediaPage() {
   const indexOfLast = currentPage * videosPerPage;
   const indexOfFirst = indexOfLast - videosPerPage;
   const currentVideos = videos.slice(indexOfFirst, indexOfLast);
+
+
+
+  // PRESS IMAGE
+  const pressImages = [
+    { src: "assets/images/press/pm2.jpg", alt: "Puthiya Vaazhviyal Malar" },
+    { src: "assets/images/press/pm1.jpg", alt: "Kunguma Chimizh" },
+    ,
+    // Add more images as needed.
+  ];
+
+
+  // MAGAZINE IMAGES
+
 
   const filters = [
     ["video", "Videos"],
@@ -206,7 +246,6 @@ export default function MediaPage() {
           </div>
         </div>
       )}
-
       {/* ---------------- GALLERY ---------------- */}
       {filter === "Gallery" && (
         <div className="my-10">
@@ -223,7 +262,7 @@ export default function MediaPage() {
                 <img
                   src={album.cover}
                   alt={album.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-cover"
                 />
                 <div className="p-4 text-center text-pink-700 font-semibold">
                   {album.title}
@@ -236,24 +275,64 @@ export default function MediaPage() {
 
       {/* ---------------- ALBUM MODAL ---------------- */}
       {selectedAlbumIndex !== null && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex flex-col items-center justify-center p-6 overflow-y-auto pt-24">
-          <h3 className="text-2xl text-white mb-4 font-semibold">
+        <div className="fixed inset-0 bg-black/80 z-50 overflow-y-auto pt-32 pb-12 flex flex-col items-center px-4">
+          {/* Title */}
+          <h3 className="text-2xl text-white mb-6 font-semibold text-center">
             {albums[selectedAlbumIndex].title}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-6xl">
-            {albums[selectedAlbumIndex].images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`Photo ${idx + 1}`}
-                className="w-full h-48 object-cover rounded cursor-pointer hover:scale-105 transition"
-                onClick={() => setSliderIndex(idx)}
-              />
-            ))}
+
+          {/* Image Carousel with Arrows */}
+          <div className="relative w-full max-w-5xl flex items-center justify-center mb-8">
+            {/* Left Arrow */}
+            <button
+              className="absolute left-0 z-10 text-white text-4xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
+              onClick={() =>
+                setAlbumPageIndex((prev) =>
+                  prev === 0 ? Math.floor((albums[selectedAlbumIndex].images.length - 1) / 3) : prev - 1
+                )
+              }
+            >
+              ‹
+            </button>
+
+            {/* Image Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full px-10">
+              {albums[selectedAlbumIndex].images
+                .slice(albumPageIndex * 3, albumPageIndex * 3 + 3)
+                .map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Photo ${albumPageIndex * 3 + idx + 1}`}
+                    className="w-full h-72 object-cover rounded-xl shadow-lg cursor-pointer hover:scale-105 transition"
+                    onClick={() =>
+                      setSliderIndex(albumPageIndex * 3 + idx)
+                    }
+                  />
+                ))}
+            </div>
+
+            {/* Right Arrow */}
+            <button
+              className="absolute right-0 z-10 text-white text-4xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
+              onClick={() =>
+                setAlbumPageIndex((prev) =>
+                  (prev + 1) * 3 >= albums[selectedAlbumIndex].images.length ? 0 : prev + 1
+                )
+              }
+            >
+              ›
+            </button>
           </div>
+
+          {/* Close Button */}
           <button
-            className="mt-6 px-4 py-2 bg-white text-red-600 rounded hover:bg-gray-200"
-            onClick={() => setSelectedAlbumIndex(null)}
+            className="mb-10 px-4 py-2 bg-pink-600 text-white rounded"
+            onClick={() => {
+              setSelectedAlbumIndex(null);
+              setSliderIndex(null);
+              setAlbumPageIndex(0); // Reset on close
+            }}
           >
             Close
           </button>
@@ -262,49 +341,79 @@ export default function MediaPage() {
 
       {/* ---------------- FULLSCREEN SLIDER ---------------- */}
       {sliderIndex !== null && selectedAlbumIndex !== null && (
-        <div className="fixed inset-0 bg-black z-[60] flex flex-col justify-center items-center">
+        <div className="fixed inset-0 bg-black z-[60] flex flex-col justify-center items-center px-6 py-8 pt-24h">
+          {/* Previous Button */}
+          <button
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
+            onClick={() =>
+              setSliderIndex((prev) =>
+                prev === 0
+                  ? albums[selectedAlbumIndex].images.length - 1
+                  : (prev ?? 1) - 1
+              )
+            }
+          >
+            ‹
+          </button>
+
+          {/* Image */}
           <img
             src={albums[selectedAlbumIndex].images[sliderIndex]}
-            alt="Gallery Slide"
+            alt={`Slide ${sliderIndex + 1}`}
             className="max-h-[80vh] object-contain rounded shadow-lg"
           />
-          <div className="flex gap-6 mt-6">
-            <Button
-              variant="outline"
-              className="text-white border-white"
-              onClick={() =>
-                setSliderIndex((prev) =>
-                  prev === 0
-                    ? albums[selectedAlbumIndex].images.length - 1
-                    : (prev ?? 1) - 1
-                )
-              }
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              className="text-white border-white"
-              onClick={() =>
-                setSliderIndex((prev) =>
-                  prev === albums[selectedAlbumIndex].images.length - 1
-                    ? 0
-                    : (prev ?? 0) + 1
-                )
-              }
-            >
-              Next
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => setSliderIndex(null)}
-              className="ml-4"
-            >
-              Close
-            </Button>
-          </div>
+
+          {/* Next Button */}
+          <button
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
+            onClick={() =>
+              setSliderIndex((prev) =>
+                prev === albums[selectedAlbumIndex].images.length - 1
+                  ? 0
+                  : (prev ?? 0) + 1
+              )
+            }
+          >
+            ›
+          </button>
+
+          {/* Close Button below image */}
+          <button
+            className="mt-6 px-6 py-2 bg-pink-600 text-white rounded "
+            onClick={() => setSliderIndex(null)}
+          >
+            Close
+          </button>
         </div>
       )}
+
+      {/* ---------------- BLOG SECTION ---------------- */}
+      {filter === "blog" && <Blogs />}
+
+
+      {/* ---------------- PRESS SECTION ---------------- */}
+      {filter === "press" && (
+        <div className="space-y-8">
+          {pressImages.map((image, index) => (
+            <div key={index} className="w-full">
+              <img
+                src={image.src}
+                alt={image.alt || `Press image ${index + 1}`}
+                className="w-full h-auto object-cover rounded-lg shadow-md"
+              />
+              <p className="mt-2 text-sm text-gray-700 text-left">
+                {image.alt || `Press image ${index + 1}`}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ---------------- MAGAZINE SECTION ---------------- */}
+      {filter === "magazine" && <MagazineFlipBook />}
+
+
     </div>
   );
+
 }

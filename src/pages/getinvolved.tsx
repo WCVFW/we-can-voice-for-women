@@ -79,19 +79,15 @@ export default function GetInvolved() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50">
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="pt-32 pb-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-pink-100 rounded-full text-pink-700 text-sm font-medium mb-6">
-            <Users className="w-4 h-4 mr-2" />
-            Join Our Mission
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-pink-900 mb-6">
-            Get{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
-              Involved
+          <h1 className="text-3xl md:text-4xl font-bold text-black mb-6">
+            <span className="text-pink-600">
+              Join Our Mission
             </span>
           </h1>
-          <p className="text-xl text-pink-700 mb-8 max-w-2xl mx-auto leading-relaxed">
+
+          <p className="text-lg text-black mb-8 max-w-2xl mx-auto leading-relaxed">
             Join the We Can Voice for Women Foundation and be part of a movement
             that empowers women worldwide. Whether through your career, learning
             journey, or volunteer spirit, there's a place for you.
@@ -99,23 +95,21 @@ export default function GetInvolved() {
         </div>
       </section>
 
+
       {/* Contact Form Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-6 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 bg-pink-100 rounded-full text-pink-700 text-sm font-medium mb-4">
-              <Send className="w-4 h-4 mr-2" />
-              Get Started
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-left mb-12">
+            <h2 className="text-2xl font-bold text-pink-600 mb-4">
               Ready to Join Us?
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-black">
               Fill out the form below and we'll connect you with the right
               opportunities. Whether you're interested in careers, internships,
               or volunteering, we'd love to hear from you.
             </p>
           </div>
+
 
           <Card className="shadow-xl border-0 border-pink-200">
             <CardContent className="p-8">
