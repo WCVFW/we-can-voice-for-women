@@ -239,13 +239,46 @@ export default function DonatePage() {
     <div className="font-serif pt-[94px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
         <div className="flex flex-col lg:flex-row gap-10">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="w-full lg:w-1/2 space-y-6 text-gray-800">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="w-full lg:w-1/2 space-y-6 text-gray-800"
+          >
             <h2 className="text-3xl font-bold text-pink-600">Let's begin change</h2>
-            <img src="/assets/images/donateimg.jpeg" alt="Empowered Women" className="w-[600px] h-58 object-cover rounded-lg shadow-lg" />
-            <p>Like a small drop leading to a big flood, every small contribution you make can bring about significant change in our society.</p>
-            <p>Your support will help women move forward. Donate generously and become a catalyst for equality for women in society.</p>
-          </motion.div>
+            <img
+              src="/assets/images/donateimg.jpeg"
+              alt="Empowered Women"
+              className="w-[600px] h-[500px] object-cover rounded-2xl shadow-lg"
+            />
+            <p>
+              Like a small drop leading to a big flood, every small contribution you make can
+              bring about significant change in our society. Your support will help women move
+              forward.
+            </p>
+            <p>
+              You can assist those sisters who are struggling to pursue higher education due to
+              financial difficulties.
+            </p>
+            <p>
+              Your donations will support mothers who are enduring illnesses without access to
+              quality medical care.
+            </p>
+            <p>
+              The financial help you provide will be invaluable to women striving to achieve
+              success in life.
+            </p>
+            <p>
+              Empowering women means empowering the entire country. Women are the backbone of
+              families, and the education they receive can transform generations.
+            </p>
+            <p>
+              We envision a future where women in every village and slum can pursue development.
+              Every rupee you donate contributes to that vision. Donate generously and become a catalyst for equality for women in society. Let’s
+              begin this change today.
+            </p>
 
+          </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="w-full lg:w-1/2">
             <Card className="rounded-xl shadow-2xl border border-gray-200 p-6 bg-white">
               <CardHeader className="text-center space-y-3">
