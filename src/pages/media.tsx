@@ -35,7 +35,7 @@ export default function MediaPage() {
       ],
     },
     {
-      title: "Scolership For Higher Education",
+      title: "Scholarship For Higher Education",
       cover: "/assets/images/ci/ci1.png",
       images: ["/assets/images/ci/ci1.png", "/assets/images/ci/ci2.png", "/assets/images/ci/ci3.png", "/assets/images/ci/ci4.png"],
     },
