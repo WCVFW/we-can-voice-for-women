@@ -115,7 +115,7 @@ const About: React.FC = () => {
       image: "/assets/images/sub5.png",
       bio: "Sudarshan Meenakshi Sundharam has a degree in Electronics Engineering and a diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
       social: {
-        linkedin: "http://www.linkedin.com/in/sudarshan-meenakshi-6790a324a",
+        linkedin: "#",
         twitter: "#",
         email: "amara@voiceforwomen.org",
       },
@@ -135,19 +135,24 @@ const About: React.FC = () => {
   ];
 
   const teamMembers = [
-    // {
-    //   name: "Name",
-    //   title: "Desiganation",
-    //   image: "/assets/images/",
-    // },
+    {
+      name: "Sreedevi K",
+      title: "Project Co-ordinator",
+      image: "/assets/images/15.jpg",
+    },
     {
       name: "Logasri P",
-      title: "Field Coordinator",
+      title: "Field Co-ordinator",
       image: "/assets/images/1.jpg",
     },
     {
+      name: "Kavi Muhil Sriraman",
+      title: "Fundraiser Executive",
+      image: "/assets/images/14.jpg",
+    },
+    {
       name: "Charulatha H",
-      title: "Entrepreneurship Coordinator",
+      title: "Entrepreneurship Co-ordinator",
       image: "/assets/images/3.jpg",
     },
     {
@@ -162,18 +167,13 @@ const About: React.FC = () => {
     },
     {
       name: "Rajesh M",
-      title: "Director of Photography",
+      title: "Videographer",
       image: "/assets/images/4.jpg",
     },
     {
       name: "Pradeep E",
       title: "Visual Editor",
       image: "/assets/images/Pradeep.jpg",
-    },
-    {
-      name: "Harini Ga",
-      title: "Graphic Designer",
-      image: "/assets/images/harini.jpg",
     },
   ];
 
