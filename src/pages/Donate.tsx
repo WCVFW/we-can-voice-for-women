@@ -111,7 +111,7 @@ export default function DonatePage() {
             amount: customAmount,
           };
 
-          const res = await fetch("http://wecanvoiceforwomen.org/api/donations/verify", {
+          const res = await fetch("https://wecanvoiceforwomen.org/api/donations/verify", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(donationPayload),
