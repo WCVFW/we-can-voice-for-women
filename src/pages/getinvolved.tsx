@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X, Send, FileText } from "lucide-react";
@@ -11,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -21,15 +21,35 @@ import {
 } from "@/components/ui/select";
 import { policies } from "@/pages/GetInvolvedpolices";
 
+const RequiredLabel = ({ children }: { children: string }) => (
+  <Label>
+    {children} <span className="text-red-500">*</span>
+  </Label>
+);
+
 export default function GetInvolved() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [selectedInterest, setSelectedInterest] = useState("");
+  const [selectedPartnership, setSelectedPartnership] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
   const [selectedState, setSelectedState] = useState("");
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [aadhaarFile, setAadhaarFile] = useState<File | null>(null);
+
   const [agreed, setAgreed] = useState(false);
   const [showPolicy, setShowPolicy] = useState(false);
   const [policyTitle, setPolicyTitle] = useState("");
   const [policyContent, setPolicyContent] = useState("");
   const [confirmRead, setConfirmRead] = useState(false);
   const [indianStates, setIndianStates] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
 
   useEffect(() => {
     const fetchStates = async () => {
@@ -52,6 +72,7 @@ export default function GetInvolved() {
 
     fetchStates();
   }, []);
+
   const openPolicy = (type: string) => {
     const selectedPolicy = policies[type];
     if (selectedPolicy) {
@@ -61,7 +82,6 @@ export default function GetInvolved() {
     }
   };
 
-
   const handleAgree = () => {
     if (confirmRead) {
       setAgreed(true);
@@ -69,6 +89,50 @@ export default function GetInvolved() {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true); // show loader
+    setSubmitted(false);
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("state", selectedState);
+    formData.append("aadhaarNumber", aadhaarNumber);
+    formData.append("interest", selectedInterest);
+
+    if (selectedInterest === "Partners") {
+      formData.append("partnerType", selectedPartnership);
+    } else {
+      formData.append("roleAppliedFor", selectedRole);
+      if (cvFile) formData.append("cv", cvFile);
+      if (imageFile) formData.append("image", imageFile);
+      if (aadhaarFile) formData.append("aadhaar", aadhaarFile);
+    }
+
+    try {
+      const response = await fetch("https://wecanvoiceforwomen.org/api/get-involved/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          window.location.reload(); // refresh after 2 seconds
+        }, 2000);
+      } else {
+        alert("❌ Failed to submit application.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("❌ Error submitting form.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50">
       <section className="pt-28 pb-16 px-4">
@@ -77,7 +141,7 @@ export default function GetInvolved() {
             <span className="text-pink-600">Join Our Mission</span>
           </h1>
           <p className="text-lg text-gray-700 mt-4 max-w-2xl mx-auto">
-            Be part of our impact movement at We Can Voice for Women Foundation.
+            Be part of our impact movement at We Can Voice for Women Foundation. <br />
             Fill the form below and let’s make a difference together.
           </p>
         </div>
@@ -92,33 +156,33 @@ export default function GetInvolved() {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <Label>First Name</Label>
-                    <Input placeholder="Enter first name" />
+                    <RequiredLabel>First Name</RequiredLabel>
+                    <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                   </div>
                   <div>
-                    <Label>Last Name</Label>
-                    <Input placeholder="Enter last name" />
+                    <RequiredLabel>Last Name</RequiredLabel>
+                    <Input value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <Label>Email</Label>
-                    <Input type="email" placeholder="Enter email" />
+                    <RequiredLabel>Email</RequiredLabel>
+                    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                   </div>
                   <div>
-                    <Label>Phone</Label>
-                    <Input type="tel" placeholder="Enter phone number" />
+                    <RequiredLabel>Phone</RequiredLabel>
+                    <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <Label>State</Label>
-                    <Select onValueChange={setSelectedState}>
+                    <RequiredLabel>State</RequiredLabel>
+                    <Select required onValueChange={setSelectedState}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select State" />
                       </SelectTrigger>
@@ -132,19 +196,17 @@ export default function GetInvolved() {
                     </Select>
                   </div>
                   <div>
-                    <Label>Aadhaar Number</Label>
-                    <Input maxLength={12} placeholder="Enter Aadhaar number" />
+                    <RequiredLabel>Aadhaar Number</RequiredLabel>
+                    <Input value={aadhaarNumber} onChange={(e) => setAadhaarNumber(e.target.value)} maxLength={12} required />
                   </div>
                 </div>
 
                 <div>
-                  <Label>I'm interested in</Label>
-                  <Select
-                    onValueChange={(value) => {
-                      setSelectedInterest(value);
-                      setAgreed(false); // reset agreement on change
-                    }}
-                  >
+                  <RequiredLabel>I'm interested in</RequiredLabel>
+                  <Select required onValueChange={(value) => {
+                    setSelectedInterest(value);
+                    setAgreed(false);
+                  }}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select interest" />
                     </SelectTrigger>
@@ -152,30 +214,92 @@ export default function GetInvolved() {
                       <SelectItem value="career">Career</SelectItem>
                       <SelectItem value="internship">Internship</SelectItem>
                       <SelectItem value="volunteer">Volunteer</SelectItem>
+                      <SelectItem value="Partners">Partners</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                {selectedInterest && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => openPolicy(selectedInterest)}
-                    className="gap-2 text-pink-600 border-pink-400"
-                  >
-                    <FileText className="w-4 h-4" />
-                    Read {selectedInterest} Policy
-                  </Button>
+                {(selectedInterest === "career" || selectedInterest === "internship" || selectedInterest === "volunteer") && (
+                  <>
+                    <div>
+                      <RequiredLabel>Role Applying For</RequiredLabel>
+                      <Select required onValueChange={setSelectedRole}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Role" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="fundraising-executive">Fundraising Executive</SelectItem>
+                          <SelectItem value="field-coordinator">Field Coordinator</SelectItem>
+                          <SelectItem value="project-manager">Project Manager</SelectItem>
+                          <SelectItem value="project-coordinator">Project Coordinator</SelectItem>
+                          <SelectItem value="fundraising-manager">Fundraising Manager</SelectItem>
+                          <SelectItem value="community-developer">Community Developer</SelectItem>
+                          <SelectItem value="videographer">Videographer</SelectItem>
+                          <SelectItem value="photographer">Photographer</SelectItem>
+                          <SelectItem value="content-writer">Content Writer</SelectItem>
+                          <SelectItem value="reporter">Reporter</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 pt-4">
+                      <div>
+                        <RequiredLabel>Upload Your CV</RequiredLabel>
+                        <Input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setCvFile(e.target.files?.[0] || null)} required />
+                      </div>
+                      <div>
+                        <RequiredLabel>Upload Your Image</RequiredLabel>
+                        <Input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} required />
+                      </div>
+                    </div>
+
+                    <div className="pt-4">
+                      <RequiredLabel>Upload Your Aadhaar</RequiredLabel>
+                      <Input type="file" accept="application/pdf,image/*" onChange={(e) => setAadhaarFile(e.target.files?.[0] || null)} required />
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => openPolicy(selectedInterest)}
+                      className="gap-2 text-pink-600 border-pink-400"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Read {selectedInterest} Policy
+                    </Button>
+                  </>
+                )}
+
+                {(selectedInterest === "Partners") && (
+                  <div>
+                    <RequiredLabel>Type of Partners</RequiredLabel>
+                    <Select required onValueChange={setSelectedPartnership}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="csr-partners">CSR Partners</SelectItem>
+                        <SelectItem value="event-partners">Event Partners</SelectItem>
+                        <SelectItem value="ngo-partners">NGO Partners</SelectItem>
+                        <SelectItem value="education-partners">Education Partners</SelectItem>
+                        <SelectItem value="entrepreneurship-partners">Entrepreneurship Partners</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 )}
 
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={!selectedInterest || !agreed}
+                  disabled={!selectedInterest || !agreed || loading}
                   className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white h-12 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4 mr-2" />
-                  Submit Application
+                  {loading ? "Processing..." : submitted ? "Submitted Successfully!" : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      Submit Application
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -183,7 +307,6 @@ export default function GetInvolved() {
         </div>
       </section>
 
-      {/* Modal Popup for Policy */}
       <Transition show={showPolicy} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={() => setShowPolicy(false)}>
           <Transition.Child

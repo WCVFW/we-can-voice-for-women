@@ -35,6 +35,11 @@ export default function MediaPage() {
       ],
     },
     {
+      title: "Manvaasanai-Pongal Festivel",
+      cover: "/assets/images/mi/mi12.jpg",
+      images: ["/assets/images/mi/mi1.jpg", "/assets/images/mi/mi2.jpg", "/assets/images/mi/mi3.jpg", "/assets/images/mi/mi4.jpg","/assets/images/mi/mi5.jpg","/assets/images/mi/mi6.jpg","/assets/images/mi/mi7.jpg","/assets/images/mi/mi8.jpg","/assets/images/mi/mi9.jpg","/assets/images/mi/mi10.jpg","/assets/images/mi/mi11.jpg","/assets/images/mi/mi12.jpg",],
+    },
+    {
       title: "Scholarship For Higher Education",
       cover: "/assets/images/ci/ci1.png",
       images: ["/assets/images/ci/ci1.png", "/assets/images/ci/ci2.png", "/assets/images/ci/ci3.png", "/assets/images/ci/ci4.png"],
