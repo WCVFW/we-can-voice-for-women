@@ -43,10 +43,10 @@ const mediaLinks: [string, string][] = [
 const policyLinks: [string, string][] = [
   ['Privacy Policy', '/PrivacyPolicy'],
   ['Refund Policy', '/RefundPolicy'],
+  ['Cancellation Policy ', '/CancellationPolicy'],
   ['Cookies Policy', '/CookiePolicy'],
   ['Terms & Conditions', '/TermsAndConditions'],
   ['POSH Policy', '/POSHPolicy'],
-  ['CancellationPolicy ', '/CancellationPolicy'],
   ['FAQ', '/FAQ'],
 ];
 
