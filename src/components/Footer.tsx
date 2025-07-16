@@ -46,6 +46,7 @@ const policyLinks: [string, string][] = [
   ['Cookies Policy', '/CookiePolicy'],
   ['Terms & Conditions', '/TermsAndConditions'],
   ['POSH Policy', '/POSHPolicy'],
+  ['CancellationPolicy ', '/CancellationPolicy'],
   ['FAQ', '/FAQ'],
 ];
 

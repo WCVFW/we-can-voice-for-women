@@ -25,6 +25,7 @@ import {
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 
 import POSHPolicy from './pages/Posh-Policy';
+import CancellationPolicy from './pages/CancellationPolicy ';
 
 // Lazy-loaded pages
 const Index = lazy(() => import('./pages/Index'));
@@ -115,6 +116,7 @@ const App = () => {
                   <Route path="RefundPolicy" element={<RefundPolicy />} />
                   <Route path="CookiePolicy" element={<CookiePolicy />} />
                   <Route path="POSHPolicy" element={<POSHPolicy />} />
+                  <Route path="CancellationPolicy" element={<CancellationPolicy />} />
                   <Route path="TermsAndConditions" element={<TermsAndConditions />} />
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>

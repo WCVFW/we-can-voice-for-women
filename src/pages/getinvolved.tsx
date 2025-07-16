@@ -1,12 +1,14 @@
+"use client";
+import { useEffect, useState, Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { X, Send, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,421 +19,230 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Briefcase,
-  GraduationCap,
-  Heart,
-  ArrowRight,
-  Users,
-  Globe,
-  Award,
-  Calendar,
-  MapPin,
-  Mail,
-  Send,
-} from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-const indianStates = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "West Bengal",
-  "Andaman and Nicobar Islands",
-  "Chandigarh",
-  "Dadra and Nagar Haveli and Daman and Diu",
-  "Delhi",
-  "Jammu and Kashmir",
-  "Ladakh",
-  "Lakshadweep",
-  "Puducherry",
-  "Other"
-];
+import { policies } from "@/pages/GetInvolvedpolices";
 
 export default function GetInvolved() {
   const [selectedInterest, setSelectedInterest] = useState("");
-  const [, setSelectedState] = useState('');
+  const [selectedState, setSelectedState] = useState("");
+  const [agreed, setAgreed] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
+  const [policyTitle, setPolicyTitle] = useState("");
+  const [policyContent, setPolicyContent] = useState("");
+  const [confirmRead, setConfirmRead] = useState(false);
+  const [indianStates, setIndianStates] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const response = await fetch("https://countriesnow.space/api/v0.1/countries/states", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country: "India" }),
+        });
+
+        const result = await response.json();
+        if (result.data && result.data.states) {
+          const states = result.data.states.map((s: any) => s.name);
+          setIndianStates(states);
+        }
+      } catch (error) {
+        console.error("Error fetching Indian states:", error);
+      }
+    };
+
+    fetchStates();
+  }, []);
+  const openPolicy = (type: string) => {
+    const selectedPolicy = policies[type];
+    if (selectedPolicy) {
+      setPolicyTitle(selectedPolicy.title);
+      setPolicyContent(selectedPolicy.content);
+      setShowPolicy(true);
+    }
+  };
+
+
+  const handleAgree = () => {
+    if (confirmRead) {
+      setAgreed(true);
+      setShowPolicy(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50">
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-28 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-black mb-6">
-            <span className="text-pink-600">
-              Join Our Mission
-            </span>
+          <h1 className="text-4xl font-bold text-black">
+            <span className="text-pink-600">Join Our Mission</span>
           </h1>
-
-          <p className="text-lg text-black mb-8 max-w-2xl mx-auto leading-relaxed">
-            Join the We Can Voice for Women Foundation and be part of a movement
-            that empowers women worldwide. Whether through your career, learning
-            journey, or volunteer spirit, there's a place for you.
+          <p className="text-lg text-gray-700 mt-4 max-w-2xl mx-auto">
+            Be part of our impact movement at We Can Voice for Women Foundation.
+            Fill the form below and let’s make a difference together.
           </p>
         </div>
       </section>
 
-
-      {/* Contact Form Section */}
-      <section className="py-6 px-4 bg-gray-50">
+      <section className="pb-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-left mb-12">
-            <h2 className="text-2xl font-bold text-pink-600 mb-4">
-              Ready to Join Us?
-            </h2>
-            <p className="text-lg text-black">
-              Fill out the form below and we'll connect you with the right
-              opportunities. Whether you're interested in careers, internships,
-              or volunteering, we'd love to hear from you.
-            </p>
-          </div>
-
-
-          <Card className="shadow-xl border-0 border-pink-200">
-            <CardContent className="p-8">
+          <Card className="shadow-xl border border-pink-200">
+            <CardHeader>
+              <CardTitle className="text-xl text-pink-600 font-semibold">
+                Get Involved Form
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
               <form className="space-y-6">
-                {/* Personal Information */}
-                <div className="space-y-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
-                  <h3 className="font-semibold text-pink-900 text-lg">
-                    Personal Information
-                  </h3>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName" className="text-pink-800">
-                        First Name *
-                      </Label>
-                      <Input
-                        id="firstName"
-                        placeholder="Enter your first name"
-                        className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName" className="text-pink-800">
-                        Last Name *
-                      </Label>
-                      <Input
-                        id="lastName"
-                        placeholder="Enter your last name"
-                        className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200"
-                      />
-                    </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <Label>First Name</Label>
+                    <Input placeholder="Enter first name" />
                   </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-pink-800">
-                        Email Address *
-                      </Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="Enter your email address"
-                        className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-pink-800">
-                        Phone Number *
-                      </Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="Enter your phone number"
-                        className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="state">State</Label>
-                      <Select onValueChange={setSelectedState}>
-                        <SelectTrigger id="state" className="w-full">
-                          <SelectValue placeholder="Select State" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {indianStates.map((state) => (
-                            <SelectItem key={state} value={state.toLowerCase().replace(/\s+/g, '-')}>
-                              {state}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="aadhaar" className="text-pink-800">
-                        Aadhaar Number *
-                      </Label>
-                      <Input
-                        id="aadhaar"
-                        placeholder="Enter your 12-digit Aadhaar number"
-                        maxLength={12}
-                        className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200"
-                      />
-                    </div>
+                  <div>
+                    <Label>Last Name</Label>
+                    <Input placeholder="Enter last name" />
                   </div>
                 </div>
 
-                {/* Interest Selection */}
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="interest"
-                    className="text-pink-800 font-semibold"
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <Label>Email</Label>
+                    <Input type="email" placeholder="Enter email" />
+                  </div>
+                  <div>
+                    <Label>Phone</Label>
+                    <Input type="tel" placeholder="Enter phone number" />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <Label>State</Label>
+                    <Select onValueChange={setSelectedState}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select State" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {indianStates.map((state) => (
+                          <SelectItem key={state} value={state}>
+                            {state}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label>Aadhaar Number</Label>
+                    <Input maxLength={12} placeholder="Enter Aadhaar number" />
+                  </div>
+                </div>
+
+                <div>
+                  <Label>I'm interested in</Label>
+                  <Select
+                    onValueChange={(value) => {
+                      setSelectedInterest(value);
+                      setAgreed(false); // reset agreement on change
+                    }}
                   >
-                    I'm interested in *
-                  </Label>
-                  <Select onValueChange={setSelectedInterest}>
-                    <SelectTrigger className="h-12 border-pink-300 focus:border-pink-500 focus:ring-pink-200">
-                      <SelectValue placeholder="Select your interest" />
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select interest" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="career">
-                        Career Opportunities
-                      </SelectItem>
-                      <SelectItem value="internship">
-                        Internship Programs
-                      </SelectItem>
-                      <SelectItem value="volunteer">
-                        Volunteer Opportunities
-                      </SelectItem>
+                      <SelectItem value="career">Career</SelectItem>
+                      <SelectItem value="internship">Internship</SelectItem>
+                      <SelectItem value="volunteer">Volunteer</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Conditional Fields Based on Interest */}
-                {selectedInterest === "career" && (
-                  <div className="space-y-6 p-4 bg-rose-50 rounded-lg border border-rose-200">
-                    <h3 className="font-semibold text-rose-900">
-                      Career Application
-                    </h3>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="position" className="text-rose-800">
-                        Position of Interest
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="h-12 border-rose-300 focus:border-rose-500">
-                          <SelectValue placeholder="Select position" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="program-manager">
-                            Program Manager
-                          </SelectItem>
-                          <SelectItem value="communications-director">
-                            Communications Director
-                          </SelectItem>
-                          <SelectItem value="community-outreach">
-                            Community Outreach Specialist
-                          </SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="experience" className="text-rose-800">
-                        Professional Experience
-                      </Label>
-                      <Textarea
-                        id="experience"
-                        placeholder="Briefly describe your relevant work experience..."
-                        className="min-h-[80px] resize-none border-rose-300 focus:border-rose-500"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="resume" className="text-rose-800">
-                        Resume/CV
-                      </Label>
-                      <Input
-                        id="resume"
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        className="h-12 border-rose-300 focus:border-rose-500"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {selectedInterest === "internship" && (
-                  <div className="space-y-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
-                    <h3 className="font-semibold text-pink-900">
-                      Internship Application
-                    </h3>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="program" className="text-pink-800">
-                        Program Type
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="h-12 border-pink-300 focus:border-pink-500">
-                          <SelectValue placeholder="Select program" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="summer">
-                            Summer Impact Internship
-                          </SelectItem>
-                          <SelectItem value="fellowship">
-                            Year-Round Fellowship
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="education" className="text-pink-800">
-                        Current Education Level
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="h-12 border-pink-300 focus:border-pink-500">
-                          <SelectValue placeholder="Select education level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="undergraduate">
-                            Undergraduate Student
-                          </SelectItem>
-                          <SelectItem value="graduate">
-                            Graduate Student
-                          </SelectItem>
-                          <SelectItem value="recent-graduate">
-                            Recent Graduate
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="interests" className="text-pink-800">
-                        Areas of Interest
-                      </Label>
-                      <Textarea
-                        id="interests"
-                        placeholder="What aspects of women's empowerment are you most passionate about?"
-                        className="min-h-[80px] resize-none border-pink-300 focus:border-pink-500"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {selectedInterest === "volunteer" && (
-                  <div className="space-y-6 p-4 bg-fuchsia-50 rounded-lg border border-fuchsia-200">
-                    <h3 className="font-semibold text-fuchsia-900">
-                      Volunteer Application
-                    </h3>
-
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="volunteer-type"
-                        className="text-fuchsia-800"
-                      >
-                        Volunteer Interest
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="h-12 border-fuchsia-300 focus:border-fuchsia-500">
-                          <SelectValue placeholder="Select volunteer type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="events">Event Support</SelectItem>
-                          <SelectItem value="mentorship">Mentorship</SelectItem>
-                          <SelectItem value="digital">
-                            Digital Advocacy
-                          </SelectItem>
-                          <SelectItem value="all">All of the above</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="availability"
-                        className="text-fuchsia-800"
-                      >
-                        Time Availability
-                      </Label>
-                      <Select>
-                        <SelectTrigger className="h-12 border-fuchsia-300 focus:border-fuchsia-500">
-                          <SelectValue placeholder="Select availability" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="weekly">
-                            Few hours per week
-                          </SelectItem>
-                          <SelectItem value="monthly">
-                            Few hours per month
-                          </SelectItem>
-                          <SelectItem value="events-only">
-                            Events only
-                          </SelectItem>
-                          <SelectItem value="flexible">Flexible</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="skills" className="text-fuchsia-800">
-                        Special Skills or Interests
-                      </Label>
-                      <Textarea
-                        id="skills"
-                        placeholder="Any special skills, experience, or areas you'd like to help with?"
-                        className="min-h-[80px] resize-none border-fuchsia-300 focus:border-fuchsia-500"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-4">
+                {selectedInterest && (
                   <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white h-12"
+                    type="button"
+                    variant="outline"
+                    onClick={() => openPolicy(selectedInterest)}
+                    className="gap-2 text-pink-600 border-pink-400"
                   >
-                    <Send className="w-4 h-4 mr-2" />
-                    Submit Application
+                    <FileText className="w-4 h-4" />
+                    Read {selectedInterest} Policy
                   </Button>
-                </div>
+                )}
 
-                <div className="text-center text-sm text-gray-500">
-                  <p>
-                    We'll review your application and get back to you within 5-7
-                    business days.
-                  </p>
-                  <p className="mt-2 text-pink-600">
-                    All information provided will be kept confidential and
-                    secure.
-                  </p>
-                </div>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={!selectedInterest || !agreed}
+                  className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white h-12 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Send className="w-4 h-4 mr-2" />
+                  Submit Application
+                </Button>
               </form>
             </CardContent>
           </Card>
         </div>
       </section>
+
+      {/* Modal Popup for Policy */}
+      <Transition show={showPolicy} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={() => setShowPolicy(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 flex items-center justify-center p-4">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl relative">
+                <Dialog.Title className="text-lg font-bold text-pink-600">
+                  {policyTitle}
+                </Dialog.Title>
+                <button
+                  onClick={() => setShowPolicy(false)}
+                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="mt-4 max-h-64 overflow-y-auto text-sm text-gray-700 whitespace-pre-line">
+                  {policyContent}
+                </div>
+                <div className="mt-4 flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    id="readAgree"
+                    className="mt-1 accent-pink-600"
+                    checked={confirmRead}
+                    onChange={(e) => setConfirmRead(e.target.checked)}
+                  />
+                  <label htmlFor="readAgree" className="text-sm text-gray-700">
+                    I have read and agree to this policy.
+                  </label>
+                </div>
+                <div className="mt-6 text-right">
+                  <Button onClick={handleAgree} disabled={!confirmRead}>
+                    Agree & Close
+                  </Button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   );
 }
