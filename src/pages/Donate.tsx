@@ -95,9 +95,9 @@ export default function DonatePage() {
         order_id: orderData.id,
         handler: async function (response: any) {
           const donationPayload = {
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
             name: formData.name,
             email: formData.email,
             phone: formData.phone,

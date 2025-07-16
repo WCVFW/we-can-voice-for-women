@@ -113,9 +113,9 @@ const About: React.FC = () => {
       title: "Global advisor",
       location: "Toronto, Canada",
       image: "/assets/images/sub5.png",
-      bio: "Sudarshan Meenakshi Sundharam has a degree in Electronics Engineering and a diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
+      bio: "Sudarshan Meenakshi Sundharam has a Diploma in Electronics Engineering and Post Graduate diploma in Dialysis Technology. He has worked at Toronto General Hospital since 2001 and teaches at Centennial College, . He has published articles on renal engineering, and many of his students work in hospitals across Canada.",
       social: {
-        linkedin: "#",
+        linkedin: "http://www.linkedin.com/in/sudarshan-meenakshi-6790a324a",
         twitter: "#",
         email: "amara@voiceforwomen.org",
       },
@@ -288,9 +288,8 @@ const About: React.FC = () => {
                         return (
                           <div
                             key={leader.id}
-                            className={`flex flex-col sm:flex-row ${
-                              isReversed ? "sm:flex-row-reverse" : ""
-                            } gap-4 items-center justify-center`}
+                            className={`flex flex-col sm:flex-row ${isReversed ? "sm:flex-row-reverse" : ""
+                              } gap-4 items-center justify-center`}
                           >
                             {/* Image Card */}
                             <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-[280px] h-[420px] flex items-center justify-center">
