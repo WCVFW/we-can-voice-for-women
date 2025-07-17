@@ -149,7 +149,8 @@ const blogItems = [
   },
   {
     id: 1, // Assuming this would be the next ID after 0
-    title: 'Starting a Business for Women in Tamil Nadu: A Complete Guide',
+    title: 'Starting a Business for Women in Tamil Nadu:',
+    title1: ' A Complete Guide',
     description:
       'A comprehensive guide for women entrepreneurs in Tamil Nadu, covering registrations, government schemes, funding options, and profitable business ideas.',
     date: 'July 9, 2025',
@@ -518,6 +519,7 @@ const blogItems = [
   {
     id: 2,
     title: 'A Complete Guide for Pregnant Women and New Mothers',
+    title1:"",
     description:
       'From conception to childbirth and beyond, this detailed guide covers essential foods, exercises, and care tips for expecting and new moms.',
     date: 'July 9, 2025',
@@ -639,7 +641,8 @@ const blogItems = [
   },
   {
     id: 3,
-    title: 'Women’s Rights and Legal Protections in India: A Complete Overview',
+    title: 'Women’s Rights and Legal Protections in India: ',
+    title1:"A Complete Overview",
     description:
       'A thorough guide to key Indian laws protecting women’s rights — from inheritance to workplace safety and protection against domestic violence.',
     date: 'July 9, 2025',
@@ -745,7 +748,8 @@ const blogItems = [
   },
   {
     id: 4,
-    title: 'Cancer in Women: Risks, Prevention, Early Detection, and Treatment',
+    title: 'Cancer in Women: Risks, Prevention,',
+    title1:" Early Detection, and Treatment",
     description:
       'Understand why women are more vulnerable to certain types of cancer, and explore key strategies for prevention, screening, and treatment.',
     date: 'July 9, 2025',
@@ -901,8 +905,9 @@ export default function Blogs() {
                 alt={blog.title}
                 className="w-full sm:w-48 h-48 object-cover flex-shrink-0"
               />
-              <div className="p-3 text-pink-700 font-semibold flex items-center justify-center text-center w-full">
-                {blog.title}
+              <div className="flex flex-col items-center justify-center w-full p-4 text-pink-700 font-semibold text-center">
+                <div className="mb-2">{blog.title}</div>
+                <div>{blog.title1}</div>
               </div>
             </div>
           ))}
