@@ -6,7 +6,7 @@ const projects = [
   {
     id: 1,
     name: 'EASYA பேசு ENGLISH',
-    image: '/assets/images/sc2.jpg', // second image
+    image: '/assets/images/ec2.jpg', // second image
     content: `
       <div>
         <p>
@@ -14,14 +14,14 @@ const projects = [
           Through age-appropriate, play-based sessions held two times a week, the program helps girls build essential communication skills, vocabulary, and confidence in spoken English.
         </p>
  
-        <img src="/assets/images/sc1.jpg" alt="Girls learning English" class="my-6 rounded-lg shadow-md" />
+        <img src="/assets/images/ec2.jpg" alt="Girls learning English" class="my-6 rounded-lg shadow-md" />
  
         <p>
           Using songs, storytelling, games, and visual aids, we create an engaging and culturally relevant learning environment.
           Our trained facilitators apply gender-sensitive methods that boost self-esteem, while parents and teachers are involved to reinforce learning beyond the classroom.
         </p>
  
-        <img src="/assets/images/sc2.jpg" alt="Program Poster" class="my-6 rounded-lg shadow-md" />
+        <img src="/assets/images/ec1.jpg" alt="Program Poster" class="my-6 rounded-lg shadow-md" />
  
         <p>
           The goal is to enable over 1000 girls to express themselves fluently and confidently, improving classroom participation, leadership, and future opportunities.
