@@ -135,16 +135,21 @@ export default function Footer(): JSX.Element {
               {getInvolvedLinks.map(([label, link]) => (
                 <li key={label}>
                   <Link
-                    style={{ color: accentColor1 }}
-                    to={link}
-                    className="hover:underline"
+                    to={{
+                      pathname: link,
+                      search: `?interest=${label.toLowerCase()}`, // optional, if you want query params
+                    }}
+                    state={{ selectedInterest: label.toLowerCase() }} // pass state outside 'to'
                     onClick={() => window.scrollTo(0, 0)}
+                    style={{ color: accentColor1 }}
+                    className="hover:underline"
                   >
                     {label}
                   </Link>
                 </li>
               ))}
             </ul>
+
           </div>
 
           {/* Column 4: Media */}

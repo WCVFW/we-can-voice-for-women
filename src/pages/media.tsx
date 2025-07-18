@@ -37,37 +37,37 @@ export default function MediaPage() {
     {
       title: "Manvaasanai-Pongal Festivel",
       cover: "/assets/images/mi/mi12.jpg",
-      images: ["/assets/images/mi/mi1.jpg", "/assets/images/mi/mi2.jpg", "/assets/images/mi/mi3.jpg", "/assets/images/mi/mi4.jpg","/assets/images/mi/mi5.jpg","/assets/images/mi/mi6.jpg","/assets/images/mi/mi7.jpg","/assets/images/mi/mi8.jpg","/assets/images/mi/mi9.jpg","/assets/images/mi/mi10.jpg","/assets/images/mi/mi11.jpg","/assets/images/mi/mi12.jpg",],
+      images: ["/assets/images/mi/mi1.jpg", "/assets/images/mi/mi2.jpg", "/assets/images/mi/mi3.jpg", "/assets/images/mi/mi4.jpg", "/assets/images/mi/mi5.jpg", "/assets/images/mi/mi6.jpg", "/assets/images/mi/mi7.jpg", "/assets/images/mi/mi8.jpg", "/assets/images/mi/mi9.jpg", "/assets/images/mi/mi10.jpg", "/assets/images/mi/mi11.jpg", "/assets/images/mi/mi12.jpg",],
     },
     {
       title: "Scholarship For Higher Education",
       cover: "/assets/images/ci/ci1.png",
       images: ["/assets/images/ci/ci1.png", "/assets/images/ci/ci2.png", "/assets/images/ci/ci3.png", "/assets/images/ci/ci4.png"],
     },
-    {
-      title: "Why Are Women Slaves?",
-      cover: "/assets/images/bd/bd1.jpg",
-      images: [
-        "/assets/images/bd/bd1.jpg",
-        "/assets/images/bd/bd2.JPG",
-        "/assets/images/bd/bd4.JPG",
-        "/assets/images/bd/bd5.jpg",
-        "/assets/images/bd/bd6.JPG",
-        "/assets/images/bd/bd7.JPG",
-        "/assets/images/bd/bd8.JPG",
-        "/assets/images/bd/bd9.jpeg",
-        "/assets/images/bd/bd10.jpg",
-        "/assets/images/bd/bd11.jpg",
-        "/assets/images/bd/bd12.jpg",
-        "/assets/images/bd/bd13.jpg",
-        "/assets/images/bd/bd14.JPG",
-        "/assets/images/bd/bd15.JPG",
-        "/assets/images/bd/bd17.jpg",
-        "/assets/images/bd/bd18.jpg",
-        "/assets/images/bd/bd19.JPG",
-        "/assets/images/bd/bd20.JPG"
-      ]
-    },
+    // {
+    //   title: "Why Are Women Slaves?",
+    //   cover: "/assets/images/bd/bd1.jpg",
+    //   images: [
+    //     "/assets/images/bd/bd1.jpg",
+    //     "/assets/images/bd/bd2.JPG",
+    //     "/assets/images/bd/bd4.JPG",
+    //     "/assets/images/bd/bd5.jpg",
+    //     "/assets/images/bd/bd6.JPG",
+    //     "/assets/images/bd/bd7.JPG",
+    //     "/assets/images/bd/bd8.JPG",
+    //     "/assets/images/bd/bd9.jpeg",
+    //     "/assets/images/bd/bd10.jpg",
+    //     "/assets/images/bd/bd11.jpg",
+    //     "/assets/images/bd/bd12.jpg",
+    //     "/assets/images/bd/bd13.jpg",
+    //     "/assets/images/bd/bd14.JPG",
+    //     "/assets/images/bd/bd15.JPG",
+    //     "/assets/images/bd/bd17.jpg",
+    //     "/assets/images/bd/bd18.jpg",
+    //     "/assets/images/bd/bd19.JPG",
+    //     "/assets/images/bd/bd20.JPG"
+    //   ]
+    // },
 
     {
       title: "Cancer Awareness Medical Camp",
@@ -254,9 +254,6 @@ export default function MediaPage() {
       {/* ---------------- GALLERY ---------------- */}
       {filter === "Gallery" && (
         <div className="my-10">
-          {/* <h2 className="text-3xl font-bold text-pink-700 mb-6 text-center underline">
-            Gallery Albums
-          </h2> */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {albums.map((album, index) => (
               <div
@@ -346,45 +343,50 @@ export default function MediaPage() {
 
       {/* ---------------- FULLSCREEN SLIDER ---------------- */}
       {sliderIndex !== null && selectedAlbumIndex !== null && (
-        <div className="fixed inset-0 bg-black z-[60] flex flex-col justify-center items-center px-6 py-8 pt-24h">
-          {/* Previous Button */}
-          <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
-            onClick={() =>
-              setSliderIndex((prev) =>
-                prev === 0
-                  ? albums[selectedAlbumIndex].images.length - 1
-                  : (prev ?? 1) - 1
-              )
-            }
-          >
-            ‹
-          </button>
+        <div className="fixed inset-0 bg-black z-[999] flex flex-col justify-center items-center px-6 py-8 pt-24">
+          {/* Disable body scroll */}
+          <style>{`body { overflow: hidden !important; }`}</style>
 
-          {/* Image */}
-          <img
-            src={albums[selectedAlbumIndex].images[sliderIndex]}
-            alt={`Slide ${sliderIndex + 1}`}
-            className="max-h-[80vh] object-contain rounded shadow-lg"
-          />
+          <div className="relative group w-full flex justify-center items-center">
+            {/* Previous Button */}
+            <button
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              onClick={() =>
+                setSliderIndex((prev) =>
+                  prev === 0
+                    ? albums[selectedAlbumIndex].images.length - 1
+                    : (prev ?? 1) - 1
+                )
+              }
+            >
+              ‹
+            </button>
 
-          {/* Next Button */}
-          <button
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full"
-            onClick={() =>
-              setSliderIndex((prev) =>
-                prev === albums[selectedAlbumIndex].images.length - 1
-                  ? 0
-                  : (prev ?? 0) + 1
-              )
-            }
-          >
-            ›
-          </button>
+            {/* Image */}
+            <img
+              src={albums[selectedAlbumIndex].images[sliderIndex]}
+              alt={`Slide ${sliderIndex + 1}`}
+              className="max-h-[80vh] object-contain rounded shadow-lg"
+            />
 
-          {/* Close Button below image */}
+            {/* Next Button */}
+            <button
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 bg-black/50 hover:bg-black/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              onClick={() =>
+                setSliderIndex((prev) =>
+                  prev === albums[selectedAlbumIndex].images.length - 1
+                    ? 0
+                    : (prev ?? 0) + 1
+                )
+              }
+            >
+              ›
+            </button>
+          </div>
+
+          {/* Close Button */}
           <button
-            className="mt-6 px-6 py-2 bg-pink-600 text-white rounded "
+            className="mt-6 px-6 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition"
             onClick={() => setSliderIndex(null)}
           >
             Close

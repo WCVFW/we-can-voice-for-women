@@ -42,6 +42,7 @@
     "@tanstack/query-sync-storage-persister": "^5.81.5",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-persist-client": "^5.81.5",
+    "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -50,9 +51,10 @@
     "dotenv": "^17.0.1",
     "embla-carousel-react": "^8.3.0",
     "express": "^5.1.0",
+    "fast-xml-parser": "^5.2.5",
     "firebase": "^11.9.1",
     "formidable": "^3.5.4",
-    "framer-motion": "^12.19.1",
+    "framer-motion": "^12.23.6",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next": "^15.3.4",
@@ -71,6 +73,7 @@
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",
     "vaul": "^0.9.3",
+    "xml2js": "^0.6.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

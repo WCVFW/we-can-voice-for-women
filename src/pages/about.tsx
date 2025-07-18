@@ -230,7 +230,7 @@ const About: React.FC = () => {
             {/* Third Image */}
             {/* <div className="relative w-full flex justify-center md:justify-start"> */}
             <img
-              src="/assets/images/IMG_20190116_074215.jpg"
+              src="/assets/images/ca/ca3.jpg"
               alt="About 3"
               className="object-cover rounded-2xl shadow-md bg-white border"
               style={{

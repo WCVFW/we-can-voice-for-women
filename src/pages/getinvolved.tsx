@@ -20,7 +20,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { policies } from "@/pages/GetInvolvedpolices";
-
+import { useLocation } from 'react-router-dom';
+interface LocationState {
+  selectedInterest?: string;
+}
 const RequiredLabel = ({ children }: { children: string }) => (
   <Label>
     {children} <span className="text-red-500">*</span>
@@ -49,6 +52,7 @@ export default function GetInvolved() {
   const [indianStates, setIndianStates] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const location = useLocation() as { state: LocationState };
 
 
   useEffect(() => {
@@ -72,6 +76,7 @@ export default function GetInvolved() {
 
     fetchStates();
   }, []);
+
 
   const openPolicy = (type: string) => {
     const selectedPolicy = policies[type];
@@ -133,6 +138,12 @@ export default function GetInvolved() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    const interest = location.state?.selectedInterest;
+    if (interest) {
+      setSelectedInterest(interest);
+    }
+  }, [location.state]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50">
       <section className="pt-28 pb-16 px-4">
@@ -203,10 +214,14 @@ export default function GetInvolved() {
 
                 <div>
                   <RequiredLabel>I'm interested in</RequiredLabel>
-                  <Select required onValueChange={(value) => {
-                    setSelectedInterest(value);
-                    setAgreed(false);
-                  }}>
+                  <Select
+                    required
+                    value={selectedInterest} // controlled component
+                    onValueChange={(value) => {
+                      setSelectedInterest(value);
+                      setAgreed(false);
+                    }}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select interest" />
                     </SelectTrigger>
@@ -214,9 +229,10 @@ export default function GetInvolved() {
                       <SelectItem value="career">Career</SelectItem>
                       <SelectItem value="internship">Internship</SelectItem>
                       <SelectItem value="volunteer">Volunteer</SelectItem>
-                      <SelectItem value="Partners">Partners</SelectItem>
+                      <SelectItem value="partners">Partners</SelectItem>
                     </SelectContent>
                   </Select>
+
                 </div>
 
                 {(selectedInterest === "career" || selectedInterest === "internship" || selectedInterest === "volunteer") && (
