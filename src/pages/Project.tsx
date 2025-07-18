@@ -32,31 +32,31 @@ const projects = [
   },
   {
     id: 2,
-    name: 'Save Girl Child Campaign',
+    name: 'Save Girl Child',
     image: '/assets/images/sc1.jpg',
     content: `
-    <div>
-      <p>
-        The <strong>"Save Girl Child"</strong> campaign of awareness is being initiated in Chennai government schools with the central aim of propagating the value and dignity of the girl child in our society.
-      </p>
+      <div>
+        <p>
+          The <strong>"Save Girl Child"</strong> Project of awareness is being initiated in Chennai government schools with the central aim of propagating the value and dignity of the girl child in our society.
+        </p>
  
-      <img src="/assets/images/sc1.jpg" alt="Save Girl Child Awareness" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
+        <img src="/assets/images/sc1.jpg" alt="Save Girl Child Awareness" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
-      <p>
-        This campaign looks to educate students, teachers, and the surrounding community about the value of gender equality, the girl child's right to education, and the need to end discrimination and violence against them, and do it as a matter of urgency.
-      </p>
+        <p>
+          This Project looks to educate students, teachers, and the surrounding community about the value of gender equality, the girl child's right to education, and the need to end discrimination and violence against them, and do it as a matter of urgency.
+        </p>
  
-      <p>
-        The campaign is built around priority issues like safety and empowerment of girls, and the need for equitable societal values.
-      </p>
+        <p>
+          The Project is built around priority issues like safety and empowerment of girls, and the need for equitable societal values.
+        </p>
  
-      <img src="/assets/images/sc2.jpg" alt="Empowering the Girl Child" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
+        <img src="/assets/images/sc2.jpg" alt="Empowering the Girl Child" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
-      <p>
-        Through community engagement, creative workshops, and interactive sessions, the campaign aims to bring about long-term change by urging young minds to respect and empower the girl child.
-      </p>
-    </div>
-  `,
+        <p>
+          Through community engagement, creative workshops, and interactive sessions, the campaign aims to bring about long-term change by urging young minds to respect and empower the girl child.
+        </p>
+      </div>
+    `,
   },
  
   {
