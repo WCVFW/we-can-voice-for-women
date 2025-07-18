@@ -1,27 +1,26 @@
 'use client';
- 
+
 import React, { useState } from 'react';
- 
+
 const projects = [
   {
     id: 1,
     name: 'EASYA பேசு ENGLISH',
-    image: '/assets/images/ec2.jpg', // second image
+    image: '/assets/images/e1.jpeg',
     content: `
       <div>
         <p>
-          <strong>“EASYA பேசு ENGLISH”</strong> is a 6-month spoken English program focused on empowering girl children (Grades 1–7) in government schools across Chennai District.
-          Through age-appropriate, play-based sessions held two times a week, the program helps girls build essential communication skills, vocabulary, and confidence in spoken English.
+          <strong>“EASYA பேசு ENGLISH” is a 6-month spoken English program focused on empowering girl children (Grades 6–9) in government schools across Chennai District. Through age-appropriate, play-based sessions held two times a week, the program helps girls build essential communication skills, vocabulary, and confidence in spoken English.
         </p>
  
-        <img src="/assets/images/ec2.jpg" alt="Girls learning English" class="my-6 rounded-lg shadow-md" />
+        <img src="/assets/images/e2.jpeg" alt="Girls learning English" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
         <p>
           Using songs, storytelling, games, and visual aids, we create an engaging and culturally relevant learning environment.
           Our trained facilitators apply gender-sensitive methods that boost self-esteem, while parents and teachers are involved to reinforce learning beyond the classroom.
         </p>
  
-        <img src="/assets/images/ec1.jpg" alt="Program Poster" class="my-6 rounded-lg shadow-md" />
+        <img src="/assets/images/e1.jpeg" alt="Program Poster" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
         <p>
           The goal is to enable over 1000 girls to express themselves fluently and confidently, improving classroom participation, leadership, and future opportunities.
@@ -58,7 +57,7 @@ const projects = [
       </div>
     `,
   },
- 
+
   {
     id: 3,
     name: '',
@@ -66,11 +65,11 @@ const projects = [
     content: '',
   },
 ];
- 
- 
+
+
 export default function ProjectPage() {
   const [selectedProject, setSelectedProject] = useState<null | typeof projects[0]>(null);
- 
+
   return (
     <section className="pt-24 pb-16 px-4 bg-pink-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -79,7 +78,7 @@ export default function ProjectPage() {
             <h2 className="pt-10 text-4xl font-bold text-pink-700 mb-10 text-center underline underline-offset-4">
               Our Projects
             </h2>
- 
+
             <div className="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
               {projects.map(
                 (project) =>
@@ -108,13 +107,13 @@ export default function ProjectPage() {
             <h1 className="text-4xl font-bold text-pink-700 mb-6">
               {selectedProject.name}
             </h1>
- 
+
             {/* Content */}
             <div
               className="prose prose-pink max-w-none text-gray-800"
               dangerouslySetInnerHTML={{ __html: selectedProject.content }}
             />
- 
+
             {/* Back Button at Bottom */}
             <div className="mt-10 text-center">
               <button
