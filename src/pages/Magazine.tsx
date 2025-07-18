@@ -95,12 +95,7 @@ export default function MagazineFlipBook() {
 
           <div className="relative w-full max-w-6xl">
             {/* Close Button - top right for better accessibility */}
-            <button
-              onClick={() => setOpenMagazineIndex(null)}
-              className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-800 z-[1000]"
-            >
-              Close
-            </button>
+
 
             <HTMLFlipBook
               className="shadow-2xl rounded mx-auto"
@@ -146,7 +141,14 @@ export default function MagazineFlipBook() {
                 </div>
               ))}
             </HTMLFlipBook>
+
           </div>
+          <button
+            onClick={() => setOpenMagazineIndex(null)}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 px-5 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-800 z-[1000] shadow-lg"
+          >
+            Close
+          </button>
         </div>
       )}
     </div>
