@@ -6,21 +6,21 @@ const projects = [
   {
     id: 1,
     name: 'EASYA பேசு ENGLISH',
-    image: '/assets/images/e1.jpeg',
+    image: '/assets/images/ec2.jpg',
     content: `
       <div>
         <p>
           <strong>“EASYA பேசு ENGLISH” is a 6-month spoken English program focused on empowering girl children (Grades 6–9) in government schools across Chennai District. Through age-appropriate, play-based sessions held two times a week, the program helps girls build essential communication skills, vocabulary, and confidence in spoken English.
         </p>
  
-        <img src="/assets/images/e2.jpeg" alt="Girls learning English" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
+        <img src="/assets/images/ec2.jpg" alt="Girls learning English" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
         <p>
           Using songs, storytelling, games, and visual aids, we create an engaging and culturally relevant learning environment.
           Our trained facilitators apply gender-sensitive methods that boost self-esteem, while parents and teachers are involved to reinforce learning beyond the classroom.
         </p>
  
-        <img src="/assets/images/e1.jpeg" alt="Program Poster" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
+        <img src="/assets/images/ec1.jpg" alt="Program Poster" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
  
         <p>
           The goal is to enable over 1000 girls to express themselves fluently and confidently, improving classroom participation, leadership, and future opportunities.
