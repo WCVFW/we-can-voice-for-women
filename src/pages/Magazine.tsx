@@ -87,15 +87,17 @@ export default function MagazineFlipBook() {
       {/* Fullscreen Flipbook */}
       {openMagazineIndex !== null && (
         <div
-          className="fixed inset-0 pt-10 mt-10 mb-0 bg-black bg-opacity-90 z-50 flex flex-col items-center justify-center p-6"
+          className="fixed inset-0 bg-black bg-opacity-90 z-[999] flex flex-col items-center justify-center p-6"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Flipbook container with positioned close button */}
-          <div className="relative my-4">
-            {/* Close Button - bottom right beside flipbook */}
+          {/* Prevent body scroll */}
+          <style>{`body { overflow: hidden !important; }`}</style>
+
+          <div className="relative w-full max-w-6xl">
+            {/* Close Button - top right for better accessibility */}
             <button
               onClick={() => setOpenMagazineIndex(null)}
-              className="absolute bottom-4 -right-6 translate-x-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-800 z-50"
+              className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-800 z-[1000]"
             >
               Close
             </button>
@@ -104,9 +106,9 @@ export default function MagazineFlipBook() {
               className="shadow-2xl rounded mx-auto"
               width={flipSize.width}
               height={flipSize.height}
-              minWidth={300}
+              minWidth={150}
               maxWidth={1000}
-              minHeight={400}
+              minHeight={200}
               maxHeight={1533}
               drawShadow={false}
               flippingTime={600}
@@ -147,7 +149,6 @@ export default function MagazineFlipBook() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
