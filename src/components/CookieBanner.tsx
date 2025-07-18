@@ -48,10 +48,10 @@ const CookieBanner = () => {
           <Button onClick={handleConsent} className="bg-pink-600 hover:bg-pink-700 text-white flex items-center gap-1">
             <ShieldCheck className="w-4 h-4" /> Accept
           </Button>
-          <Button onClick={() => setVisible(false)} className="bg-white text-pink-600 hover:bg-gray-100 border border-white flex items-center gap-1">
+          <Button onClick={() => setVisible(false)} className="bg-pink-600 hover:bg-pink-700 text-white border border-white flex items-center gap-1">
             <XCircle className="w-4 h-4" /> Reject
           </Button>
-          <Button onClick={() => window.location.href = '/cookie-policy'} className="text-pink-200 hover:text-white underline flex items-center gap-1" variant="ghost">
+          <Button onClick={() => window.location.href = '/cookie-policy'} className="bg-pink-600 hover:bg-pink-700 text-white underline flex items-center gap-1" variant="ghost">
             <Settings className="w-4 h-4" /> Cookie Settings
           </Button>
         </div>
