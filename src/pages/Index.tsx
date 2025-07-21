@@ -36,25 +36,25 @@ export default function Home() {
       title: 'Enlightenment',
       description: 'When women achieve independence through education, they unlock their full potential and flourish in every aspect of life.',
       colorClass: 'text-pink-600',
-      href: '#',
+      href: '/Enlightenment',
       image: 'assets/images/Enlightenment.jpg',
-
+ 
     },
     {
       title: 'Enhealthment',
       description: 'A healthy woman embodies vitality. We provide essential medical support to underserved women, ensuring they thrive.',
       colorClass: 'text-white-600',
-      href: '#',
+      href: '/Enhealthment',
       image: 'assets/images/Enhealthment.jpg',
-
+ 
     },
     {
       title: 'Empowerment',
       description: 'Grassroots women can improve their economic status through self-employment, and we are here to empower their journey to success.',
       colorClass: 'text-pink-600',
-      href: '#',
+      href: '/Empowerment',
       image: 'assets/images/Empowerment.jpeg',
-
+ 
     },
   ];
   return (

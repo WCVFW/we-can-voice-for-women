@@ -166,11 +166,6 @@ const About: React.FC = () => {
       image: "/assets/images/5.jpg",
     },
     {
-      name: "Rajesh M",
-      title: "Videographer",
-      image: "/assets/images/4.jpg",
-    },
-    {
       name: "Pradeep E",
       title: "Visual Editor",
       image: "/assets/images/Pradeep.jpg",
