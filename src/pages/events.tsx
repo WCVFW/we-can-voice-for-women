@@ -23,26 +23,26 @@ const events: Event[] = [
     image: '/images/event1.jpg',
     isUpcoming: true,
   },
-  {
-    id: 2,
-    title: 'Health Awareness Camp',
-    date: 'August 2, 2025',
-    location: 'Ranchi, Jharkhand',
-    description:
-      'Organizing free checkups, menstrual hygiene awareness, and nutrition sessions in collaboration with local doctors.',
-    image: '/images/event2.jpg',
-    isUpcoming: true,
-  },
-  {
-    id: 3,
-    title: 'Fundraiser Gala',
-    date: 'September 10, 2025',
-    location: 'Bangalore, India',
-    description:
-      'An evening of stories, performances, and support for the cause of girl child education.',
-    image: '/images/event3.jpg',
-    isUpcoming: true,
-  },
+  // {
+  //   id: 2,
+  //   title: 'Health Awareness Camp',
+  //   date: 'August 2, 2025',
+  //   location: 'Ranchi, Jharkhand',
+  //   description:
+  //     'Organizing free checkups, menstrual hygiene awareness, and nutrition sessions in collaboration with local doctors.',
+  //   image: '/images/event2.jpg',
+  //   isUpcoming: true,
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Fundraiser Gala',
+  //   date: 'September 10, 2025',
+  //   location: 'Bangalore, India',
+  //   description:
+  //     'An evening of stories, performances, and support for the cause of girl child education.',
+  //   image: '/images/event3.jpg',
+  //   isUpcoming: true,
+  // },
 ];
 
 export default function Events() {
@@ -55,7 +55,7 @@ export default function Events() {
     >
       {/* Title */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-bold text-pink-600 mb-4">Upcoming Events</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-pink-600 mb-4 mt-12">Upcoming Events</h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           Join us at our upcoming events to make a difference and uplift lives through empowerment and outreach.
         </p>
@@ -94,10 +94,10 @@ export default function Events() {
           Want to collaborate or volunteer at our next event?
         </p>
         <a
-          href="/contact"
+          href="/donate"
           className="inline-block mt-4 px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg shadow-md hover:bg-pink-700 transition"
         >
-          Contact Us
+          Donate Now
         </a>
       </div>
     </motion.div>

@@ -15,7 +15,7 @@ export default function Empowerment() {
         {/* Image Placeholder */}
         <div className="w-full lg:w-1/2">
           <img
-            src="/images/foundation-empowerment.jpg"
+            src="assets/images/Empowermentinside.jpg"
             alt="Women engaged in entrepreneurship"
             className="rounded-md shadow-md w-full h-auto"
           />
