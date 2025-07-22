@@ -15,7 +15,7 @@ export default function Enlightenment() {
         {/* Image Placeholder */}
         <div className="w-full lg:w-1/2">
           <img
-            src="assets/images/Enlightenmentinside.jpg"
+            src="assets/images/enlight.jpeg"
             alt="Women learning English in a classroom"
             className="rounded-md shadow-md w-full h-auto"
           />
