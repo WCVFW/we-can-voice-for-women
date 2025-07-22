@@ -34,7 +34,7 @@ const Enhealthment = lazy(() => import('./pages/Enhealthment'));
 const Empowerment = lazy(() => import('./pages/Empowerment'));
 const Donate = lazy(() => import('./pages/Donate'));
 const About = lazy(() => import('@/pages/about'));
-const Blogs = lazy(() => import('@/pages/blogs'));
+const Blogs = lazy(() => import('@/pages/media/blogs'));
 const Media = lazy(() => import('@/pages/media'));
 const Events = lazy(() => import('@/pages/events'));
 const Project = lazy(() => import('@/pages/Project'));

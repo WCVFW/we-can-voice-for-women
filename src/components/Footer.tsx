@@ -32,8 +32,8 @@ const getInvolvedLinks: [string, string][] = [
 ];
 
 const mediaLinks: [string, string][] = [
-  ['Videos', '/Media'],
-  ['Images', '/Media'],
+  ['Video', '/Media'],
+  ['gallery', '/Media'],
   ['Magazine', '/Media'],
   ['Blog', '/Media'],
   ['Press', '/Media'],
@@ -165,7 +165,7 @@ export default function Footer(): JSX.Element {
                 <li key={label}>
                   <Link
                     style={{ color: accentColor1 }}
-                    to={link}
+                    to={`/Media?filter=${label.toLowerCase()}`}
                     className="hover:underline"
                     onClick={() => window.scrollTo(0, 0)}
                   >
