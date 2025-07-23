@@ -183,7 +183,7 @@ export default function MediaPage() {
       )}
 
       {/* GALLERY */}
-      {filter === "gallery" && (
+      {filter === "images" && (
         <div className="my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {albums.map((album, index) => (
             <div key={index} onClick={() => setSelectedAlbumIndex(index)} className="bg-white rounded-lg shadow-md hover:shadow-xl transition overflow-hidden cursor-pointer">
