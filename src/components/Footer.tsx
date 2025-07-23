@@ -33,7 +33,7 @@ const getInvolvedLinks: [string, string][] = [
 
 const mediaLinks: [string, string][] = [
   ['Video', '/Media'],
-  ['gallery', '/Media'],
+  ['Images', '/Media'],
   ['Magazine', '/Media'],
   ['Blog', '/Media'],
   ['Press', '/Media'],
