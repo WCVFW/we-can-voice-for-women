@@ -146,11 +146,6 @@ const About: React.FC = () => {
       image: "/assets/images/1.jpg",
     },
     {
-      name: "Kavi Muhil Sriraman",
-      title: "Fundraiser Executive",
-      image: "/assets/images/14.jpg",
-    },
-    {
       name: "Charulatha H",
       title: "Entrepreneurship Co-ordinator",
       image: "/assets/images/3.jpg",
