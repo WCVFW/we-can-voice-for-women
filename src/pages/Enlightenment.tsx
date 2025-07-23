@@ -5,9 +5,9 @@ export default function Enlightenment() {
     <div className="max-w-7xl mx-auto w-full pt-32 px-4 py-12 md:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-pink-700 mb-4">Enlightenment</h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+{/*         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
           Empowering women through education for a brighter tomorrow.
-        </p>
+        </p> */}
       </div>
 
       {/* Foundation Section */}
