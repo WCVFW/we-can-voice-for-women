@@ -20,7 +20,7 @@ export default function MediaPage() {
   const filterParam = searchParams.get("filter")?.toLowerCase() ?? "video";
 
   const [filter, setFilter] = useState<
-    "video" | "gallery" | "magazine" | "blog" | "press" | "podcast"
+    "video" | "images" | "magazine" | "blog" | "press" | "podcast"
   >(filterParam as any);
 
   const [playingVideoItem, setPlayingVideoItem] = useState<{
@@ -77,7 +77,7 @@ export default function MediaPage() {
 
   const filters = [
     ["video", "Videos"],
-    ["gallery", "Gallery"],
+    ["images", "Images"],
     ["magazine", "Magazine"],
     ["blog", "Blog"],
     ["press", "Press"],
