@@ -841,6 +841,104 @@ const blogItems = [
       </>
     ),
   },
+  {
+    id: 5,
+    title: 'The Gentle Power of Prenatal Yoga',
+    description:
+      'Discover how prenatal yoga offers more than just physical benefits — it nurtures emotional balance, breath connection, and sacred presence during pregnancy.',
+    date: 'July 2025',
+    author: 'Staff Writer',
+    image: './assets/images/blogimg/bm10.jpg',
+    coverImage: '',
+    category: ['Motherhood', 'Wellness', 'Pregnancy'],
+    comingSoon: false,
+    fullContent: (
+      <>
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            The Gentle Power of Prenatal Yoga
+          </h1>
+          <p className="text-sm text-gray-500 mb-2">
+            By <span className="font-medium text-gray-700">Staff Writer</span> |{' '}
+            <span className="text-pink-600 font-medium">Motherhood</span> | July 2025
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 items-start">
+          <div>
+            <p className="text-lg text-gray-800 leading-relaxed mb-4 mt-4 md:mt-20">
+              Pregnancy is one of the most transformative journeys a woman can experience. With each passing week, your body changes to nurture new life, your emotions deepen, and your sense of self shifts. Amidst this whirlwind, prenatal yoga gently supports you — offering strength, serenity, and space to connect with your baby.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed mb-4">
+              Prenatal yoga isn’t about twisting into difficult shapes. It’s about listening, softening, and tuning in. Gentle movements ease common discomforts like back pain, swollen ankles, and fatigue, while also calming the emotional rollercoaster of pregnancy. More than physical relief, it offers a sacred pause — a moment each day to honor the miracle growing within you.
+            </p>
+          </div>
+          <div>
+            <img
+              src="/assets/images/blogimg/bm10.jpg"
+              alt="Expecting mother in a gentle yoga pose"
+              className="w-full h-auto rounded-xl shadow-md border border-gray-200 object-cover"
+            />
+          </div>
+        </div>
+
+        <h3 className="text-2xl font-bold text-gray-800 mt-10 mb-4">🌿 A Trimester-Wise Approach</h3>
+        <p className="mb-6 text-gray-800 leading-relaxed">
+          Every trimester brings new needs. Here’s how to adapt your yoga practice:
+        </p>
+        <ul className="list-disc list-inside ml-4 mb-6 text-gray-700 space-y-2 text-lg leading-relaxed">
+          <li>
+            <strong>1st Trimester:</strong> Focus on rest, breath awareness, and gentle hip openers like Butterfly, Cat-Cow, and Seated Forward Bend.
+          </li>
+          <li>
+            <strong>2nd Trimester:</strong> With renewed energy, try standing poses like Warrior II and Goddess. These improve strength and stamina while keeping your breath calm and steady.
+          </li>
+          <li>
+            <strong>3rd Trimester:</strong> Prioritize comfort. Use props like pillows and bolsters. Pelvic tilts, supported squats, and side-lying Savasana prepare the body for childbirth.
+          </li>
+        </ul>
+
+        <h3 className="text-2xl font-bold text-gray-800 mt-10 mb-4">💨 The Power of the Breath</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 items-start">
+          <div>
+            <img
+              src="/assets/images/blogimg/bm11.jpg"
+              alt="Pregnant woman meditating with hands on belly"
+              className="w-full h-auto rounded-xl shadow-md border border-gray-200 object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-gray-800 leading-relaxed mb-4 mt-4 md:mt-20">
+              Breath is the anchor of prenatal yoga. It calms the nervous system and centers your awareness — essential tools for labor and delivery.
+            </p>
+            <ul className="list-disc list-inside ml-4 text-gray-700 space-y-2 text-lg leading-relaxed">
+              <li>🌬️ Deep belly breathing for relaxation</li>
+              <li>🌿 Anulom Vilom (alternate nostril breathing) for emotional balance</li>
+              <li>🕉️ Gentle chanting like Om to connect with your baby</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="text-2xl font-bold text-gray-800 mt-10 mb-4">💛 More Than Physical</h3>
+        <p className="mb-6 text-gray-800 leading-relaxed">
+          Prenatal yoga nurtures more than your body. Many women describe it as spiritual — a time to communicate with their unborn child. It’s a quiet, intuitive space where the heart listens and the soul whispers.
+        </p>
+
+        <h3 className="text-2xl font-bold text-gray-800 mt-10 mb-4">🌼 You Don’t Have to Be Perfect</h3>
+        <p className="mb-6 text-gray-800 leading-relaxed">
+          Some days you’ll feel strong. Others, tired or tearful. And that’s okay. There’s no perfection in prenatal yoga — only presence. Showing up, breathing, being gentle with yourself — that’s enough. Because growing a life is already a full-time miracle.
+        </p>
+
+        <h3 className="text-2xl font-bold text-gray-800 mt-10 mb-4">✨ Final Thought</h3>
+        <p className="mb-6 text-gray-800 leading-relaxed">
+          Whether you’re navigating your first pregnancy or your third, prenatal yoga offers a soft yet powerful way to care for yourself. It fosters strength, surrender, and stillness — the very essence of motherhood.
+        </p>
+        <p className="mb-6 text-gray-800 leading-relaxed">
+          So unroll your mat, close your eyes, and take a deep breath. Let the journey within begin.
+        </p>
+      </>
+    )
+  },
 
 ];
 
@@ -891,7 +989,7 @@ export default function Blogs() {
 
         {/* Smaller Blogs Grid (3 items) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10">
-          {blogItems.slice(1, 5).map((blog, i) => (
+          {blogItems.slice(1, 6).map((blog, i) => (
             <div
               key={blog.id}
               className="bg-white rounded-lg shadow-md cursor-pointer hover:shadow-xl transition overflow-hidden flex flex-col sm:flex-row"
