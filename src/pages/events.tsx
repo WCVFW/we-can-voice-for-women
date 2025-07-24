@@ -20,7 +20,7 @@ const events: Event[] = [
     time: '09:00 AM to 01:00 PM',
     location: 'Goonipalayam, Tamil Nadu, India',
     description: `
-      <strong>Medical Camp at Goonipalayam Village – Bridging a Healthcare Gap</strong><br/><br/>
+      <strong>Medical Camp at Parvathi Pannai, Goonipalayam Village – Bridging a Healthcare Gap</strong><br/><br/>
       Goonipalayam is a rural village with 1,200+ people in 300 homes. While the community is making progress in education and livelihoods, healthcare access remains a big challenge:<br/><br/>
       • No nearby hospital or emergency care<br/>
       • Limited access to medicines and checkups<br/>
@@ -43,7 +43,7 @@ const events: Event[] = [
       🕘 <strong>Time:</strong> 9:00 AM to 1:00 PM<br/><br/>
       🙌 Let’s come together to support this village and make healthcare accessible to all.
     `,
-    image: 'assets/images/events/event1.jpg',
+    image: 'assets/images/event1.jpg',
   },
 ];
 
