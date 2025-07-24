@@ -15,6 +15,18 @@ function parseISO8601Duration(duration: string): number {
   return hours * 3600 + minutes * 60 + seconds;
 }
 
+// Cache keys
+const CACHE_KEY = "cachedYouTubeVideos";
+const CACHE_TIMESTAMP_KEY = "cachedYouTubeVideosTimestamp";
+// Cache expiry: 1 hour = 3600000 ms
+const CACHE_DURATION_MS = 3600000;
+// View cached videos
+console.log(JSON.parse(localStorage.getItem("cachedYouTubeVideos")));
+
+// View cached timestamp
+console.log(new Date(Number(localStorage.getItem("cachedYouTubeVideosTimestamp"))));
+
+
 export function useYouTubeVideos(maxPages = 5) {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +38,21 @@ export function useYouTubeVideos(maxPages = 5) {
 
     if (!apiKey || !channelId) {
       setError("Missing YouTube API credentials.");
+      setLoading(false);
+      return;
+    }
+
+    // Check for cached data
+    const cached = localStorage.getItem(CACHE_KEY);
+    const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+
+    if (
+      cached &&
+      cachedTimestamp &&
+      Date.now() - Number(cachedTimestamp) < CACHE_DURATION_MS
+    ) {
+      setVideos(JSON.parse(cached));
+      setLoading(false);
       return;
     }
 
@@ -72,11 +99,11 @@ export function useYouTubeVideos(maxPages = 5) {
               const durationInSeconds = parseISO8601Duration(duration);
               return durationInSeconds >= 60
                 ? {
-                    id: video.id,
-                    title: video.snippet.title,
-                    thumbnail: video.snippet.thumbnails.medium.url,
-                    duration,
-                  }
+                  id: video.id,
+                  title: video.snippet.title,
+                  thumbnail: video.snippet.thumbnails.medium.url,
+                  duration,
+                }
                 : null;
             })
             .filter(Boolean) as YouTubeVideo[];
@@ -84,16 +111,20 @@ export function useYouTubeVideos(maxPages = 5) {
           videoDetails.push(...batchVideos);
         }
 
+        // Cache results
+        localStorage.setItem(CACHE_KEY, JSON.stringify(videoDetails));
+        localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+
         setVideos(videoDetails);
         setLoading(false);
       } catch (err: any) {
-        setError(err.message);
+        setError(err.message || "Error fetching YouTube videos.");
         setLoading(false);
       }
     }
 
     fetchAllVideos();
-  }, []);
+  }, [maxPages]);
 
   return { videos, error, loading };
 }
