@@ -43,6 +43,7 @@ const Contact = lazy(() => import('@/pages/contact'));
 const PrivacyPolicy = lazy(() => import('@/pages/privacy-policy'));
 const RefundPolicy = lazy(() => import('@/pages/refund-policy'));
 const CookiePolicy = lazy(() => import('@/pages/cookie-policy'));
+const PartnershipPolicy = lazy(() => import('@/pages/Partnership-Policy'));
 const TermsAndConditions = lazy(() => import('@/pages/terms-and-conditions'));
 const FAQ = lazy(() => import('@/pages/FAQ'));
 
@@ -118,6 +119,7 @@ const App = () => {
                   <Route path="POSHPolicy" element={<POSHPolicy />} />
                   <Route path="CancellationPolicy" element={<CancellationPolicy />} />
                   <Route path="TermsAndConditions" element={<TermsAndConditions />} />
+                  <Route path="PartnershipPolicy" element={<PartnershipPolicy />} />
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>
 
