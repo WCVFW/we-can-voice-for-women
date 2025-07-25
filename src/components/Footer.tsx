@@ -62,25 +62,43 @@ export default function Footer(): JSX.Element {
         className="w-full px-6 lg:px-12 py-12"
         style={{ backgroundColor: '#ffe3ee' }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)] gap-8 items-start">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)] gap-8 items-start">
           {/* Column 1: Logo & Info */}
-          <div className="flex items-start gap-4 text-left">
+          <div className="flex flex-col sm:flex-row items-start gap-4 text-left">
             <img
               src="/assets/images/Logo.png"
               alt="We Can Voice For Women Logo"
               className="h-16 w-auto mt-1"
             />
-            <div className="flex justify-center">
-              <div className="text-left">
-                <h2 className="text-2xl font-bold mb-3" style={{ color: accentColor }} >
-                  We Can Voice For Women Foundation
-                </h2>
-                <p className="text-sm leading-snug" style={{ color: accentColor1 }} >
-                  Empowering women through education, health initiatives, and economic opportunities.
-                </p>
+            <div className="flex flex-col text-left">
+              <h2 className="text-2xl font-bold mb-3" style={{ color: accentColor }}>
+                We Can Voice For Women Foundation
+              </h2>
+              <p className="text-sm leading-snug mb-3" style={{ color: accentColor1 }}>
+                Empowering women through education, health initiatives, and economic opportunities.
+              </p>
+
+              {/* Move social icons here, under the paragraph */}
+              <div className="flex gap-3" style={{ color: accentColor }}>
+                <a href="https://www.facebook.com/wecanvoiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <Facebook size={18} />
+                </a>
+                <a href="https://x.com/wcvfwf" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                  <Twitter size={18} />
+                </a>
+                <a href="https://www.instagram.com/wecanvoiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <Instagram size={18} />
+                </a>
+                <a href="https://www.youtube.com/@WeCanVoiceforWomen" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                  <Youtube size={18} />
+                </a>
+                <a href="https://www.linkedin.com/company/voiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin size={18} />
+                </a>
               </div>
             </div>
           </div>
+
 
           {/* Column 2: Quick Links */}
           <div>
@@ -166,7 +184,7 @@ export default function Footer(): JSX.Element {
                 <li key={label}>
                   <Link
                     style={{ color: accentColor1 }}
-                    to={`/Media?filter=${label.toLowerCase()}`}
+                    to={link}
                     className="hover:underline"
                     onClick={() => window.scrollTo(0, 0)}
                   >
@@ -203,6 +221,7 @@ export default function Footer(): JSX.Element {
             </address>
           </div>
         </div>
+
       </div>
 
       {/* Bottom Section */}
@@ -227,24 +246,6 @@ export default function Footer(): JSX.Element {
                 {label}
               </Link>
             ))}
-          </div>
-
-          <div className="flex gap-3 justify-center">
-            <a href="https://www.facebook.com/wecanvoiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook size={18} />
-            </a>
-            <a href="https://x.com/wcvfwf" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <Twitter size={18} />
-            </a>
-            <a href="https://www.instagram.com/wecanvoiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram size={18} />
-            </a>
-            <a href="https://www.youtube.com/@WeCanVoiceforWomen" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <Youtube size={18} />
-            </a>
-            <a href="https://www.linkedin.com/company/voiceforwomen/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin size={18} />
-            </a>
           </div>
 
           <div className="text-center md:text-right font-medium">
