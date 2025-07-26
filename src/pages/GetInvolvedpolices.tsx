@@ -188,4 +188,73 @@ WhatsApp: 9444888197
 www.wecanvoiceforwomen.org
     `.trim(),
   },
+
+  partners: {
+  title: "We Can Voice for Women Foundation\nPartnership Policy",
+  content: `
+Effective Date: 1st July 2025
+Approved by: Chairman
+
+1. Introduction  
+We Can Voice for Women Foundation is committed to empowering women through education, advocacy, and sustainable development. Partnerships play a key role in achieving lasting impact.
+
+2. Purpose of the Policy  
+- Establish clear CSR collaboration guidelines  
+- Encourage corporate involvement in women’s empowerment  
+- Provide opportunities for employee engagement  
+- Ensure alignment with partner organizations’ CSR goals  
+
+3. Scope  
+This policy applies to:  
+- Corporate CSR partnerships  
+- Employees participating in volunteering or projects  
+- Jointly executed campaigns and events  
+
+4. CSR Partnership Opportunities  
+a. Program Sponsorship: Support skill development, hygiene awareness, digital literacy, and legal aid  
+b. Cause-Driven Campaigns: Collaborate on gender equality, safety, and rights initiatives  
+c. Capacity Building Support: Fund digital tools, training resources, and outreach  
+d. Infrastructure Development: Help build safe spaces, help desks, and training hubs  
+
+5. Employee Engagement Channels  
+a. Volunteering Programs: Engage in mentorship, training, awareness, storytelling  
+b. Skill-Based Engagement: Provide legal, HR, marketing, IT support pro bono  
+c. Fundraising & Advocacy: Organize internal drives and awareness weeks  
+d. Field Visits: Participate in on-ground programs  
+
+6. Roles and Responsibilities  
+Foundation:  
+- Provide orientation and resources  
+- Share updates and impact reports  
+- Maintain transparency and CSR compliance  
+
+Corporate Partners:  
+- Appoint CSR liaison  
+- Ensure employee alignment with values  
+- Uphold beneficiary dignity and confidentiality  
+
+7. Impact Measurement  
+- Define KPIs collaboratively  
+- Quarterly/bi-annual reporting  
+- Annual impact reports shared  
+
+8. Ethics and Conduct  
+- Respect diversity and inclusion  
+- Zero tolerance for discrimination or harassment  
+- Adherence to local laws and ethics  
+
+9. Termination  
+Either party may end partnership with 30 days' notice for:  
+- Policy breaches  
+- Misaligned goals or values  
+
+10. Contact  
+CSR & Partnerships Desk  
+📧 chairman@wecanvoiceforwomen.org  
+📞 +91-9840584463  
+🌐 www.wecanvoiceforwomen.org
+  `.trim(),
+}
+
+
 };
