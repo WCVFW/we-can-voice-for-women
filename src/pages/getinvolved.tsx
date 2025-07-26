@@ -108,7 +108,7 @@ export default function GetInvolved() {
     formData.append("aadhaarNumber", aadhaarNumber);
     formData.append("interest", selectedInterest);
 
-    if (selectedInterest === "Partners") {
+    if (selectedInterest === "partners") {
       formData.append("partnerType", selectedPartnership);
     } else {
       formData.append("roleAppliedFor", selectedRole);
@@ -229,7 +229,7 @@ export default function GetInvolved() {
                       <SelectItem value="career">Career</SelectItem>
                       <SelectItem value="internship">Internship</SelectItem>
                       <SelectItem value="volunteer">Volunteer</SelectItem>
-                      <SelectItem value="partners">Partners</SelectItem>
+                      <SelectItem value="partners">Partners</SelectItem> ✅
                     </SelectContent>
                   </Select>
 
@@ -286,22 +286,33 @@ export default function GetInvolved() {
                   </>
                 )}
 
-                {(selectedInterest === "Partners") && (
-                  <div>
-                    <RequiredLabel>Type of Partners</RequiredLabel>
-                    <Select required onValueChange={setSelectedPartnership}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="csr-partners">CSR Partners</SelectItem>
-                        <SelectItem value="event-partners">Event Partners</SelectItem>
-                        <SelectItem value="ngo-partners">NGO Partners</SelectItem>
-                        <SelectItem value="education-partners">Education Partners</SelectItem>
-                        <SelectItem value="entrepreneurship-partners">Entrepreneurship Partners</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                {(selectedInterest === "partners") && (
+                  <>
+                    <div>
+                      <RequiredLabel>Type of Partners</RequiredLabel>
+                      <Select required onValueChange={setSelectedPartnership}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="csr-partners">CSR Partners</SelectItem>
+                          <SelectItem value="event-partners">Event Partners</SelectItem>
+                          <SelectItem value="ngo-partners">NGO Partners</SelectItem>
+                          <SelectItem value="education-partners">Education Partners</SelectItem>
+                          <SelectItem value="entrepreneurship-partners">Entrepreneurship Partners</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => openPolicy(selectedInterest)}
+                      className="gap-2 text-pink-600 border-pink-400"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Read {selectedInterest} Policy
+                    </Button>
+                  </>
                 )}
 
                 <Button
