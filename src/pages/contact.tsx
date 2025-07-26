@@ -41,7 +41,7 @@ export default function Contact() {
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-pink-600 mb-4">Contact Us</h1>
           <p className="text-gray-700 text-base sm:text-lg max-w-2xl mx-auto">
-            Whether you're looking to volunteer, collaborate, or just say hello — we’d love to hear from you.
+            Whether you're looking to volunteer, collaborate, or just say hello <br />We’d love to hear from you.
           </p>
         </div>
 
