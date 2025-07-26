@@ -28,7 +28,7 @@ const getInvolvedLinks: [string, string][] = [
   ['Volunteer', '/GetInvolved'],
   ['Internship', '/GetInvolved'],
   ['Career', '/GetInvolved'],
-  ['Partner', '/GetInvolved'],
+  ['Partners', '/GetInvolved'],
 ];
 
 const mediaLinks: [string, string][] = [
