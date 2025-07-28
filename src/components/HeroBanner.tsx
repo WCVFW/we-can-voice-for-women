@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const scrollContent = [
-  "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
-  "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
+  // "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
+  // "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
   
 ];
 
