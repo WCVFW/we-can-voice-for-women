@@ -1,15 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const scrollContent = [
-  // "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
-  // "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th july 2025",
-  
+  // "Upcoming Event: General Medical Camp at Goonipalayam Village, Thiruvallur District on 27th July 2025",
+  // "Women Empowerment Workshop – Chennai, 10th August 2025",
+  // "Skill Training Camp – Coimbatore, 15th August 2025",
+];
+
+const images = [
+  "/assets/images/untitled-529.jpeg",
+  "/assets/images/hero2.jpg",
+  "/assets/images/hero3.jpg",
 ];
 
 const HeroBanner = () => {
   const scrollContainerRef = useRef(null);
-  const [bgColor, setBgColor] = useState("#ffe3ee"); // Dynamic background for gradient
+  const [bgColor, setBgColor] = useState("#ffe3ee");
+  const [currentImage, setCurrentImage] = useState(0);
 
+  // Auto-slide background images every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 15000); // 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-scroll ticker
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     let scrollAmount = 0;
@@ -24,7 +41,7 @@ const HeroBanner = () => {
       }
     };
 
-    const interval = setInterval(scroll, 20); // Adjust for speed
+    const interval = setInterval(scroll, 20);
     return () => clearInterval(interval);
   }, []);
 
@@ -33,24 +50,15 @@ const HeroBanner = () => {
   return (
     <>
       {/* --- HERO BANNER SECTION --- */}
-      <div className="relative w-full overflow-hidden pt-[94px] h-screen">
-        {/* Background Image */}
+      <div className="relative w-full overflow-hidden pt-[94px] h-screen transition-all duration-1000">
+        {/* Background Image with fade transition */}
         <img
-          src="/assets/images/untitled-529.jpeg"
+          src={images[currentImage]}
           alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          className="absolute top-10 left-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
+          key={currentImage}
         />
 
-        {/* Color Picker */}
-        <div className="absolute top-5 right-5 z-30 bg-white p-2 rounded shadow">
-          <label className="text-sm font-medium">Pick Background Color: </label>
-          <input
-            type="color"
-            value={bgColor}
-            onChange={(e) => setBgColor(e.target.value)}
-            className="ml-2"
-          />
-        </div>
 
         {/* Gradient Overlay */}
         <div
@@ -90,22 +98,6 @@ const HeroBanner = () => {
           ))}
         </div>
       </div>
-
-      {/* --- Animation Styles --- */}
-      <style>{`
-        @keyframes horizontal-scroll {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .animate-horizontal-scroll {
-          animation: horizontal-scroll 60s linear infinite;
-        }
-      `}</style>
     </>
   );
 };
