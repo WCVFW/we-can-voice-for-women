@@ -55,10 +55,10 @@ const HeroBanner = () => {
         <img
           src={images[currentImage]}
           alt="Hero Background"
+          loading="eager"
           className="absolute top-10 left-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
           key={currentImage}
         />
-
 
         {/* Gradient Overlay */}
         <div
