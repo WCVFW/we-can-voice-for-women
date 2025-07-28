@@ -64,6 +64,11 @@ export default function MediaPage() {
       cover: "/assets/images/ca/ca3.jpg",
       images: ["/assets/images/ca/ca1.jpg", "/assets/images/ca/ca2.jpg", "/assets/images/ca/ca3.jpg", "/assets/images/ca/ca4.jpg", "/assets/images/ca/ca5.jpg", "/assets/images/ca/ca6.jpg"],
     },
+    {
+      title: "General Medical Camp",
+      cover: "/assets/images/medicalcampu/0T5A8465.JPG",
+      images: ["/assets/images/medicalcampu/0T5A8255.JPG","/assets/images/medicalcampu/0T5A8291.JPG","/assets/images/medicalcampu/0T5A8292.JPG","/assets/images/medicalcampu/0T5A8297.JPG","/assets/images/medicalcampu/0T5A8347.JPG","/assets/images/medicalcampu/0T5A8348.JPG","/assets/images/medicalcampu/0T5A8390.JPG","/assets/images/medicalcampu/0T5A8425.JPG","/assets/images/medicalcampu/0T5A8441.JPG","/assets/images/medicalcampu/0T5A8445.JPG","/assets/images/medicalcampu/0T5A8465.JPG","/assets/images/medicalcampu/0T5A8472.JPG","/assets/images/medicalcampu/0T5A8480.JPG","/assets/images/medicalcampu/0T5A8483.JPG","/assets/images/medicalcampu/0T5A8507.JPG","/assets/images/medicalcampu/0T5A8518.JPG","/assets/images/medicalcampu/0T5A8529.JPG","/assets/images/medicalcampu/0T5A8627.JPG","/assets/images/medicalcampu/0T5A8698.JPG"],
+    },
   ]);
 
   const [selectedAlbumIndex, setSelectedAlbumIndex] = useState<number | null>(null);
