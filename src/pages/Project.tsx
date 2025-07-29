@@ -60,10 +60,31 @@ const projects = [
 
   {
     id: 3,
-    name: '',
-    image: '/assets/images/project-3.jpg',
-    content: '',
-  },
+    name: 'Upskill Young Skill',
+    image: '/assets/images/project3.jpg',
+    content: `
+    <div>
+      <p>
+        <strong>We Can Voice for Women Foundation</strong> is excited to announce the launch of <strong>Upskill Young Skill</strong>, a Skill Development Centre located in Goonipalayam Village, Thiruvallur District. This centre aims to empower children and women by providing accessible training and opportunities.
+      </p>
+
+      <img src="/assets/images/project3.jpg" alt="Upskill Young Skill Centre" class="my-6 rounded-lg shadow-md w-full h-64 object-cover" />
+
+      <p>
+        The centre focuses on nurturing children's creativity, communication, and problem-solving skills. Simultaneously, it offers women vocational training, entrepreneurship guidance, financial literacy, and essential life skills necessary for self-reliance.
+      </p>
+
+      <p>
+        This initiative creates a safe and inclusive environment where individuals can build confidence, improve their livelihoods, and contribute to community development.
+      </p>
+
+      <p>
+        Ultimately, it strives to create a skilled, confident, and empowered society.
+      </p>
+    </div>
+  `,
+  }
+
 ];
 
 
@@ -88,11 +109,11 @@ export default function ProjectPage() {
                       className="cursor-pointer flex flex-col items-center text-center p-4 bg-white rounded-2xl transition-shadow duration-300 w-full sm:w-[45%] lg:w-[30%] max-w-[320px] hover:shadow-lg"
                       onClick={() => setSelectedProject(project)}
                     >
-                      <div className="w-full aspect-square mb-4 overflow-hidden rounded-lg">
+                      <div className="w-full h-60 mb-4 overflow-hidden rounded-lg bg-gray-100">
                         <img
                           src={project.image}
                           alt={project.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-center"
                         />
                       </div>
                       <h3 className="text-xl font-semibold text-pink-700">{project.name}</h3>
