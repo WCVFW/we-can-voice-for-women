@@ -15,7 +15,7 @@ export default function Enhealthment() {
         {/* Image Placeholder */}
         <div className="w-full lg:w-1/2">
           <img
-            src="assets/images/ca/ca2.jpg"
+            src="assets/images/enhealth2.JPG"
             alt="Empowered women receiving medical care"
             className="rounded-md shadow-md w-full h-auto"
           />
