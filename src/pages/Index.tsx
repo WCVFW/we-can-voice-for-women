@@ -45,7 +45,7 @@ export default function Home() {
       description: 'A healthy woman embodies vitality. We provide essential medical support to underserved women, ensuring they thrive.',
       colorClass: 'text-white-600',
       href: '/Enhealthment',
-      image: 'assets/images/Enhealthment.jpg',
+      image: 'assets/images/enhealth1.JPG',
  
     },
     {
