@@ -73,7 +73,7 @@ const projects = [
       <p>
         The centre focuses on nurturing children's creativity, communication, and problem-solving skills. Simultaneously, it offers women vocational training, entrepreneurship guidance, financial literacy, and essential life skills necessary for self-reliance.
       </p>
-
+      <br>
       <p>
         This initiative creates a safe and inclusive environment where individuals can build confidence, improve their livelihoods, and contribute to community development.
       </p>
