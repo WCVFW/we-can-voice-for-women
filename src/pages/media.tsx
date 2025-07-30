@@ -55,6 +55,11 @@ export default function MediaPage() {
       images: ["/assets/images/cl/c1.jpg", "/assets/images/cl/c2.jpg", "/assets/images/cl/c3.jpg", "/assets/images/cl/c4.jpg", "/assets/images/cl/c5.jpg", "/assets/images/cl/c6.jpg", "/assets/images/cl/c7.jpg", "/assets/images/cl/c8.jpg", "/assets/images/cl/c9.jpg", "/assets/images/cl/c10.jpg", "/assets/images/cl/c11.jpg", "/assets/images/cl/c12.jpg", "/assets/images/cl/c13.jpg", "/assets/images/cl/c14.jpg", "/assets/images/cl/c15.jpg", "/assets/images/cl/c16.jpg", "/assets/images/cl/c17.jpg", "/assets/images/cl/c18.jpg", "/assets/images/cl/c19.jpg", "/assets/images/cl/c20.jpg", "/assets/images/cl/c21.jpg", "/assets/images/cl/c22.jpg", "/assets/images/cl/c23.jpg", "/assets/images/cl/c24.jpg", "/assets/images/cl/c25.jpg", "/assets/images/cl/c26.jpg"]
     },
     {
+      title: "Kerala Flood Donation",
+      cover: "/assets/images/keraladonation/Kerala Flood help 2.jpg",
+      images: ["/assets/images/keraladonation/Kerala Flood help 2.jpg", "/assets/images/keraladonation/Kerala Flood help 1.jpg", "/assets/images/keraladonation/Kerala Flood help 3.jpg"]
+    },
+    {
       title: "Manvaasanai-Pongal Festivel",
       cover: "/assets/images/mi/mi12.jpg",
       images: ["/assets/images/mi/mi1.jpg", "/assets/images/mi/mi2.jpg", "/assets/images/mi/mi3.jpg", "/assets/images/mi/mi4.jpg", "/assets/images/mi/mi5.jpg", "/assets/images/mi/mi6.jpg", "/assets/images/mi/mi7.jpg", "/assets/images/mi/mi8.jpg", "/assets/images/mi/mi9.jpg", "/assets/images/mi/mi10.jpg", "/assets/images/mi/mi11.jpg", "/assets/images/mi/mi12.jpg",],
@@ -73,6 +78,11 @@ export default function MediaPage() {
       title: "General Medical Camp",
       cover: "/assets/images/medicalcampu/0T5A8347.JPG",
       images: ["/assets/images/medicalcampu/0T5A8255.JPG","/assets/images/medicalcampu/0T5A8347.JPG","/assets/images/medicalcampu/0T5A8348.JPG","/assets/images/medicalcampu/0T5A8390.JPG","/assets/images/medicalcampu/0T5A8425.JPG","/assets/images/medicalcampu/0T5A8441.JPG","/assets/images/medicalcampu/0T5A8445.JPG","/assets/images/medicalcampu/0T5A8465.JPG","/assets/images/medicalcampu/0T5A8472.JPG","/assets/images/medicalcampu/0T5A8480.JPG","/assets/images/medicalcampu/0T5A8483.JPG","/assets/images/medicalcampu/0T5A8507.JPG","/assets/images/medicalcampu/0T5A8529.JPG","/assets/images/medicalcampu/0T5A8627.JPG","/assets/images/medicalcampu/0T5A8698.JPG"],
+    },
+    {
+      title: "Upliftment Support",
+      cover: "/assets/images/upliftment/up3.jpeg",
+      images: ["/assets/images/upliftment/up1.jpg", "/assets/images/upliftment/up3.jpeg" ,"/assets/images/upliftment/up2.jpg"]
     },
   ]);
 
