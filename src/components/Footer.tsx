@@ -32,12 +32,12 @@ const getInvolvedLinks: [string, string][] = [
 ];
 
 const mediaLinks: [string, string][] = [
-  ['Video', '/Media'],
-  ['Images', '/Media'],
-  ['Magazine', '/Media'],
-  ['Blog', '/Media'],
-  ['Press', '/Media'],
-  ['Podcast', '/Media'],
+  ['Video', '/Media?type=video'],
+  ['Images', '/Media?type=images'],
+  ['Magazine', '/Media?type=magazine'],
+  ['Blog', '/Media?type=blog'],
+  ['Press', '/Media?type=press'],
+  ['Podcast', '/Media?type=podcast'],
 ];
 
 const policyLinks: [string, string][] = [
