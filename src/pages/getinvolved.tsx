@@ -229,7 +229,7 @@ export default function GetInvolved() {
                       <SelectItem value="career">Career</SelectItem>
                       <SelectItem value="internship">Internship</SelectItem>
                       <SelectItem value="volunteer">Volunteer</SelectItem>
-                      <SelectItem value="partners">Partners</SelectItem> ✅
+                      <SelectItem value="partners">Partners</SelectItem> 
                     </SelectContent>
                   </Select>
 
