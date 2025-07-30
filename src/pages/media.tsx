@@ -17,22 +17,27 @@ function convertToEmbedUrlFromId(videoId: string): string {
 
 export default function MediaPage() {
   const [searchParams] = useSearchParams();
-  const filterParam = searchParams.get("filter")?.toLowerCase() ?? "video";
+  const navigate = useNavigate();
 
+  const typeParam = searchParams.get("type")?.toLowerCase() ?? "video";
   const [filter, setFilter] = useState<
     "video" | "images" | "magazine" | "blog" | "press" | "podcast"
-  >(filterParam as any);
+  >(typeParam as any);
 
   const [playingVideoItem, setPlayingVideoItem] = useState<{
     id: string;
     title: string;
   } | null>(null);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    const param = searchParams.get("filter")?.toLowerCase() ?? "video";
-    setFilter(param as any);
+    const type = searchParams.get("type")?.toLowerCase() ?? "video";
+    if (type !== filter) {
+      setFilter(type as any);
+      setPlayingVideoItem(null);
+      setSliderIndex(null);
+      setSelectedAlbumIndex(null);
+      setCurrentPage(1);
+    }
   }, [searchParams]);
 
   const { videos, error } = useYouTubeVideos(30);
@@ -88,7 +93,6 @@ export default function MediaPage() {
     ["press", "Press"],
     ["podcast", "Podcast"],
   ] as const;
-
   return (
     <div className="min-h-screen bg-white px-4 pt-28 pb-8 max-w-7xl mx-auto">
       {/* Filter Tabs */}
@@ -109,7 +113,7 @@ export default function MediaPage() {
               setSliderIndex(null);
               setSelectedAlbumIndex(null);
               setCurrentPage(1);
-              navigate(`?filter=${id}`);
+              navigate(`?type=${id}`);
               window.scrollTo(0, 0);
             }}
           >
