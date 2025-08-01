@@ -41,7 +41,7 @@ const events: Event[] = [
       📍 <strong>Location:</strong> Goonipalayam Village<br/>
       📅 <strong>Date:</strong> 27th July 2025<br/>
       🕘 <strong>Time:</strong> 9:00 AM to 1:00 PM<br/><br/>
-      🙌 Let’s come together to support this village and make healthcare accessible to all.
+      🙌 Event Completed.
     `,
     image: 'assets/images/event1.jpg',
   },
