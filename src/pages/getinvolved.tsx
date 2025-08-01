@@ -229,7 +229,7 @@ export default function GetInvolved() {
                       <SelectItem value="career">Career</SelectItem>
                       <SelectItem value="internship">Internship</SelectItem>
                       <SelectItem value="volunteer">Volunteer</SelectItem>
-                      <SelectItem value="partners">Partners</SelectItem> 
+                      <SelectItem value="partners">Partners</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -286,7 +286,7 @@ export default function GetInvolved() {
                   </>
                 )}
 
-                {(selectedInterest === "partners") && (
+                {selectedInterest === "partners" && (
                   <>
                     <div>
                       <RequiredLabel>Type of Partners</RequiredLabel>
@@ -303,17 +303,39 @@ export default function GetInvolved() {
                         </SelectContent>
                       </Select>
                     </div>
+                    <div className="mb-4">
+                      <RequiredLabel>Organization Name</RequiredLabel>
+                      <input
+                        type="text"
+                        name="organizationName"
+                        required
+                        // placeholder="Enter organization name"
+                        className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <RequiredLabel>Location</RequiredLabel>
+                      <input
+                        type="text"
+                        name="location"
+                        required
+                        // placeholder="Enter location"
+                        className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                    </div>
                     <Button
                       type="button"
                       variant="outline"
                       onClick={() => openPolicy(selectedInterest)}
-                      className="gap-2 text-pink-600 border-pink-400"
+                      className="gap-2 text-pink-600 border-pink-400 mt-4"
                     >
                       <FileText className="w-4 h-4" />
                       Read {selectedInterest} Policy
                     </Button>
                   </>
                 )}
+
 
                 <Button
                   type="submit"
