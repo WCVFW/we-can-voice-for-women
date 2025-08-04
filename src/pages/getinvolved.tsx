@@ -35,6 +35,8 @@ export default function GetInvolved() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
+  const [organizationLocation, setOrganizationLocation] = useState("");
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [selectedInterest, setSelectedInterest] = useState("");
   const [selectedPartnership, setSelectedPartnership] = useState("");
@@ -110,6 +112,8 @@ export default function GetInvolved() {
 
     if (selectedInterest === "partners") {
       formData.append("partnerType", selectedPartnership);
+      formData.append("organizationName", organizationName);
+      formData.append("organizationLocation", organizationLocation);
     } else {
       formData.append("roleAppliedFor", selectedRole);
       if (cvFile) formData.append("cv", cvFile);
@@ -311,6 +315,7 @@ export default function GetInvolved() {
                         required
                         // placeholder="Enter organization name"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        value={organizationName} onChange={(e) => setOrganizationName(e.target.value)}
                       />
                     </div>
 
@@ -318,10 +323,11 @@ export default function GetInvolved() {
                       <RequiredLabel>Location</RequiredLabel>
                       <input
                         type="text"
-                        name="location"
+                        name="organizationLocation"
                         required
                         // placeholder="Enter location"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        value={organizationLocation} onChange={(e) => setOrganizationLocation(e.target.value)}
                       />
                     </div>
                     <Button
