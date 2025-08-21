@@ -67,6 +67,13 @@ const EnhancedAdminDashboard: React.FC = () => {
     }
   });
 
+  // Form states for quick edits
+  const [quickEdits, setQuickEdits] = useState({
+    siteTitle: 'We Can Voice For Women',
+    siteTagline: 'Empowering Women Through Voice',
+    heroBannerText: 'Join us in our mission to empower women...'
+  });
+
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     const path = value === 'overview' ? '/admin' : `/admin/${value}`;
@@ -235,15 +242,24 @@ const EnhancedAdminDashboard: React.FC = () => {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>Site Title</Label>
-                  <Input defaultValue="We Can Voice For Women" />
+                  <Input
+                    value={quickEdits.siteTitle}
+                    onChange={(e) => setQuickEdits({...quickEdits, siteTitle: e.target.value})}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Site Tagline</Label>
-                  <Input defaultValue="Empowering Women Through Voice" />
+                  <Input
+                    value={quickEdits.siteTagline}
+                    onChange={(e) => setQuickEdits({...quickEdits, siteTagline: e.target.value})}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Hero Banner Text</Label>
-                  <Textarea defaultValue="Join us in our mission to empower women..." />
+                  <Textarea
+                    value={quickEdits.heroBannerText}
+                    onChange={(e) => setQuickEdits({...quickEdits, heroBannerText: e.target.value})}
+                  />
                 </div>
                 <Button size="sm">Update Text</Button>
               </CardContent>
@@ -258,8 +274,23 @@ const EnhancedAdminDashboard: React.FC = () => {
                 <div className="space-y-2">
                   <Label>Primary Color</Label>
                   <div className="flex items-center space-x-2">
-                    <Input type="color" value="#e53888" className="w-16 h-10" />
-                    <Input value="#e53888" className="flex-1" />
+                    <Input
+                      type="color"
+                      value={siteConfig.theme.primaryColor}
+                      onChange={(e) => setSiteConfig({
+                        ...siteConfig,
+                        theme: {...siteConfig.theme, primaryColor: e.target.value}
+                      })}
+                      className="w-16 h-10"
+                    />
+                    <Input
+                      value={siteConfig.theme.primaryColor}
+                      onChange={(e) => setSiteConfig({
+                        ...siteConfig,
+                        theme: {...siteConfig.theme, primaryColor: e.target.value}
+                      })}
+                      className="flex-1"
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
