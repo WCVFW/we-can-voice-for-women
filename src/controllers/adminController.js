@@ -1,20 +1,25 @@
-import pool from '../config/database.js';
+import { executeQuery } from '../config/sqlite-database.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
 
-// Utility function for database queries
-const executeQuery = async (query, params = []) => {
-  const connection = await pool.getConnection();
+// Wrapper for database queries to handle SQLite vs MySQL differences
+const queryDatabase = async (query, params = []) => {
   try {
-    const [results] = await connection.execute(query, params);
-    return results;
+    // SQLite uses different result format
+    const result = executeQuery(query, params);
+
+    // Handle SELECT queries (return array)
+    if (query.trim().toLowerCase().startsWith('select')) {
+      return Array.isArray(result) ? result : [result];
+    }
+
+    // Handle INSERT/UPDATE/DELETE queries
+    return result;
   } catch (error) {
     console.error('Database query error:', error);
     throw error;
-  } finally {
-    connection.release();
   }
 };
 
@@ -61,14 +66,15 @@ export const userController = {
       query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
       params.push(parseInt(limit), parseInt(offset));
       
-      const users = await executeQuery(query, params);
-      const totalQuery = 'SELECT COUNT(*) as total FROM users WHERE 1=1' + 
-        (role ? ' AND role = ?' : '') + 
+      const users = await queryDatabase(query, params);
+      const totalQuery = 'SELECT COUNT(*) as total FROM users WHERE 1=1' +
+        (role ? ' AND role = ?' : '') +
         (status ? ' AND status = ?' : '') +
         (search ? ' AND (name LIKE ? OR email LIKE ?)' : '');
-      
+
       const countParams = params.slice(0, -2); // Remove limit and offset
-      const [{ total }] = await executeQuery(totalQuery, countParams);
+      const totalResult = await queryDatabase(totalQuery, countParams);
+      const total = totalResult[0]?.total || 0;
       
       res.json({
         success: true,
