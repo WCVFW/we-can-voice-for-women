@@ -73,7 +73,7 @@ const upload = multer({
   }
 });
 
-// Upload endpoints
+// Legacy upload endpoint for backward compatibility
 app.post('/api/upload', upload.single('file'), (req, res) => {
   try {
     if (!req.file) {
@@ -93,164 +93,6 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   } catch (error) {
     console.error('Upload error:', error);
     res.status(500).json({ error: 'Upload failed' });
-  }
-});
-
-// Multiple files upload
-app.post('/api/upload-multiple', upload.array('files', 10), (req, res) => {
-  try {
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'No files uploaded' });
-    }
-
-    const uploadedFiles = req.files.map(file => ({
-      fileUrl: `/media/${file.filename}`,
-      filename: file.filename,
-      originalName: file.originalname,
-      size: file.size,
-      mimeType: file.mimetype
-    }));
-
-    res.json({
-      success: true,
-      files: uploadedFiles,
-      count: uploadedFiles.length
-    });
-  } catch (error) {
-    console.error('Multiple upload error:', error);
-    res.status(500).json({ error: 'Upload failed' });
-  }
-});
-
-// Delete file endpoint
-app.delete('/api/media/:filename', (req, res) => {
-  try {
-    const filename = req.params.filename;
-    const filePath = path.join(uploadDir, filename);
-
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-      res.json({ success: true, message: 'File deleted successfully' });
-    } else {
-      res.status(404).json({ error: 'File not found' });
-    }
-  } catch (error) {
-    console.error('Delete error:', error);
-    res.status(500).json({ error: 'Failed to delete file' });
-  }
-});
-
-// Admin data persistence endpoints
-const dataDir = path.join(__dirname, 'data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-
-// Save admin data
-app.post('/api/admin/save', (req, res) => {
-  try {
-    const { type, data } = req.body;
-    const filePath = path.join(dataDir, `${type}.json`);
-
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    res.json({ success: true, message: `${type} data saved successfully` });
-  } catch (error) {
-    console.error('Save error:', error);
-    res.status(500).json({ error: 'Failed to save data' });
-  }
-});
-
-// Load admin data
-app.get('/api/admin/load/:type', (req, res) => {
-  try {
-    const { type } = req.params;
-    const filePath = path.join(dataDir, `${type}.json`);
-
-    if (fs.existsSync(filePath)) {
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-      res.json({ success: true, data });
-    } else {
-      res.json({ success: true, data: [] });
-    }
-  } catch (error) {
-    console.error('Load error:', error);
-    res.status(500).json({ error: 'Failed to load data' });
-  }
-});
-
-// Publish changes
-app.post('/api/admin/publish', (req, res) => {
-  try {
-    // Here you would typically:
-    // 1. Validate all data
-    // 2. Generate static files
-    // 3. Deploy to production
-    // 4. Clear caches
-    // For now, we'll just simulate the process
-
-    const publishLog = {
-      timestamp: new Date().toISOString(),
-      status: 'success',
-      message: 'All changes published successfully'
-    };
-
-    const logPath = path.join(dataDir, 'publish_log.json');
-    let logs = [];
-
-    if (fs.existsSync(logPath)) {
-      logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
-    }
-
-    logs.push(publishLog);
-
-    // Keep only last 50 logs
-    if (logs.length > 50) {
-      logs = logs.slice(-50);
-    }
-
-    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
-
-    res.json({ success: true, message: 'Changes published successfully', publishLog });
-  } catch (error) {
-    console.error('Publish error:', error);
-    res.status(500).json({ error: 'Failed to publish changes' });
-  }
-});
-
-// Get admin statistics
-app.get('/api/admin/stats', (req, res) => {
-  try {
-    const stats = {
-      totalContent: 0,
-      totalEvents: 0,
-      totalDonations: 0,
-      totalUsers: 0,
-      totalAlbums: 0,
-      recentActivity: []
-    };
-
-    // Count data from files
-    const dataTypes = ['content', 'events', 'donations', 'users', 'albums'];
-
-    dataTypes.forEach(type => {
-      const filePath = path.join(dataDir, `${type}.json`);
-      if (fs.existsSync(filePath)) {
-        const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        stats[`total${type.charAt(0).toUpperCase() + type.slice(1)}`] = Array.isArray(data) ? data.length : 0;
-      }
-    });
-
-    // Get recent activity from publish logs
-    const logPath = path.join(dataDir, 'publish_log.json');
-    if (fs.existsSync(logPath)) {
-      const logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
-      stats.recentActivity = logs.slice(-10).reverse();
-    }
-
-    res.json({ success: true, stats });
-  } catch (error) {
-    console.error('Stats error:', error);
-    res.status(500).json({ error: 'Failed to get statistics' });
   }
 });
 
@@ -293,6 +135,8 @@ app.post("/api/contact", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Media files served from: ${uploadDir}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Media files served from: ${uploadDir}`);
+  console.log(`✅ Admin API available at: http://localhost:${PORT}/api/admin`);
+  console.log(`✅ Database: MySQL with full CRUD operations`);
 });
