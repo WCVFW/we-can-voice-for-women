@@ -1,10 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-const nodemailer = require("nodemailer");
-const path = require("path");
-const fs = require("fs");
-const multer = require("multer");
-require("dotenv").config();
+import express from 'express';
+import cors from 'cors';
+import nodemailer from 'nodemailer';
+import path from 'path';
+import fs from 'fs';
+import multer from 'multer';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import dotenv from 'dotenv';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
