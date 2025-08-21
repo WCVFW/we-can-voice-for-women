@@ -448,29 +448,65 @@ const EnhancedAdminDashboard: React.FC = () => {
                     <div className="space-y-2">
                       <Label>Primary Color</Label>
                       <div className="flex items-center space-x-2">
-                        <Input type="color" value="#e53888" className="w-12 h-10" />
-                        <Input value="#e53888" />
+                        <Input
+                          type="color"
+                          value={siteConfig.theme.primaryColor}
+                          onChange={(e) => setSiteConfig({
+                            ...siteConfig,
+                            theme: {...siteConfig.theme, primaryColor: e.target.value}
+                          })}
+                          className="w-12 h-10"
+                        />
+                        <Input
+                          value={siteConfig.theme.primaryColor}
+                          onChange={(e) => setSiteConfig({
+                            ...siteConfig,
+                            theme: {...siteConfig.theme, primaryColor: e.target.value}
+                          })}
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label>Secondary Color</Label>
                       <div className="flex items-center space-x-2">
-                        <Input type="color" value="#fde3ec" className="w-12 h-10" />
-                        <Input value="#fde3ec" />
+                        <Input
+                          type="color"
+                          value={siteConfig.theme.secondaryColor}
+                          onChange={(e) => setSiteConfig({
+                            ...siteConfig,
+                            theme: {...siteConfig.theme, secondaryColor: e.target.value}
+                          })}
+                          className="w-12 h-10"
+                        />
+                        <Input
+                          value={siteConfig.theme.secondaryColor}
+                          onChange={(e) => setSiteConfig({
+                            ...siteConfig,
+                            theme: {...siteConfig.theme, secondaryColor: e.target.value}
+                          })}
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label>Accent Color</Label>
                       <div className="flex items-center space-x-2">
-                        <Input type="color" value="#3b82f6" className="w-12 h-10" />
-                        <Input value="#3b82f6" />
+                        <Input
+                          type="color"
+                          defaultValue="#3b82f6"
+                          className="w-12 h-10"
+                        />
+                        <Input defaultValue="#3b82f6" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label>Background Color</Label>
                       <div className="flex items-center space-x-2">
-                        <Input type="color" value="#ffffff" className="w-12 h-10" />
-                        <Input value="#ffffff" />
+                        <Input
+                          type="color"
+                          defaultValue="#ffffff"
+                          className="w-12 h-10"
+                        />
+                        <Input defaultValue="#ffffff" />
                       </div>
                     </div>
                   </div>
