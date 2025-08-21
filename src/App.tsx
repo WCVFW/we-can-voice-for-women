@@ -123,13 +123,20 @@ const App = () => {
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>
 
-                {/* Admin Dashboard (with Admin Layout) */}
+                {/* Admin Routes */}
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminDashboard />} />
+                  <Route path="content" element={<AdminDashboard />} />
+                  <Route path="media" element={<AdminDashboard />} />
+                  <Route path="events" element={<AdminDashboard />} />
+                  <Route path="donations" element={<AdminDashboard />} />
+                  <Route path="users" element={<AdminDashboard />} />
+                  <Route path="about" element={<AdminDashboard />} />
+                  <Route path="settings" element={<AdminDashboard />} />
                 </Route>
 
                 {/* Admin Login (no layout) */}
-                <Route path="login" element={<AdminLogin />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
                 {/* 404 Not Found */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
