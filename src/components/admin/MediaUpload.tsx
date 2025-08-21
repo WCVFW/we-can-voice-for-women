@@ -39,7 +39,7 @@ const MediaUpload: React.FC<MediaUploadProps> = ({
       // Check file size
       const oversizedFiles = newFiles.filter(file => file.size > maxFileSize * 1024 * 1024);
       if (oversizedFiles.length > 0) {
-        toast.error(`Some files exceed the maximum size of ₹{maxFileSize}MB`);
+        toast.error(`Some files exceed the maximum size of ${maxFileSize}MB`);
         return;
       }
       
@@ -60,42 +60,71 @@ const MediaUpload: React.FC<MediaUploadProps> = ({
     return <ImagePlus className="h-5 w-5" />;
   };
 
+  const uploadToServer = async (file: File): Promise<any> => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Upload failed');
+    }
+
+    return response.json();
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     if (files.length === 0) {
       toast.error('Please select at least one file to upload');
       return;
     }
 
     setUploading(true);
-    
-    // Simulate upload process
-    for (let i = 0; i <= 100; i += 10) {
-      setProgress(i);
-      await new Promise(resolve => setTimeout(resolve, 200));
-    }
+    setProgress(0);
 
-    // Here you would typically upload to your backend/storage
     try {
-      const uploadedMedia = files.map(file => ({
-        id: Math.random().toString(36).substr(2, 9),
-        title: title || file.name,
-        description,
-        url: URL.createObjectURL(file),
-        type: file.type,
-        size: file.size,
-        uploadedAt: new Date().toISOString()
-      }));
-      
-      onUploadComplete?.(uploadedMedia);
-      toast.success(`₹{files.length} file(s) uploaded successfully!`);
-      
-      // Reset form
-      setFiles([]);
-      setTitle('');
-      setDescription('');
+      const uploadedMedia = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        setProgress(((i + 1) / files.length) * 100);
+
+        try {
+          const result = await uploadToServer(file);
+
+          uploadedMedia.push({
+            id: Math.random().toString(36).substr(2, 9),
+            title: title || file.name,
+            description,
+            url: result.fileUrl,
+            type: file.type,
+            size: file.size,
+            uploadedAt: new Date().toISOString(),
+            filename: result.filename,
+            originalName: result.originalName
+          });
+        } catch (error) {
+          console.error(`Failed to upload ${file.name}:`, error);
+          toast.error(`Failed to upload ${file.name}`);
+        }
+      }
+
+      if (uploadedMedia.length > 0) {
+        onUploadComplete?.(uploadedMedia);
+        toast.success(`${uploadedMedia.length} file(s) uploaded successfully!`);
+
+        // Reset form
+        setFiles([]);
+        setTitle('');
+        setDescription('');
+      }
     } catch (error) {
+      console.error('Upload error:', error);
       toast.error('Failed to upload files. Please try again.');
     } finally {
       setUploading(false);
