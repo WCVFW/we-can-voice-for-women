@@ -12,6 +12,7 @@ import MainLayout from '@/layouts/MainLayout';
 import AdminLayout from '@/layouts/AdminLayout';
 
 import AdminDashboard from '@/pages/admin/Dashboard';
+import EnhancedAdminDashboard from '@/pages/admin/EnhancedDashboard';
 import AdminLogin from '@/pages/admin/Login';
 import NotFound from '@/pages/NotFound';
 
@@ -123,13 +124,30 @@ const App = () => {
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>
 
-                {/* Admin Dashboard (with Admin Layout) */}
+                {/* Admin Routes */}
                 <Route path="/admin" element={<AdminLayout />}>
-                  <Route index element={<AdminDashboard />} />
+                  <Route index element={<EnhancedAdminDashboard />} />
+                  <Route path="overview" element={<EnhancedAdminDashboard />} />
+                  <Route path="content" element={<EnhancedAdminDashboard />} />
+                  <Route path="pages" element={<EnhancedAdminDashboard />} />
+                  <Route path="design" element={<EnhancedAdminDashboard />} />
+                  <Route path="components" element={<EnhancedAdminDashboard />} />
+                  <Route path="menus" element={<EnhancedAdminDashboard />} />
+                  <Route path="media" element={<EnhancedAdminDashboard />} />
+                  <Route path="forms" element={<EnhancedAdminDashboard />} />
+                  <Route path="seo" element={<EnhancedAdminDashboard />} />
+                  <Route path="code" element={<EnhancedAdminDashboard />} />
+                  <Route path="database" element={<EnhancedAdminDashboard />} />
+                  <Route path="advanced" element={<EnhancedAdminDashboard />} />
+                  <Route path="events" element={<AdminDashboard />} />
+                  <Route path="donations" element={<AdminDashboard />} />
+                  <Route path="users" element={<AdminDashboard />} />
+                  <Route path="about" element={<AdminDashboard />} />
+                  <Route path="settings" element={<AdminDashboard />} />
                 </Route>
 
                 {/* Admin Login (no layout) */}
-                <Route path="login" element={<AdminLogin />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
                 {/* 404 Not Found */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
