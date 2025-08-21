@@ -779,7 +779,22 @@ const AdminDashboard: React.FC = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <Button>
+                  <Button onClick={() => {
+                    const name = prompt('Enter user name:');
+                    const email = prompt('Enter user email:');
+                    const password = prompt('Enter user password:');
+                    const role = prompt('Enter user role (admin/editor/subscriber/volunteer):') as 'admin' | 'editor' | 'subscriber' | 'volunteer';
+                    if (name && email && password && role) {
+                      handleCreateUser({
+                        name,
+                        email,
+                        password,
+                        role,
+                        status: 'active',
+                        joinDate: new Date().toISOString()
+                      });
+                    }
+                  }}>
                     <Plus className="h-4 w-4 mr-2" />
                     Add User
                   </Button>
@@ -810,10 +825,23 @@ const AdminDashboard: React.FC = () => {
                         </Badge>
                       </div>
                       <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => {
+                          const newRole = prompt('Edit user role (admin/editor/subscriber/volunteer):', user.role) as 'admin' | 'editor' | 'subscriber' | 'volunteer';
+                          const newStatus = prompt('Edit user status (active/inactive/suspended):', user.status) as 'active' | 'inactive' | 'suspended';
+                          if (newRole && newStatus) {
+                            handleUpdateUser(user.id, {
+                              role: newRole,
+                              status: newStatus
+                            });
+                          }
+                        }}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => {
+                          if (confirm('Are you sure you want to delete this user?')) {
+                            handleDeleteUser(user.id);
+                          }
+                        }}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
