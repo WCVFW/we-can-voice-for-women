@@ -108,19 +108,80 @@ export interface AboutPageContent {
 class AdminService {
   private baseUrl = '/api/admin';
 
-  // Generic save method
+  // Helper method to handle API responses
+  private async handleResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+      throw new Error(error.error || `HTTP ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Expected JSON response');
+    }
+
+    const result = await response.json();
+    if (!result.success) {
+      throw new Error(result.error || 'API request failed');
+    }
+
+    return result.data;
+  }
+
+  // Generic save method - now uses specific endpoints
   private async saveData(type: string, data: any): Promise<void> {
     try {
-      const response = await fetch(`${this.baseUrl}/save`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ type, data }),
-      });
+      // Use specific endpoints for each data type
+      const endpoints: Record<string, string> = {
+        content: 'content',
+        events: 'events',
+        donations: 'donations',
+        users: 'users',
+        albums: 'albums',
+        settings: 'settings'
+      };
 
-      if (!response.ok) {
-        throw new Error(`Failed to save ${type} data: ${response.status} ${response.statusText}`);
+      const endpoint = endpoints[type];
+      if (!endpoint) {
+        // Fallback to legacy save endpoint
+        const response = await fetch(`${this.baseUrl}/save`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ type, data }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to save ${type} data: ${response.status} ${response.statusText}`);
+        }
+        return;
+      }
+
+      // For bulk saves, we need to handle each item individually
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          if (item.id && !item.id.toString().startsWith('new_')) {
+            // Update existing item
+            await this.updateItem(endpoint, item.id, item);
+          } else {
+            // Create new item
+            await this.createItem(endpoint, item);
+          }
+        }
+      } else {
+        // Single item or settings object
+        if (type === 'settings') {
+          const response = await fetch(`${this.baseUrl}/settings`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ settings: data }),
+          });
+
+          await this.handleResponse(response);
+        }
       }
     } catch (error) {
       console.error(`Save error for ${type}:`, error);
@@ -128,10 +189,53 @@ class AdminService {
     }
   }
 
-  // Generic load method
+  // Helper methods for CRUD operations
+  private async createItem(endpoint: string, item: any): Promise<any> {
+    const response = await fetch(`${this.baseUrl}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    });
+
+    return this.handleResponse(response);
+  }
+
+  private async updateItem(endpoint: string, id: string, item: any): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/${endpoint}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    });
+
+    await this.handleResponse(response);
+  }
+
+  private async deleteItem(endpoint: string, id: string): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/${endpoint}/${id}`, {
+      method: 'DELETE',
+    });
+
+    await this.handleResponse(response);
+  }
+
+  // Generic load method - now uses specific endpoints
   private async loadData<T>(type: string): Promise<T[]> {
     try {
-      const response = await fetch(`${this.baseUrl}/load/${type}`);
+      // Use specific endpoints for each data type
+      const endpoints: Record<string, string> = {
+        content: 'content',
+        events: 'events',
+        donations: 'donations',
+        users: 'users',
+        albums: 'albums'
+      };
+
+      const endpoint = endpoints[type] || `load/${type}`;
+      const response = await fetch(`${this.baseUrl}/${endpoint}`);
 
       if (!response.ok) {
         console.warn(`API endpoint not available for ${type}, using empty data`);
@@ -162,40 +266,37 @@ class AdminService {
   }
 
   async createContent(content: Omit<ContentItem, 'id'>): Promise<ContentItem> {
-    const newContent: ContentItem = {
-      ...content,
-      id: Date.now().toString(),
-      lastModified: new Date().toISOString(),
-    };
+    const response = await fetch(`${this.baseUrl}/content`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...content,
+        lastModified: new Date().toISOString(),
+      }),
+    });
 
-    const existingContent = await this.loadContent();
-    const updatedContent = [...existingContent, newContent];
-    await this.saveContent(updatedContent);
-    
-    return newContent;
+    return this.handleResponse(response);
   }
 
   async updateContent(id: string, updates: Partial<ContentItem>): Promise<void> {
-    const content = await this.loadContent();
-    const index = content.findIndex(item => item.id === id);
-    
-    if (index === -1) {
-      throw new Error('Content not found');
-    }
+    const response = await fetch(`${this.baseUrl}/content/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...updates,
+        lastModified: new Date().toISOString(),
+      }),
+    });
 
-    content[index] = {
-      ...content[index],
-      ...updates,
-      lastModified: new Date().toISOString(),
-    };
-
-    await this.saveContent(content);
+    await this.handleResponse(response);
   }
 
   async deleteContent(id: string): Promise<void> {
-    const content = await this.loadContent();
-    const filteredContent = content.filter(item => item.id !== id);
-    await this.saveContent(filteredContent);
+    await this.deleteItem('content', id);
   }
 
   // Events Management
@@ -208,34 +309,15 @@ class AdminService {
   }
 
   async createEvent(event: Omit<Event, 'id'>): Promise<Event> {
-    const newEvent: Event = {
-      ...event,
-      id: Date.now().toString(),
-    };
-
-    const existingEvents = await this.loadEvents();
-    const updatedEvents = [...existingEvents, newEvent];
-    await this.saveEvents(updatedEvents);
-    
-    return newEvent;
+    return this.createItem('events', event);
   }
 
   async updateEvent(id: string, updates: Partial<Event>): Promise<void> {
-    const events = await this.loadEvents();
-    const index = events.findIndex(event => event.id === id);
-    
-    if (index === -1) {
-      throw new Error('Event not found');
-    }
-
-    events[index] = { ...events[index], ...updates };
-    await this.saveEvents(events);
+    await this.updateItem('events', id, updates);
   }
 
   async deleteEvent(id: string): Promise<void> {
-    const events = await this.loadEvents();
-    const filteredEvents = events.filter(event => event.id !== id);
-    await this.saveEvents(filteredEvents);
+    await this.deleteItem('events', id);
   }
 
   // Donations Management
@@ -248,28 +330,11 @@ class AdminService {
   }
 
   async createDonation(donation: Omit<Donation, 'id'>): Promise<Donation> {
-    const newDonation: Donation = {
-      ...donation,
-      id: Date.now().toString(),
-    };
-
-    const existingDonations = await this.loadDonations();
-    const updatedDonations = [...existingDonations, newDonation];
-    await this.saveDonations(updatedDonations);
-    
-    return newDonation;
+    return this.createItem('donations', donation);
   }
 
   async updateDonation(id: string, updates: Partial<Donation>): Promise<void> {
-    const donations = await this.loadDonations();
-    const index = donations.findIndex(donation => donation.id === id);
-    
-    if (index === -1) {
-      throw new Error('Donation not found');
-    }
-
-    donations[index] = { ...donations[index], ...updates };
-    await this.saveDonations(donations);
+    await this.updateItem('donations', id, updates);
   }
 
   // Users Management
@@ -282,34 +347,15 @@ class AdminService {
   }
 
   async createUser(user: Omit<User, 'id'>): Promise<User> {
-    const newUser: User = {
-      ...user,
-      id: Date.now().toString(),
-    };
-
-    const existingUsers = await this.loadUsers();
-    const updatedUsers = [...existingUsers, newUser];
-    await this.saveUsers(updatedUsers);
-    
-    return newUser;
+    return this.createItem('users', user);
   }
 
   async updateUser(id: string, updates: Partial<User>): Promise<void> {
-    const users = await this.loadUsers();
-    const index = users.findIndex(user => user.id === id);
-    
-    if (index === -1) {
-      throw new Error('User not found');
-    }
-
-    users[index] = { ...users[index], ...updates };
-    await this.saveUsers(users);
+    await this.updateItem('users', id, updates);
   }
 
   async deleteUser(id: string): Promise<void> {
-    const users = await this.loadUsers();
-    const filteredUsers = users.filter(user => user.id !== id);
-    await this.saveUsers(filteredUsers);
+    await this.deleteItem('users', id);
   }
 
   // Albums Management
@@ -322,60 +368,94 @@ class AdminService {
   }
 
   async createAlbum(album: Omit<Album, 'id'>): Promise<Album> {
-    const newAlbum: Album = {
+    return this.createItem('albums', {
       ...album,
-      id: Date.now().toString(),
       createdDate: new Date().toISOString(),
-    };
-
-    const existingAlbums = await this.loadAlbums();
-    const updatedAlbums = [...existingAlbums, newAlbum];
-    await this.saveAlbums(updatedAlbums);
-    
-    return newAlbum;
+    });
   }
 
   async updateAlbum(id: string, updates: Partial<Album>): Promise<void> {
-    const albums = await this.loadAlbums();
-    const index = albums.findIndex(album => album.id === id);
-    
-    if (index === -1) {
-      throw new Error('Album not found');
-    }
-
-    albums[index] = { ...albums[index], ...updates };
-    await this.saveAlbums(albums);
+    await this.updateItem('albums', id, updates);
   }
 
   async deleteAlbum(id: string): Promise<void> {
-    const albums = await this.loadAlbums();
-    const filteredAlbums = albums.filter(album => album.id !== id);
-    await this.saveAlbums(filteredAlbums);
+    await this.deleteItem('albums', id);
   }
 
   // Site Settings
   async saveSiteSettings(settings: SiteSettings): Promise<void> {
-    return this.saveData('settings', settings);
+    const response = await fetch(`${this.baseUrl}/settings`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ settings }),
+    });
+
+    await this.handleResponse(response);
   }
 
   async loadSiteSettings(): Promise<SiteSettings | null> {
-    const settings = await this.loadData<SiteSettings>('settings');
-    return settings.length > 0 ? settings[0] : null;
+    try {
+      const response = await fetch(`${this.baseUrl}/settings`);
+      const result = await this.handleResponse(response);
+
+      // Convert grouped settings back to flat object
+      const settings: SiteSettings = {
+        siteName: result.general?.site_name?.value || 'We Can Voice For Women',
+        tagline: result.general?.site_tagline?.value || 'Empowering Women Through Voice',
+        contactEmail: result.contact?.contact_email?.value || 'contact@wcvfw.org',
+        phone: result.contact?.contact_phone?.value || '+1-555-0123',
+        address: result.contact?.address?.value || '123 Main St, City, State 12345',
+        socialMedia: {
+          facebook: result.social?.social_facebook?.value || 'https://facebook.com/wcvfw',
+          twitter: result.social?.social_twitter?.value || 'https://twitter.com/wcvfw',
+          instagram: result.social?.social_instagram?.value || 'https://instagram.com/wcvfw'
+        },
+        maintenanceMode: result.system?.maintenance_mode?.value === 'true',
+        registrationEnabled: result.system?.registration_enabled?.value === 'true'
+      };
+
+      return settings;
+    } catch (error) {
+      console.warn('Failed to load site settings:', error);
+      return null;
+    }
   }
 
   // About Page Content
   async saveAboutContent(content: AboutPageContent): Promise<void> {
-    return this.saveData('about', content);
+    const settings = {
+      about_mission: content.mission,
+      about_vision: content.vision,
+      about_history: content.history,
+      about_team: content.team
+    };
+
+    await this.saveSiteSettings(settings as any);
   }
 
   async loadAboutContent(): Promise<AboutPageContent | null> {
-    const content = await this.loadData<AboutPageContent>('about');
-    return content.length > 0 ? content[0] : null;
+    try {
+      const response = await fetch(`${this.baseUrl}/settings`);
+      const result = await this.handleResponse(response);
+
+      const content: AboutPageContent = {
+        mission: result.general?.about_mission?.value || 'To empower women through voice, advocacy, and community support, creating opportunities for growth and positive change.',
+        vision: result.general?.about_vision?.value || 'A world where every woman has the power to voice her opinions, pursue her dreams, and create meaningful impact in her community.',
+        history: result.general?.about_history?.value || 'Founded in 2020, We Can Voice For Women has been dedicated to empowering women through various initiatives including education, healthcare, and advocacy programs.',
+        team: result.general?.about_team?.value || 'Our diverse team of professionals is committed to making a difference in women\'s lives through dedicated service and innovative programs.'
+      };
+
+      return content;
+    } catch (error) {
+      console.warn('Failed to load about content:', error);
+      return null;
+    }
   }
 
   // Bulk operations
   async publishAllChanges(): Promise<void> {
-    // This could trigger a build/deployment process
     const response = await fetch(`${this.baseUrl}/publish`, {
       method: 'POST',
       headers: {
@@ -383,9 +463,7 @@ class AdminService {
       },
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to publish changes');
-    }
+    await this.handleResponse(response);
   }
 
   // Analytics/Stats
@@ -401,27 +479,43 @@ class AdminService {
       timestamp: string;
     }>;
   }> {
-    const [content, events, donations, users, albums] = await Promise.all([
-      this.loadContent(),
-      this.loadEvents(),
-      this.loadDonations(),
-      this.loadUsers(),
-      this.loadAlbums(),
-    ]);
+    try {
+      const response = await fetch(`${this.baseUrl}/dashboard/stats`);
+      const stats = await this.handleResponse(response);
 
-    return {
-      totalContent: content.length,
-      totalEvents: events.length,
-      totalDonations: donations.reduce((sum, d) => sum + d.amount, 0),
-      totalUsers: users.length,
-      totalAlbums: albums.length,
-      recentActivity: [
-        // This would be populated with actual recent activities
-        { type: 'content', message: 'New blog post published', timestamp: new Date().toISOString() },
-        { type: 'event', message: 'Event registration received', timestamp: new Date().toISOString() },
-        { type: 'donation', message: 'New donation received', timestamp: new Date().toISOString() },
-      ],
-    };
+      return {
+        totalContent: stats.content?.total_content || 0,
+        totalEvents: stats.events?.total_events || 0,
+        totalDonations: stats.donations?.total_amount || 0,
+        totalUsers: stats.users?.total_users || 0,
+        totalAlbums: stats.media?.total_albums || 0,
+        recentActivity: stats.recent_activity || []
+      };
+    } catch (error) {
+      console.warn('Failed to load stats, using fallback:', error);
+
+      // Fallback to individual calls
+      const [content, events, donations, users, albums] = await Promise.all([
+        this.loadContent(),
+        this.loadEvents(),
+        this.loadDonations(),
+        this.loadUsers(),
+        this.loadAlbums(),
+      ]);
+
+      return {
+        totalContent: content.length,
+        totalEvents: events.length,
+        totalDonations: donations.reduce((sum, d) => sum + d.amount, 0),
+        totalUsers: users.length,
+        totalAlbums: albums.length,
+        recentActivity: [
+          { type: 'content', message: 'New blog post published', timestamp: new Date().toISOString() },
+          { type: 'event', message: 'Event registration received', timestamp: new Date().toISOString() },
+          { type: 'donation', message: 'New donation received', timestamp: new Date().toISOString() },
+        ],
+      };
+    }
   }
 }
 
