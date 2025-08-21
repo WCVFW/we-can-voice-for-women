@@ -110,29 +110,46 @@ class AdminService {
 
   // Generic save method
   private async saveData(type: string, data: any): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/save`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ type, data }),
-    });
+    try {
+      const response = await fetch(`${this.baseUrl}/save`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ type, data }),
+      });
 
-    if (!response.ok) {
-      throw new Error(`Failed to save ${type} data`);
+      if (!response.ok) {
+        throw new Error(`Failed to save ${type} data: ${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(`Save error for ${type}:`, error);
+      throw error;
     }
   }
 
   // Generic load method
   private async loadData<T>(type: string): Promise<T[]> {
-    const response = await fetch(`${this.baseUrl}/load/${type}`);
-    
-    if (!response.ok) {
-      throw new Error(`Failed to load ${type} data`);
-    }
+    try {
+      const response = await fetch(`${this.baseUrl}/load/${type}`);
 
-    const result = await response.json();
-    return result.data || [];
+      if (!response.ok) {
+        console.warn(`API endpoint not available for ${type}, using empty data`);
+        return [];
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        console.warn(`Expected JSON response for ${type}, got ${contentType}`);
+        return [];
+      }
+
+      const result = await response.json();
+      return result.data || [];
+    } catch (error) {
+      console.warn(`Failed to load ${type} data:`, error);
+      return [];
+    }
   }
 
   // Content Management
