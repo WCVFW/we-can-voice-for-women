@@ -33,7 +33,7 @@ export default function DynamicGalleryManager({
     formData.append("file", file);
 
     try {
-      const res = await fetch("/pages/api/upload", {
+      const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
