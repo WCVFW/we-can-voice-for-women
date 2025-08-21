@@ -13,6 +13,8 @@ import AdminLayout from '@/layouts/AdminLayout';
 
 import AdminDashboard from '@/pages/admin/Dashboard';
 import AdminLogin from '@/pages/admin/Login';
+import AdminContent from '@/pages/admin/Content';
+import AdminMedia from '@/pages/admin/Media';
 import NotFound from '@/pages/NotFound';
 
 import {
@@ -123,13 +125,16 @@ const App = () => {
                   <Route path="FAQ" element={<FAQ />} />
                 </Route>
 
-                {/* Admin Dashboard (with Admin Layout) */}
+                {/* Simplified Admin Dashboard */}
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminDashboard />} />
+                  <Route path="content" element={<AdminContent />} />
+                  <Route path="media" element={<AdminMedia />} />
                 </Route>
 
-                {/* Admin Login (no layout) */}
-                <Route path="login" element={<AdminLogin />} />
+                {/* Admin Login */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+                
                 {/* 404 Not Found */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
