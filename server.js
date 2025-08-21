@@ -7,7 +7,7 @@ import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import dotenv from 'dotenv';
-import { initializeDatabase } from './src/config/database.js';
+import { initializeDatabase } from './src/config/sqlite-database.js';
 import adminRoutes from './src/routes/adminRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,10 +20,10 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Initialize database
+// Initialize SQLite database
 initializeDatabase().then((success) => {
   if (success) {
-    console.log('✅ Database initialized successfully');
+    console.log('✅ SQLite Database initialized successfully');
   } else {
     console.log('❌ Database initialization failed - some features may not work');
   }
@@ -138,5 +138,5 @@ app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
   console.log(`✅ Media files served from: ${uploadDir}`);
   console.log(`✅ Admin API available at: http://localhost:${PORT}/api/admin`);
-  console.log(`✅ Database: MySQL with full CRUD operations`);
+  console.log(`✅ Database: SQLite with full CRUD operations`);
 });
