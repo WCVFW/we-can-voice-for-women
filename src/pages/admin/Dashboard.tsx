@@ -609,7 +609,21 @@ const AdminDashboard: React.FC = () => {
                       <Search className="h-4 w-4" />
                     </Button>
                   </div>
-                  <Button>
+                  <Button onClick={() => {
+                    const title = prompt('Enter event title:');
+                    const date = prompt('Enter event date (YYYY-MM-DD):');
+                    const location = prompt('Enter event location:');
+                    if (title && date && location) {
+                      handleCreateEvent({
+                        title,
+                        date,
+                        location,
+                        description: '',
+                        status: 'upcoming',
+                        registrations: 0
+                      });
+                    }
+                  }}>
                     <Plus className="h-4 w-4 mr-2" />
                     New Event
                   </Button>
@@ -635,14 +649,27 @@ const AdminDashboard: React.FC = () => {
                         </Badge>
                       </div>
                       <div className="text-sm">{event.registrations}</div>
-                      <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button size="sm" variant="outline">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+                    <div className="flex space-x-2">
+                      <Button size="sm" variant="outline" onClick={() => {
+                        const newTitle = prompt('Edit event title:', event.title);
+                        const newStatus = prompt('Edit status (upcoming/ongoing/completed/cancelled):', event.status) as 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
+                        if (newTitle && newStatus) {
+                          handleUpdateEvent(event.id, {
+                            title: newTitle,
+                            status: newStatus
+                          });
+                        }
+                      }}>
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button size="sm" variant="outline" onClick={() => {
+                        if (confirm('Are you sure you want to delete this event?')) {
+                          handleDeleteEvent(event.id);
+                        }
+                      }}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                     </div>
                   ))}
                 </div>
