@@ -119,6 +119,9 @@ const AdminDashboard: React.FC = () => {
       try {
         setIsLoading(true);
 
+        // Small delay to ensure API server is ready
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         const [contentData, eventsData, donationsData, usersData, albumsData, settingsData, aboutData] = await Promise.all([
           adminService.loadContent(),
           adminService.loadEvents(),
