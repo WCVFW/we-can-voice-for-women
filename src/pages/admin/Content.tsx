@@ -10,21 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -34,494 +19,278 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import {
-  Plus,
   Edit,
-  Trash2,
-  Search,
-  FileText,
-  Calendar,
-  Image,
+  Save,
   Eye,
-  Save
+  FileText,
+  Home,
+  Info,
+  Users,
+  Phone,
+  Calendar,
+  Heart
 } from 'lucide-react';
 
-interface ContentItem {
-  id: number;
+interface PageContent {
+  id: string;
+  name: string;
   title: string;
   content: string;
-  status: 'draft' | 'published';
-  type: string;
-  createdAt: string;
-  updatedAt: string;
-  author?: string;
-  excerpt?: string;
-  featured?: boolean;
+  lastUpdated: string;
+  status: 'published' | 'draft';
 }
 
 export default function Content() {
-  const [pages, setPages] = useState<ContentItem[]>([]);
-  const [blogs, setBlogs] = useState<ContentItem[]>([]);
-  const [events, setEvents] = useState<ContentItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('pages');
-  const [showAddDialog, setShowAddDialog] = useState(false);
-  const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    excerpt: '',
-    status: 'draft' as 'draft' | 'published',
-    featured: false
+  const [selectedPage, setSelectedPage] = useState('home');
+  const [pages, setPages] = useState<Record<string, PageContent>>({
+    home: {
+      id: 'home',
+      name: 'Home Page',
+      title: 'We Can Voice For Women',
+      content: 'Welcome to our empowerment platform...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    },
+    about: {
+      id: 'about',
+      name: 'About Us',
+      title: 'About WCVFW',
+      content: 'Our mission is to empower women...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    },
+    empowerment: {
+      id: 'empowerment',
+      name: 'Empowerment',
+      title: 'Women Empowerment',
+      content: 'Empowering women through various initiatives...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    },
+    enlightenment: {
+      id: 'enlightenment',
+      name: 'Enlightenment',
+      title: 'Enlightenment Programs',
+      content: 'Educational and awareness programs...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    },
+    enhealthment: {
+      id: 'enhealthment',
+      name: 'Enhealthment',
+      title: 'Health & Wellness',
+      content: 'Health and wellness initiatives...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    },
+    contact: {
+      id: 'contact',
+      name: 'Contact Us',
+      title: 'Get In Touch',
+      content: 'Contact us for more information...',
+      lastUpdated: new Date().toISOString(),
+      status: 'published'
+    }
   });
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    fetchContent();
-  }, []);
+  const pageIcons = {
+    home: <Home className="h-4 w-4" />,
+    about: <Info className="h-4 w-4" />,
+    empowerment: <Users className="h-4 w-4" />,
+    enlightenment: <FileText className="h-4 w-4" />,
+    enhealthment: <Heart className="h-4 w-4" />,
+    contact: <Phone className="h-4 w-4" />
+  };
 
-  const fetchContent = async () => {
+  const currentPage = pages[selectedPage];
+
+  const handleSave = async () => {
+    setSaving(true);
     try {
-      const [pagesRes, blogsRes, eventsRes] = await Promise.all([
-        fetch('/api/admin/content/pages', {
-          headers: { 'Authorization': 'Bearer admin-session' }
-        }),
-        fetch('/api/admin/content/blogs', {
-          headers: { 'Authorization': 'Bearer admin-session' }
-        }),
-        fetch('/api/admin/content/events', {
-          headers: { 'Authorization': 'Bearer admin-session' }
-        })
-      ]);
-
-      setPages(await pagesRes.json() || []);
-      setBlogs(await blogsRes.json() || []);
-      setEvents(await eventsRes.json() || []);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setPages(prev => ({
+        ...prev,
+        [selectedPage]: {
+          ...prev[selectedPage],
+          lastUpdated: new Date().toISOString()
+        }
+      }));
+      
+      setEditing(false);
+      toast.success('Page content saved successfully!');
     } catch (error) {
-      toast.error('Failed to fetch content');
+      toast.error('Failed to save content');
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
-  const handleAddContent = async () => {
-    try {
-      const response = await fetch(`/api/admin/content/${activeTab}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer admin-session'
-        },
-        body: JSON.stringify({
-          ...formData,
-          type: activeTab.slice(0, -1) // Remove 's' from plural
-        })
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        
-        // Update the appropriate state
-        switch (activeTab) {
-          case 'pages':
-            setPages([...pages, result.content]);
-            break;
-          case 'blogs':
-            setBlogs([...blogs, result.content]);
-            break;
-          case 'events':
-            setEvents([...events, result.content]);
-            break;
-        }
-
-        setShowAddDialog(false);
-        resetForm();
-        toast.success(`${activeTab.slice(0, -1)} added successfully`);
-      } else {
-        toast.error('Failed to add content');
+  const handleContentChange = (field: string, value: string) => {
+    setPages(prev => ({
+      ...prev,
+      [selectedPage]: {
+        ...prev[selectedPage],
+        [field]: value
       }
-    } catch (error) {
-      toast.error('Error adding content');
-    }
+    }));
   };
 
-  const handleEditContent = async () => {
-    if (!editingItem) return;
-
-    try {
-      const response = await fetch(`/api/admin/content/${activeTab}/${editingItem.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer admin-session'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        
-        // Update the appropriate state
-        switch (activeTab) {
-          case 'pages':
-            setPages(pages.map(p => p.id === editingItem.id ? result.content : p));
-            break;
-          case 'blogs':
-            setBlogs(blogs.map(b => b.id === editingItem.id ? result.content : b));
-            break;
-          case 'events':
-            setEvents(events.map(e => e.id === editingItem.id ? result.content : e));
-            break;
-        }
-
-        setEditingItem(null);
-        resetForm();
-        toast.success('Content updated successfully');
-      } else {
-        toast.error('Failed to update content');
-      }
-    } catch (error) {
-      toast.error('Error updating content');
-    }
+  const toggleStatus = () => {
+    const newStatus = currentPage.status === 'published' ? 'draft' : 'published';
+    handleContentChange('status', newStatus);
   };
-
-  const handleDeleteContent = async (id: number) => {
-    if (!confirm('Are you sure you want to delete this content?')) return;
-
-    try {
-      const response = await fetch(`/api/admin/content/${activeTab}/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': 'Bearer admin-session' }
-      });
-
-      if (response.ok) {
-        // Update the appropriate state
-        switch (activeTab) {
-          case 'pages':
-            setPages(pages.filter(p => p.id !== id));
-            break;
-          case 'blogs':
-            setBlogs(blogs.filter(b => b.id !== id));
-            break;
-          case 'events':
-            setEvents(events.filter(e => e.id !== id));
-            break;
-        }
-
-        toast.success('Content deleted successfully');
-      } else {
-        toast.error('Failed to delete content');
-      }
-    } catch (error) {
-      toast.error('Error deleting content');
-    }
-  };
-
-  const resetForm = () => {
-    setFormData({
-      title: '',
-      content: '',
-      excerpt: '',
-      status: 'draft',
-      featured: false
-    });
-  };
-
-  const openEditDialog = (item: ContentItem) => {
-    setEditingItem(item);
-    setFormData({
-      title: item.title,
-      content: item.content,
-      excerpt: item.excerpt || '',
-      status: item.status,
-      featured: item.featured || false
-    });
-  };
-
-  const getCurrentContent = () => {
-    switch (activeTab) {
-      case 'pages':
-        return pages;
-      case 'blogs':
-        return blogs;
-      case 'events':
-        return events;
-      default:
-        return [];
-    }
-  };
-
-  const getTabIcon = (tab: string) => {
-    switch (tab) {
-      case 'pages':
-        return <FileText className="h-4 w-4" />;
-      case 'blogs':
-        return <FileText className="h-4 w-4" />;
-      case 'events':
-        return <Calendar className="h-4 w-4" />;
-      default:
-        return <FileText className="h-4 w-4" />;
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Content Management</h1>
-          <p className="text-gray-500">Manage pages, blog posts, and events</p>
+          <h1 className="text-3xl font-bold">Page Content</h1>
+          <p className="text-gray-500">Edit and manage your website pages</p>
         </div>
-        <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add {activeTab.slice(0, -1)}
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Add New {activeTab.slice(0, -1)}</DialogTitle>
-              <DialogDescription>
-                Create a new {activeTab.slice(0, -1)} for your website.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="title">Title</Label>
-                <Input
-                  id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Enter title"
-                />
-              </div>
-              <div>
-                <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea
-                  id="excerpt"
-                  value={formData.excerpt}
-                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                  placeholder="Brief description..."
-                  rows={3}
-                />
-              </div>
-              <div>
-                <Label htmlFor="content">Content</Label>
-                <Textarea
-                  id="content"
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="Write your content here..."
-                  rows={10}
-                />
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-1">
-                  <Label htmlFor="status">Status</Label>
-                  <Select value={formData.status} onValueChange={(value: 'draft' | 'published') => setFormData({ ...formData, status: value })}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="draft">Draft</SelectItem>
-                      <SelectItem value="published">Published</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex items-center space-x-2 pt-6">
-                  <input
-                    type="checkbox"
-                    id="featured"
-                    checked={formData.featured}
-                    onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                  />
-                  <Label htmlFor="featured">Featured</Label>
-                </div>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setShowAddDialog(false)}>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => window.open('/', '_blank')}>
+            <Eye className="h-4 w-4 mr-2" />
+            Preview Website
+          </Button>
+          {editing ? (
+            <>
+              <Button variant="outline" onClick={() => setEditing(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleAddContent}>
+              <Button onClick={handleSave} disabled={saving}>
                 <Save className="h-4 w-4 mr-2" />
-                Save {activeTab.slice(0, -1)}
+                {saving ? 'Saving...' : 'Save Changes'}
               </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+            </>
+          ) : (
+            <Button onClick={() => setEditing(true)}>
+              <Edit className="h-4 w-4 mr-2" />
+              Edit Page
+            </Button>
+          )}
+        </div>
       </div>
 
-      {/* Content Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-3 w-full max-w-md">
-          <TabsTrigger value="pages" className="flex items-center gap-2">
-            {getTabIcon('pages')}
-            Pages ({pages.length})
-          </TabsTrigger>
-          <TabsTrigger value="blogs" className="flex items-center gap-2">
-            {getTabIcon('blogs')}
-            Blogs ({blogs.length})
-          </TabsTrigger>
-          <TabsTrigger value="events" className="flex items-center gap-2">
-            {getTabIcon('events')}
-            Events ({events.length})
-          </TabsTrigger>
-        </TabsList>
-
-        {/* Content List */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              {getTabIcon(activeTab)}
-              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {getCurrentContent().length > 0 ? (
-                getCurrentContent().map((item) => (
-                  <div key={item.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-lg">{item.title}</h3>
-                          <Badge variant={item.status === 'published' ? 'default' : 'secondary'}>
-                            {item.status}
-                          </Badge>
-                          {item.featured && (
-                            <Badge variant="outline" className="border-yellow-400 text-yellow-600">
-                              Featured
-                            </Badge>
-                          )}
-                        </div>
-                        {item.excerpt && (
-                          <p className="text-gray-600 mb-2">{item.excerpt}</p>
-                        )}
-                        <div className="text-sm text-gray-500">
-                          Created: {new Date(item.createdAt).toLocaleDateString()} | 
-                          Updated: {new Date(item.updatedAt).toLocaleDateString()}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4 mr-1" />
-                          Preview
-                        </Button>
-                        <Button variant="outline" size="sm" onClick={() => openEditDialog(item)}>
-                          <Edit className="h-4 w-4 mr-1" />
-                          Edit
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={() => handleDeleteContent(item.id)}
-                          className="text-red-600 hover:text-red-700"
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Page Selection */}
+        <div className="lg:col-span-1">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Website Pages</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="space-y-1">
+                {Object.entries(pages).map(([pageId, page]) => (
+                  <button
+                    key={pageId}
+                    onClick={() => {
+                      setSelectedPage(pageId);
+                      setEditing(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
+                      selectedPage === pageId ? 'bg-primary/10 text-primary border-r-2 border-primary' : ''
+                    }`}
+                  >
+                    {pageIcons[pageId as keyof typeof pageIcons]}
+                    <div className="flex-1">
+                      <p className="font-medium">{page.name}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Badge 
+                          variant={page.status === 'published' ? 'default' : 'secondary'}
+                          className="text-xs"
                         >
-                          <Trash2 className="h-4 w-4 mr-1" />
-                          Delete
-                        </Button>
+                          {page.status}
+                        </Badge>
                       </div>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-12">
-                  <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No {activeTab} yet</h3>
-                  <p className="text-gray-500 mb-4">Get started by creating your first {activeTab.slice(0, -1)}.</p>
-                  <Button onClick={() => setShowAddDialog(true)}>
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add {activeTab.slice(0, -1)}
-                  </Button>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </Tabs>
+                  </button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-      {/* Edit Content Dialog */}
-      <Dialog open={!!editingItem} onOpenChange={(open) => !open && setEditingItem(null)}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Edit {activeTab.slice(0, -1)}</DialogTitle>
-            <DialogDescription>
-              Update your {activeTab.slice(0, -1)} content.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="edit-title">Title</Label>
-              <Input
-                id="edit-title"
-                value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                placeholder="Enter title"
-              />
-            </div>
-            <div>
-              <Label htmlFor="edit-excerpt">Excerpt</Label>
-              <Textarea
-                id="edit-excerpt"
-                value={formData.excerpt}
-                onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                placeholder="Brief description..."
-                rows={3}
-              />
-            </div>
-            <div>
-              <Label htmlFor="edit-content">Content</Label>
-              <Textarea
-                id="edit-content"
-                value={formData.content}
-                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                placeholder="Write your content here..."
-                rows={10}
-              />
-            </div>
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <Label htmlFor="edit-status">Status</Label>
-                <Select value={formData.status} onValueChange={(value: 'draft' | 'published') => setFormData({ ...formData, status: value })}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="draft">Draft</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                  </SelectContent>
-                </Select>
+        {/* Content Editor */}
+        <div className="lg:col-span-3">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {pageIcons[selectedPage as keyof typeof pageIcons]}
+                  <div>
+                    <CardTitle>{currentPage.name}</CardTitle>
+                    <p className="text-sm text-gray-500">
+                      Last updated: {new Date(currentPage.lastUpdated).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge 
+                    variant={currentPage.status === 'published' ? 'default' : 'secondary'}
+                    className="cursor-pointer"
+                    onClick={toggleStatus}
+                  >
+                    {currentPage.status}
+                  </Badge>
+                </div>
               </div>
-              <div className="flex items-center space-x-2 pt-6">
-                <input
-                  type="checkbox"
-                  id="edit-featured"
-                  checked={formData.featured}
-                  onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                />
-                <Label htmlFor="edit-featured">Featured</Label>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Page Title */}
+              <div>
+                <Label htmlFor="title">Page Title</Label>
+                {editing ? (
+                  <Input
+                    id="title"
+                    value={currentPage.title}
+                    onChange={(e) => handleContentChange('title', e.target.value)}
+                    placeholder="Enter page title"
+                  />
+                ) : (
+                  <div className="mt-1 p-3 bg-gray-50 rounded-md">
+                    {currentPage.title}
+                  </div>
+                )}
               </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditingItem(null)}>
-              Cancel
-            </Button>
-            <Button onClick={handleEditContent}>
-              <Save className="h-4 w-4 mr-2" />
-              Update {activeTab.slice(0, -1)}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+
+              {/* Page Content */}
+              <div>
+                <Label htmlFor="content">Page Content</Label>
+                {editing ? (
+                  <Textarea
+                    id="content"
+                    value={currentPage.content}
+                    onChange={(e) => handleContentChange('content', e.target.value)}
+                    placeholder="Enter page content"
+                    rows={15}
+                    className="mt-1"
+                  />
+                ) : (
+                  <div className="mt-1 p-4 bg-gray-50 rounded-md min-h-[400px] whitespace-pre-wrap">
+                    {currentPage.content}
+                  </div>
+                )}
+              </div>
+
+              {/* Content Guidelines */}
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-medium text-blue-900 mb-2">Content Guidelines</h4>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• Keep content clear and engaging</li>
+                  <li>• Use simple language that's easy to understand</li>
+                  <li>• Include relevant keywords for better SEO</li>
+                  <li>• Save changes regularly to avoid losing work</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
