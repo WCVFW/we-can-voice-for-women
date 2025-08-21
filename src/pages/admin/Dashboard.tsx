@@ -31,6 +31,7 @@ import { toast } from 'sonner';
 
 import DynamicGalleryManager from '@/components/admin/DynamicGalleryManager';
 import MediaUpload from '@/components/admin/MediaUpload';
+import adminService, { ContentItem, Event, Donation, User, Album, SiteSettings, AboutPageContent } from '@/lib/adminService';
 
 interface ContentItem {
   id: string;
@@ -82,36 +83,13 @@ const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState(getActiveTab());
   const [isLoading, setIsLoading] = useState(false);
 
-  // Sample data - in real app, this would come from API
-  const [contentItems, setContentItems] = useState<ContentItem[]>([
-    { id: '1', title: 'Welcome to Our Website', type: 'page', status: 'published', lastModified: '2024-01-15', author: 'Admin' },
-    { id: '2', title: 'Latest News Update', type: 'news', status: 'draft', lastModified: '2024-01-14', author: 'Editor' },
-    { id: '3', title: 'How to Get Involved', type: 'blog', status: 'published', lastModified: '2024-01-13', author: 'Admin' }
-  ]);
-
-  const [events, setEvents] = useState<Event[]>([
-    { id: '1', title: 'Community Workshop', date: '2024-02-15', location: 'Main Hall', description: 'Learn new skills', status: 'upcoming', registrations: 25 },
-    { id: '2', title: 'Fundraising Gala', date: '2024-03-01', location: 'Grand Hotel', description: 'Annual fundraising event', status: 'upcoming', registrations: 150 }
-  ]);
-
-  const [donations, setDonations] = useState<Donation[]>([
-    { id: '1', amount: 100, donor: 'John Smith', date: '2024-01-15', campaign: 'Education Fund', status: 'completed' },
-    { id: '2', amount: 250, donor: 'Jane Doe', date: '2024-01-14', campaign: 'Healthcare Initiative', status: 'completed' },
-    { id: '3', amount: 50, donor: 'Anonymous', date: '2024-01-13', campaign: 'General Fund', status: 'pending' }
-  ]);
-
-  const [users, setUsers] = useState<User[]>([
-    { id: '1', name: 'Admin User', email: 'admin@example.com', role: 'admin', joinDate: '2024-01-01', status: 'active' },
-    { id: '2', name: 'Content Editor', email: 'editor@example.com', role: 'editor', joinDate: '2024-01-05', status: 'active' },
-    { id: '3', name: 'Regular User', email: 'user@example.com', role: 'subscriber', joinDate: '2024-01-10', status: 'inactive' }
-  ]);
-
-  const [albums, setAlbums] = useState([
-    { id: '1', title: 'Event Photos 2024', coverImage: '/api/placeholder/300/200', images: [] },
-    { id: '2', title: 'Community Activities', coverImage: '/api/placeholder/300/200', images: [] }
-  ]);
-
-  const [siteSettings, setSiteSettings] = useState({
+  // State for all admin data
+  const [contentItems, setContentItems] = useState<ContentItem[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [donations, setDonations] = useState<Donation[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [siteSettings, setSiteSettings] = useState<SiteSettings>({
     siteName: 'We Can Voice For Women',
     tagline: 'Empowering Women Through Voice',
     contactEmail: 'contact@wcvfw.org',
@@ -125,8 +103,57 @@ const AdminDashboard: React.FC = () => {
     maintenanceMode: false,
     registrationEnabled: true
   });
+  const [aboutContent, setAboutContent] = useState<AboutPageContent>({
+    mission: 'To empower women through voice, advocacy, and community support, creating opportunities for growth and positive change.',
+    vision: 'A world where every woman has the power to voice her opinions, pursue her dreams, and create meaningful impact in her community.',
+    history: 'Founded in 2020, We Can Voice For Women has been dedicated to empowering women through various initiatives including education, healthcare, and advocacy programs.',
+    team: 'Our diverse team of professionals is committed to making a difference in women\'s lives through dedicated service and innovative programs.'
+  });
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Load all data on component mount
+  useEffect(() => {
+    const loadAllData = async () => {
+      try {
+        setIsLoading(true);
+
+        const [contentData, eventsData, donationsData, usersData, albumsData, settingsData, aboutData] = await Promise.all([
+          adminService.loadContent(),
+          adminService.loadEvents(),
+          adminService.loadDonations(),
+          adminService.loadUsers(),
+          adminService.loadAlbums(),
+          adminService.loadSiteSettings(),
+          adminService.loadAboutContent()
+        ]);
+
+        setContentItems(contentData);
+        setEvents(eventsData);
+        setDonations(donationsData);
+        setUsers(usersData);
+        setAlbums(albumsData);
+
+        if (settingsData) {
+          setSiteSettings(settingsData);
+        }
+
+        if (aboutData) {
+          setAboutContent(aboutData);
+        }
+
+        setDataLoaded(true);
+      } catch (error) {
+        console.error('Failed to load admin data:', error);
+        toast.error('Failed to load admin data');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadAllData();
+  }, []);
 
   useEffect(() => {
     const tab = getActiveTab();
@@ -142,10 +169,20 @@ const AdminDashboard: React.FC = () => {
   const handleSaveChanges = async () => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success('Changes saved successfully!');
+      // Save all data to server
+      await Promise.all([
+        adminService.saveContent(contentItems),
+        adminService.saveEvents(events),
+        adminService.saveDonations(donations),
+        adminService.saveUsers(users),
+        adminService.saveAlbums(albums),
+        adminService.saveSiteSettings(siteSettings),
+        adminService.saveAboutContent(aboutContent)
+      ]);
+
+      toast.success('All changes saved successfully!');
     } catch (error) {
+      console.error('Failed to save changes:', error);
       toast.error('Failed to save changes');
     } finally {
       setIsLoading(false);
@@ -155,13 +192,124 @@ const AdminDashboard: React.FC = () => {
   const handlePublishChanges = async () => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // First save all changes
+      await handleSaveChanges();
+
+      // Then publish
+      await adminService.publishAllChanges();
+
       toast.success('Changes published successfully!');
     } catch (error) {
+      console.error('Failed to publish changes:', error);
       toast.error('Failed to publish changes');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // CRUD operations for different data types
+  const handleCreateContent = async (newContent: Omit<ContentItem, 'id'>) => {
+    try {
+      const created = await adminService.createContent(newContent);
+      setContentItems(prev => [...prev, created]);
+      toast.success('Content created successfully!');
+    } catch (error) {
+      toast.error('Failed to create content');
+    }
+  };
+
+  const handleUpdateContent = async (id: string, updates: Partial<ContentItem>) => {
+    try {
+      await adminService.updateContent(id, updates);
+      setContentItems(prev => prev.map(item =>
+        item.id === id ? { ...item, ...updates, lastModified: new Date().toISOString() } : item
+      ));
+      toast.success('Content updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update content');
+    }
+  };
+
+  const handleDeleteContent = async (id: string) => {
+    try {
+      await adminService.deleteContent(id);
+      setContentItems(prev => prev.filter(item => item.id !== id));
+      toast.success('Content deleted successfully!');
+    } catch (error) {
+      toast.error('Failed to delete content');
+    }
+  };
+
+  const handleCreateEvent = async (newEvent: Omit<Event, 'id'>) => {
+    try {
+      const created = await adminService.createEvent(newEvent);
+      setEvents(prev => [...prev, created]);
+      toast.success('Event created successfully!');
+    } catch (error) {
+      toast.error('Failed to create event');
+    }
+  };
+
+  const handleUpdateEvent = async (id: string, updates: Partial<Event>) => {
+    try {
+      await adminService.updateEvent(id, updates);
+      setEvents(prev => prev.map(event =>
+        event.id === id ? { ...event, ...updates } : event
+      ));
+      toast.success('Event updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update event');
+    }
+  };
+
+  const handleDeleteEvent = async (id: string) => {
+    try {
+      await adminService.deleteEvent(id);
+      setEvents(prev => prev.filter(event => event.id !== id));
+      toast.success('Event deleted successfully!');
+    } catch (error) {
+      toast.error('Failed to delete event');
+    }
+  };
+
+  const handleCreateUser = async (newUser: Omit<User, 'id'>) => {
+    try {
+      const created = await adminService.createUser(newUser);
+      setUsers(prev => [...prev, created]);
+      toast.success('User created successfully!');
+    } catch (error) {
+      toast.error('Failed to create user');
+    }
+  };
+
+  const handleUpdateUser = async (id: string, updates: Partial<User>) => {
+    try {
+      await adminService.updateUser(id, updates);
+      setUsers(prev => prev.map(user =>
+        user.id === id ? { ...user, ...updates } : user
+      ));
+      toast.success('User updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update user');
+    }
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    try {
+      await adminService.deleteUser(id);
+      setUsers(prev => prev.filter(user => user.id !== id));
+      toast.success('User deleted successfully!');
+    } catch (error) {
+      toast.error('Failed to delete user');
+    }
+  };
+
+  const handleAlbumsChange = async (newAlbums: Album[]) => {
+    setAlbums(newAlbums);
+    try {
+      await adminService.saveAlbums(newAlbums);
+    } catch (error) {
+      console.error('Failed to save albums:', error);
     }
   };
 
@@ -391,9 +539,9 @@ const AdminDashboard: React.FC = () => {
                   toast.success(`${media.length} files uploaded successfully!`);
                 }} />
                 <Separator />
-                <DynamicGalleryManager 
-                  albums={albums} 
-                  onAlbumsChange={setAlbums}
+                <DynamicGalleryManager
+                  albums={albums}
+                  onAlbumsChange={handleAlbumsChange}
                 />
               </div>
             </CardContent>
@@ -631,41 +779,45 @@ const AdminDashboard: React.FC = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="mission">Mission Statement</Label>
-                  <Textarea 
+                  <Textarea
                     id="mission"
                     placeholder="Enter your organization's mission statement..."
                     className="min-h-[100px]"
-                    defaultValue="To empower women through voice, advocacy, and community support, creating opportunities for growth and positive change."
+                    value={aboutContent.mission}
+                    onChange={(e) => setAboutContent({...aboutContent, mission: e.target.value})}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="vision">Vision Statement</Label>
-                  <Textarea 
+                  <Textarea
                     id="vision"
                     placeholder="Enter your organization's vision statement..."
                     className="min-h-[100px]"
-                    defaultValue="A world where every woman has the power to voice her opinions, pursue her dreams, and create meaningful impact in her community."
+                    value={aboutContent.vision}
+                    onChange={(e) => setAboutContent({...aboutContent, vision: e.target.value})}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="history">Organization History</Label>
-                  <Textarea 
+                  <Textarea
                     id="history"
                     placeholder="Enter the history and background of your organization..."
                     className="min-h-[150px]"
-                    defaultValue="Founded in 2020, We Can Voice For Women has been dedicated to empowering women through various initiatives including education, healthcare, and advocacy programs."
+                    value={aboutContent.history}
+                    onChange={(e) => setAboutContent({...aboutContent, history: e.target.value})}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="team">Team Information</Label>
-                  <Textarea 
+                  <Textarea
                     id="team"
                     placeholder="Information about your team and leadership..."
                     className="min-h-[100px]"
-                    defaultValue="Our diverse team of professionals is committed to making a difference in women's lives through dedicated service and innovative programs."
+                    value={aboutContent.team}
+                    onChange={(e) => setAboutContent({...aboutContent, team: e.target.value})}
                   />
                 </div>
               </div>
